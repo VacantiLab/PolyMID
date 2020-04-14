@@ -1,0 +1,36 @@
+Pesciolini is the software package and PolyMID is a correction program within the package
+
+
+correct(mid,formula,metabolite_atoms,correction_matrix,name)
+    current_ion = Ion(mid,formula,metabolite_atoms,correction_matrix,name)
+    create_correction_matrix(current_ion)
+        calc_natural(current_ion)
+
+The class will be Ion
+Atributes:
+    Formula
+    metabolite_atoms
+    correction_matrix
+    Mid
+
+
+Creating a package:
+__init__.py in each folder allows for functions in modules to be imported from child directories by using dot notation: I can store my class definitions in a module called DataClasses.py and have that be in a folder called Classes. I can import them using "from Classes import DataClasses
+
+I may be able to import a file with everything in it. Then I can import individual modules using the dot notation if there is a __init__.py module in the folder and each sub-folder.
+Would need to set the current director to that containing the module with correct.py
+
+- CorrectMID (a folder) - would this be the package?
+-   __init__.py
+-     In this python file functions can be imported as there names from CorrectFunctions.py so calls to them would be CorrectMID.function_name()
+-   classes (a folder)
+-     __init__.py
+-   classes.py
+-     Define the classes within this .py file
+-     __init__.py
+-   CorrectFunctions.py
+-     Define the function within this .py file
+
+
+https://realpython.com/python3-object-oriented-programming/
+https://timothybramlett.com/How_to_create_a_Python_Package_with___init__py.html
