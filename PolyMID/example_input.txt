@@ -1,0 +1,6 @@
+Formula: C6H12N1O3Si1
+MetaboliteAtoms: C3H3O2
+MIDu: 0.854,0.104,0.0388,0.00280
+AtomLabeled: C
+FragmentName: pyruvate174
+CM:

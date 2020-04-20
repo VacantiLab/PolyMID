@@ -22,6 +22,7 @@ def main(fragment=None,TextFile=None):
         #creates a fragment object
         fragment = Fragment(formula=Inputs.formula, MetaboliteAtoms=Inputs.MetaboliteAtoms, MIDu=Inputs.MIDu, AtomLabeled=Inputs.AtomLabeled, FragmentName=Inputs.FragmentName, CM=Inputs.CM, MIDc=MIDc, PeakArea=PeakArea)
 
+
     #create a correction matrix if one is not provided in the Fragment object
     if fragment.CM is None:
         fragment.create_correction_matrix()
