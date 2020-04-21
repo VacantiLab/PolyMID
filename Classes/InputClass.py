@@ -14,6 +14,11 @@ class Input:
         from pdb import set_trace
         from Pesciolini import Fragment
         import numpy as np
+        from Pesciolini import get_directory
+
+        #If both inputs are None, then a GUI prompts for a .txt file input
+        if ((self.fragment==None) & (self.TextFile==None)):
+            self.TextFile = get_directory('gui_file')
 
         IsFragment = not (self.fragment is None)
         IsTextFile = not (self.TextFile is None)

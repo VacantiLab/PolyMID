@@ -26,4 +26,5 @@ def main(fragment=None,TextFile=None):
     fragment.calc_corrected_mid()
 
     #return the corrected MID
+    print('\n\nThe corrected MID has been successfully calculated and returned as a numpy array.')
     return(fragment.MIDc)
