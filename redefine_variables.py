@@ -12,7 +12,8 @@ AtomLabeled = 'C'
 MIDc = None
 PeakArea = None
 fragment = Fragment(formula=formula,MetaboliteAtoms=MetaboliteAtoms,MIDu=MIDu,CM=CM,MIDc=MIDc,PeakArea=PeakArea,AtomLabeled=AtomLabeled,FragmentName=FragmentName)
-PolyMID.main(fragment)
+TextFile = '/Users/nate/git_hub_projects/Pesciolini/PolyMID/example_input.txt'
+PolyMID.main(TextFile=TextFile)
 
 
 fragment.create_correction_matrix()

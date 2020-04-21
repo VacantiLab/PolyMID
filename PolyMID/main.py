@@ -6,17 +6,17 @@ def main(fragment=None,TextFile=None):
     from Pesciolini import Fragment
     from Pesciolini import Input
 
+    #Initialize the Inputs variable as an Input object
     Inputs = Input(fragment,TextFile)
 
-    Inputs.check()
+    #Check if imputs were passed correctly and import the attributes to the Inputs variable from the fragment variable or the text file
+    Inputs.check_and_import()
     if not Inputs.FragmentOrText:
         print('Either a Fragment object or a TextFile should be passed to CorrectMID.main(), but not both.')
         return
 
     #create a Fragment object if one was not passed to this function
-    if (fragment is None):
-        #creates a fragment object
-        fragment = Fragment(formula=Inputs.formula, MetaboliteAtoms=Inputs.MetaboliteAtoms, MIDu=Inputs.MIDu, AtomLabeled=Inputs.AtomLabeled, FragmentName=Inputs.FragmentName, CM=Inputs.CM, MIDc=None, PeakArea=None)
+    fragment = Inputs.fragment
 
     #create a correction matrix if one is not provided in the Fragment object
     if fragment.CM is None:
