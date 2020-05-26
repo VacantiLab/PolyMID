@@ -13,6 +13,8 @@ MIDc = None
 PeakArea = None
 fragment = Fragment(formula=formula,MetaboliteAtoms=MetaboliteAtoms,MIDu=MIDu,CM=CM,MIDc=MIDc,PeakArea=PeakArea,AtomLabeled=AtomLabeled,FragmentName=FragmentName)
 
+#Run Command with text file input
+#Run this from the directory containing the Pesciolini folder
 from Pesciolini import PolyMID
 TextFile = '/Users/nate/git_hub_projects/Pesciolini/PolyMID/example_input.txt'
 PolyMID.main(TextFile=TextFile)
