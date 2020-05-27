@@ -7,7 +7,7 @@ class Fragment:
 
         self.name = FragmentName
         self.Formula = Formula(formula)
-        self.MetaboliteAtoms = MetaboliteAtoms
+        self.MetaboliteAtoms = Formula(MetaboliteAtoms)
         self.MIDu = MIDu
         self.MIDc = MIDc
         self.CM = CM
@@ -62,7 +62,7 @@ class Fragment:
         atom_quantity_index = atom_index+1 #refering to full fragment
 
         #the number of rows of the correction matrix is equal to the quantity of the atom being corrected for that are in the fragment and the original metabolite
-        atom_quantity = quantity_of_atom(self.MetaboliteAtoms,self.AtomLabeled) #this does not refer to the full fragment!
+        atom_quantity = quantity_of_atom(self.MetaboliteAtoms.formula,self.AtomLabeled) #this does not refer to the full fragment!
 
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))

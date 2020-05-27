@@ -7,8 +7,8 @@ class Formula:
         self.FormatFormula()
 
     def FormatFormula(self):
-        # This method adds 1s where they are implied to the input string representing the chemical formula
-        # It then redefines the formula attribute
+        # This method adds 1s (ones) where they are implied to the input string representing the chemical formula
+        # It then redefines the formula attribute of the Formula object
 
         import re
         from pdb import set_trace
