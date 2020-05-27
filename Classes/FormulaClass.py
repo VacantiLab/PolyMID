@@ -1,8 +1,35 @@
 class Formula:
     # Initializer a Formula Instance and its attributes
     def __init__(self,formula):
-        self.formula = formula
+        self.FormulaInput = formula
+        self.formula = None
         self.NaturalMID = None
+        self.FormatFormula()
+
+    def FormatFormula(self):
+        # This method adds 1s where they are implied to the input string representing the chemical formula
+        # It then redefines the formula attribute
+
+        import re
+        from pdb import set_trace
+
+        #Find the flanking characters where a 1 should be inserted
+        FormulaToEdit = self.FormulaInput
+        missing1s = re.findall('(?:[A-Z]|[a-z])[A-Z]',FormulaToEdit)
+        #    '(?:)' in '(?:RegExpHere)' denotes a non-capturing group, i.e. it is used for specifying order of operations as opposed to just '()'
+
+        #Insert the 1s
+        for entry in missing1s:
+            NewEntry = entry[0] + '1' + entry[1]
+            FormulaToEdit = re.sub(entry,NewEntry,FormulaToEdit)
+
+        #If there is a letter at the end of the string, replace it with that letter and a 1
+        LetterAtEnd = re.findall('(?:[A-Z]|[a-z])$',FormulaToEdit)
+        #    '(?:)' in '(?:RegExpHere)' denotes a non-capturing group, i.e. it is used for specifying order of operations as opposed to just '()'
+        if (len(LetterAtEnd) > 0):
+            FormulaToEdit = re.sub(LetterAtEnd[0]+'$',LetterAtEnd[0]+'1',FormulaToEdit)
+
+        self.formula = FormulaToEdit
 
     # Method for calculating natural MID of a Formula object
     def calc_natural_mid(self):
@@ -11,7 +38,7 @@ class Formula:
         #    a number needs to follow each atomic symbol, even if that number is 1
 
         #import required modules
-        import pdb
+        from pdb import set_trace
         import numpy as np #this is numpy
         import pandas
         import re

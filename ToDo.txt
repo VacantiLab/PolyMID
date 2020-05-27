@@ -1,5 +1,6 @@
 To do:
 - In the formula class, work on the method calc_natural
+-    Insert the 1s into a formula without 1s
 -    I don't like the specification of n_rel_abun
 -    Make the atoms MIDs an attribute of an object that can be changed
 - In the fragment class, work on create_correction_matrix
