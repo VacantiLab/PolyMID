@@ -92,6 +92,8 @@ class Formula:
         #    if you go from the last C to the first H this will increase by one
         atom_index = 0
 
+        #Populate the atom_mid_dict
+        #    iterate through the atoms in the fragment
         for i in range(0,n_atoms): #iterate through the atoms in the fragment
 
             #Find the next row that the identity of the atom will change
