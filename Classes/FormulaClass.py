@@ -55,13 +55,6 @@ class Formula:
         atom_abundances['P'] = pandas.Series([1,0,0],index=['M0','M1','M2'])
         atom_abundances['Hv'] = pandas.Series([0,1,0],index=['M0','M1','M2'])
 
-        #determine how many relative abundances are being considered
-        n_rel_abuns = len(atom_abundances['S'])
-
-        #make a data frame out of the atom_abundances library
-        #atom_abundances_df = pandas.DataFrame(atom_abundances)
-        #atom_abundances_df = pandas.DataFrame.transpose(atom_abundances_df)
-
         #break the fragment formula up into its atomic symbol and letter components
         broken_formula = np.array(re.findall('[A-Z][a-z]?|[0-9]+', self.formula))
         #    '[A-Z][a-z]?|[0-9]+': A capital letter [A-Z], followed by a lowercase letter [a-z], which is optional '?', or '|' a number '[0-9]', and possibly more numbers '+'
@@ -74,44 +67,51 @@ class Formula:
         formula_numbers = broken_formula[odd_indices].astype(np.int) #the atomic numbers array
         formula_atoms = broken_formula[even_indices] #the atomic symbols array
 
-        #determine the number of atoms in the fragment
-        n_row = np.sum(formula_numbers)
-
-        #create a matrix containing all of the the atom mids
-        #    each row corresponds to an atom in the fragment
-        #    if an atom appears more than once in the fragment, the matrix will contain idenical rows for each appearance
-        #    the isotope mass varies across the columns
+        #create a dictionary containing all of the the atom mids
+        #    each key corresponds to an atom in the fragment
+        #    if an atom appears more than once in the fragment, the dictionary will contain idenical entries for they keys
+        #    the mass isotopomer distributions are stored as the entries for each keys
         #    example:
-        #        row corresponds to:
-        #                     carbon MID:   M0 M1 M2 M3...
-        #                     carbon MID:   M0 M1 M2 M3...
+        #                 carbon1:   M0 M1 M2 M3 M4...
+        #                 carbon2:   M0 M1 M2 M3 M4...
+        #                                    .
+        #                                    .
+        #                 hydrogen1: M0 M1 M2 M3 M4 M5...
+        #                 hydrogen2: M0 M1 M2 M3 M4 M5...
         #                                        .
         #                                        .
-        #                     hydrogen MID: M0 M1 M2 M3...
-        #                     hydrogen MID: M0 M1 M2 M3...
-        #                                        .
-        #                                        .
-        atom_mids = np.zeros([n_row,n_rel_abuns]) #initialize the matrix
-        atom_index = 0 #initialize the atom counter, this tracks the identity of the atom
-                       #    if you go from the first to the second C, this will not changed
-                       #    if you go from the last C to the first H this will increase by one
-        for i in range(0,n_row): #iterate through the rows of the atom mid matrix
-            new_atom_id_index = sum(formula_numbers[0:atom_index+1]) #'+1' is necessary because the end of the range is not included in python
-            #corresponds to the next row that the identity of the atom will change
+
+        #Initialize the dictionary containing the atom MIDs
+        atom_mids_dict = {}
+
+        #determine the number of atoms in the fragment (not unique atoms)
+        n_atoms = np.sum(formula_numbers)
+
+        #initialize the atom counter, this tracks the identity of the atom
+        #    if you go from the first to the second C, this will not changed
+        #    if you go from the last C to the first H this will increase by one
+        atom_index = 0
+
+        for i in range(0,n_atoms): #iterate through the atoms in the fragment
+
+            #Find the next row that the identity of the atom will change
+            #    '+1' is necessary because the end of the range is not included in python
+            new_atom_id_index = sum(formula_numbers[0:atom_index+1])
+
             if i < new_atom_id_index: #if the atom identity has not changed
                 current_atom = formula_atoms[atom_index]
-                atom_mids[i,] = atom_abundances[current_atom]
+                atom_mids_dict[current_atom + str(i)] = atom_abundances[current_atom]
             if i >= new_atom_id_index: #if the atom identity has changed
                 current_atom = formula_atoms[atom_index+1]
-                atom_mids[i,] = atom_abundances[current_atom]
+                atom_mids_dict[current_atom + str(i)] = atom_abundances[current_atom]
                 atom_index = atom_index + 1 #only iterate the atom_index if the atom identity has changed
 
         #given the formula A2B3 where A and B have isotopic abundances of [A_M0 A_M1 A_M2] and [B_M0 B_M1 B_M2]
         #the vector of mass isotopomeric abundace of A2B3 can be found by multiplying out the vecotors of atomic isotopic abundances as if they were polynomials, and combining like terms
         #the M0, M1, ... are be treated as exponents; thus (A_M0)*(B_M2) gives an M2 term (0+2)
         expanded_placeholder = [1] #initializes the MID vector of the fragemnt specified by the formula
-        for i in range(0,n_row):
-            expanded = expand_polynomial(expanded_placeholder,atom_mids[i,])
+        for key in atom_mids_dict.keys():
+            expanded = expand_polynomial(expanded_placeholder,atom_mids_dict[key])
             expanded_placeholder = np.array(expanded['prob'])
 
         natural_mid = np.array(expanded.iloc[:,0])

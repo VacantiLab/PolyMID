@@ -16,7 +16,7 @@ def expand_polynomial(a,b):
     import numpy as np
     import pandas
     import importlib #allows fresh importing of modules
-    import pdb
+    from pdb import set_trace
 
     #redefine the input polynomial python arrays as numpy row matrices
     mid_a = np.matrix(a) #mass isotopomer distribution for a

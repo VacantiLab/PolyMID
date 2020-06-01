@@ -1,6 +1,8 @@
 To do:
 - In the formula class, work on the method calc_natural
-x    Insert the 1s into a formula without 1s
--    I don't like the specification of n_rel_abun
+x    Allow chemical formulas to be entered without 1s by insert the 1s into a formula if they are absent.
+x    I don't like the specification of n_rel_abun. Get rid of this by storing atom MIDs in a dictionary.
+-    Why are the entries in the atom_abundances dictionary pandas.Series instead of np.arrays?
+-        Make them np.arrays if that makes sense. Likely has to do with expand_polynomial() function.
 -    Make the atoms MIDs an attribute of an object that can be changed
 - In the fragment class, work on create_correction_matrix
