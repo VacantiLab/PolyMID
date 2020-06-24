@@ -45,15 +45,26 @@ class Formula:
         from Pesciolini import expand_polynomial
 
         #define the atomic isotopic abundances, there must be an equal number for each atom
+        # atom_abundances = dict()
+        # atom_abundances['C'] = pandas.Series([0.9893,0.0107,0],index=['M0','M1','M2'])
+        # atom_abundances['H'] = pandas.Series([0.999885,0.000115,0],index=['M0','M1','M2'])
+        # atom_abundances['N'] = pandas.Series([0.99632,0.00368,0],index=['M0','M1','M2'])
+        # atom_abundances['O'] = pandas.Series([0.99757,0.00038,0.00205],index=['M0','M1','M2'])
+        # atom_abundances['Si'] = pandas.Series([0.922297,0.046832,0.030872],index=['M0','M1','M2'])
+        # atom_abundances['S'] = pandas.Series([0.9500,0.0075,0.0425],index=['M0','M1','M2'])
+        # atom_abundances['P'] = pandas.Series([1,0,0],index=['M0','M1','M2'])
+        # atom_abundances['Hv'] = pandas.Series([0,1,0],index=['M0','M1','M2'])
+
+        #define the atomic isotopic abundances, there must be an equal number for each atom
         atom_abundances = dict()
-        atom_abundances['C'] = pandas.Series([0.9893,0.0107,0],index=['M0','M1','M2'])
-        atom_abundances['H'] = pandas.Series([0.999885,0.000115,0],index=['M0','M1','M2'])
-        atom_abundances['N'] = pandas.Series([0.99632,0.00368,0],index=['M0','M1','M2'])
-        atom_abundances['O'] = pandas.Series([0.99757,0.00038,0.00205],index=['M0','M1','M2'])
-        atom_abundances['Si'] = pandas.Series([0.922297,0.046832,0.030872],index=['M0','M1','M2'])
-        atom_abundances['S'] = pandas.Series([0.9500,0.0075,0.0425],index=['M0','M1','M2'])
-        atom_abundances['P'] = pandas.Series([1,0,0],index=['M0','M1','M2'])
-        atom_abundances['Hv'] = pandas.Series([0,1,0],index=['M0','M1','M2'])
+        atom_abundances['C'] = np.array([0.9893,0.0107,0])
+        atom_abundances['H'] = np.array([0.999885,0.000115,0])
+        atom_abundances['N'] = np.array([0.99632,0.00368,0])
+        atom_abundances['O'] = np.array([0.99757,0.00038,0.00205])
+        atom_abundances['Si'] = np.array([0.922297,0.046832,0.030872])
+        atom_abundances['S'] = np.array([0.9500,0.0075,0.0425])
+        atom_abundances['P'] = np.array([1,0,0])
+        atom_abundances['Hv'] = np.array([0,1,0])
 
         #break the fragment formula up into its atomic symbol and letter components
         broken_formula = np.array(re.findall('[A-Z][a-z]?|[0-9]+', self.formula))
@@ -111,7 +122,7 @@ class Formula:
         #given the formula A2B3 where A and B have isotopic abundances of [A_M0 A_M1 A_M2] and [B_M0 B_M1 B_M2]
         #the vector of mass isotopomeric abundace of A2B3 can be found by multiplying out the vecotors of atomic isotopic abundances as if they were polynomials, and combining like terms
         #the M0, M1, ... are be treated as exponents; thus (A_M0)*(B_M2) gives an M2 term (0+2)
-        expanded_placeholder = [1] #initializes the MID vector of the fragemnt specified by the formula
+        expanded_placeholder = np.array([1]) #initializes the MID vector of the fragemnt specified by the formula
         for key in atom_mids_dict.keys():
             expanded = expand_polynomial(expanded_placeholder,atom_mids_dict[key])
             expanded_placeholder = np.array(expanded['prob'])

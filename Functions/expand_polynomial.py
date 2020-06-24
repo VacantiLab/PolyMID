@@ -26,6 +26,10 @@ def expand_polynomial(a,b):
     n_a = mid_a.shape[1] #the second entry of the returned tuple
     n_b = mid_b.shape[1] #the second entry of the returned tuple
 
+
+    #Create data frames to hold the mass isotopoer relative abundance and the number of extra neutrons associated with that mass isotopomer in separate columns
+    #    The columns are 'prob' and 'm_isotopomer' respectively
+
     #arrange information for atom a into a pandas DataFrame
     mid_a_m = np.zeros([n_a,2]) #initialize the matrix the size of data frame that will be used to hold the information for atom a
     mid_a_df = pandas.DataFrame(mid_a_m,columns=['prob','m_isotopomer']) #initialize the data frame containing the information for atom a
@@ -51,6 +55,8 @@ def expand_polynomial(a,b):
             factored.loc[iterator,'prob'] = mid_a_df.loc[i,'prob']*mid_b_df.loc[k,'prob']
             factored.loc[iterator,'m_isotopomer'] = mid_a_df.loc[i,'m_isotopomer'] + mid_b_df.loc[k,'m_isotopomer']
             iterator = iterator + 1
+
+    set_trace()
 
     #combine the relative mass isotopmer abundances for ab combinations with the same mass isotopomer mz value
     grouped = factored.groupby('m_isotopomer')
