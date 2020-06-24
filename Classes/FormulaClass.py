@@ -13,7 +13,7 @@ class Formula:
         import re
         from pdb import set_trace
 
-        #Find the flanking characters where a 1 should be inserted
+        #Find the flanking characters where a 1 should be inserted (1's that are internal to the formula)
         FormulaToEdit = self.FormulaInput
         missing1s = re.findall('(?:[A-Z]|[a-z])[A-Z]',FormulaToEdit)
         #    '(?:)' in '(?:RegExpHere)' denotes a non-capturing group, i.e. it is used for specifying order of operations as opposed to just '()'
