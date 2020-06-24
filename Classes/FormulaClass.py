@@ -127,5 +127,5 @@ class Formula:
             expanded = expand_polynomial(expanded_placeholder,atom_mids_dict[key])
             expanded_placeholder = np.array(expanded['prob'])
 
-        natural_mid = np.array(expanded.iloc[:,0])
+        natural_mid = np.array(expanded['prob'])
         self.NaturalMID = natural_mid
