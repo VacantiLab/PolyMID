@@ -63,6 +63,8 @@ def expand_polynomial(a,b):
 
     # Combine the relative mass isotopmer abundances for ab combinations with the same mass isotopomer mz value
     grouped = factored.groupby('m_isotopomer')
+    #     the groupby method of a Pandas data frame returns a group object
+    #         a grouped object has the aggregate method that takes a function as an input and returns a Pandas data frame
     factored_aggregated = grouped.aggregate(np.sum)
 
     # Shorten factored to remove negligible values
