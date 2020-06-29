@@ -5,9 +5,9 @@ x    I don't like the specification of n_rel_abun. Get rid of this by storing at
 x    Why are the entries in the atom_abundances dictionary pandas.Series instead of np.arrays?
 x        Do not need to be, changed them to np.arrays.
 -    Make the atoms MIDs an attribute of an object that can be changed
-- In the expand_polynomial function, shorten factored_aggregated in a way that considers the molecular formula and # of Hv atoms
+x In the expand_polynomial function, shorten factored_aggregated in a way that considers the resulting MID values
 - In the fragment class, work on create_correction_matrix
 - Call the software package PolyMID
-- Two functions should be PolyMID.correct() and PolyMID.natural()
+-     Two functions should be PolyMID.correct() and PolyMID.natural()
 - Have options for high resolution data
 - Have an option to correct for incorporation of specific atoms (H, C, N, etc.)
