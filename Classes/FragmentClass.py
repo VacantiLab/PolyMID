@@ -40,7 +40,7 @@ class Fragment:
     # instance method to create correction matrix for a Fragment object
     def create_correction_matrix(self):
 
-        import pdb
+        from pdb import set_trace
         import numpy as np
         import re
         import copy
@@ -48,7 +48,6 @@ class Fragment:
         from Pesciolini import quantity_of_atom
         from Pesciolini import Formula
 
-        pdb.set_trace
         #break the formula up so atoms and quantities are consecutive entries in a numpy array
         broken_formula = np.array(re.findall('[A-Z][a-z]?|[0-9]+', self.Formula.formula))
         #    '[A-Z][a-z]?|[0-9]+': A capital letter [A-Z], followed by a lowercase letter [a-z], which is optional '?', or '|' a number '[0-9]', and possibly more numbers '+'
@@ -72,7 +71,6 @@ class Fragment:
         #    these mids fill the rows of the correction matrix
         broken_formula_correct = copy.copy(broken_formula) #initialize the array to carry the formula with a heavy atom
         correction_matrix_dict = dict() #initialize a dictionary to hold the rows of the correction matrix
-        n_theoretical_mid_entries = atom_quantity + 4 #the theoretical length is all possible atoms to label plus 4 (after this the relative abundances are assumed negligible)
         for i in range(0,atom_quantity+1):
             #subtract an atom of interest from the formula
             broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(np.int) - i
@@ -94,10 +92,29 @@ class Fragment:
             new_formula.calc_natural_mid()
             correction_matrix_dict[i] = new_formula.NaturalMID
 
-            #shorten each theoretical MID with given quantities of heavy atoms to the specified length of the theoretical MIDs
-            correction_matrix_dict[i] = new_formula.NaturalMID[0:n_theoretical_mid_entries]
-            correction_row_normalization_factor = sum(correction_matrix_dict[i])
-            correction_matrix_dict[i] = correction_matrix_dict[i]/correction_row_normalization_factor
+            # Keep track of the length of the longest natural MID with heavy atoms
+            #     All of the MIDs of the molecule with incorporated heavy atoms must be set to the same length to form a correction matrix
+            if i==0:
+                n_theoretical_mid_entries = len(correction_matrix_dict[i])
+
+            if i>0:
+                if n_theoretical_mid_entries < len(correction_matrix_dict[i]):
+                    n_theoretical_mid_entries = len(correction_matrix_dict[i])
+
+        # Make all of the natural MIDs of the molecule with incorporated heavy atoms the same length by appending zeros
+        #     This length is referred to as the number of theoretical MID entries
+        for i in range(0,atom_quantity+1):
+            # The number of theoretical MID entries in the correction matrix must be the same as the number of measured MID entries for the matrix algebra to work
+            #     If the number of theoretical MID entries is less, it is increased
+            #     The case where n_theoretical_mid_entries is greater (the usual case) is handled later by increasing the number of measured MID entries
+            if n_theoretical_mid_entries < len(self.MIDu):
+                n_theoretical_mid_entries = len(self.MIDu)
+
+            # Lengthen each theoretical MID with given quantities of heavy atoms to the specified length of the theoretical MIDs
+            #     MIDs will not have to be shortened here because they are all set to have the same length as the longest MID
+            if len(correction_matrix_dict[i]) < n_theoretical_mid_entries:
+                n_zeros_needed = n_theoretical_mid_entries - len(correction_matrix_dict[i])
+                correction_matrix_dict[i] = np.pad(correction_matrix_dict[i],(0,n_zeros_needed))
 
         #make the correction matrix dictionary into a matrix
         CM = pandas.DataFrame(correction_matrix_dict)

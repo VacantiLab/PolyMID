@@ -68,9 +68,13 @@ def expand_polynomial(a,b):
     factored_aggregated = grouped.aggregate(np.sum)
 
     # Shorten factored to remove negligible values
-    n_factored_aggregated = len(factored_aggregated)
-    if n_factored_aggregated > 22:
-        factored_aggregated = factored_aggregated.iloc[0:22]
+    #     Removes all values starting from the end of the MID that are less than the specified cut-off
+    cut_off = 1e-4
+    factored_aggregated_array = np.array(factored_aggregated)
+    factored_aggregated_array[factored_aggregated_array < cut_off] = 0
+    factored_aggregated_trimmed = np.trim_zeros(factored_aggregated_array,'b')
+    n_factors = len(factored_aggregated_trimmed)
+    factored_aggregated = factored_aggregated.iloc[0:n_factors]
 
     # Return the Pandas data frame containing the mass isotopomer distrubution of the molecule ab
     return(factored_aggregated)

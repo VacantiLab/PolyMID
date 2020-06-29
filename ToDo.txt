@@ -10,3 +10,4 @@ x        Do not need to be, changed them to np.arrays.
 - Call the software package PolyMID
 - Two functions should be PolyMID.correct() and PolyMID.natural()
 - Have options for high resolution data
+- Have an option to correct for incorporation of specific atoms (H, C, N, etc.)
