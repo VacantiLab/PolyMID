@@ -7,6 +7,9 @@ x        Do not need to be, changed them to np.arrays.
 -    Make the atoms MIDs an attribute of an object that can be changed
 x In the expand_polynomial function, shorten factored_aggregated in a way that considers the resulting MID values
 - In the fragment class, work on create_correction_matrix
+x     make the MIDs the same length by adding zeros to make all of them the same length as the longest MID in the correction matrix
+-     instead of having a 'MetaboliteAtoms' attribute, have a 'CanAcquireLabel' attribute
+-         I think it will be used identically, so just renaming an attribute of the Fragment class to be more reflective of what it is
 - Call the software package PolyMID
 -     Two functions should be PolyMID.correct() and PolyMID.natural()
 - Have options for high resolution data
