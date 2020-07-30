@@ -1,7 +1,7 @@
 class Fragment:
 
     # Initializer and Instance Attributes
-    def __init__(self,formula,CanAcquireLabel,MIDu,FragmentName,CM,MIDc,PeakArea):
+    def __init__(self,formula,CanAcquireLabel,MIDu,FragmentName,MIDc,PeakArea,CM):
         from Pesciolini import Formula
         import numpy as np
 

@@ -35,8 +35,6 @@ class Input:
             CanAcquireLabel = None
             MIDu = None
             MIDc = None
-            CM = None
-            AtomLabeled = None
 
             #import values from text file
             with open(self.TextFile, 'r') as read_file:
@@ -53,8 +51,5 @@ class Input:
                         MIDu = np.fromstring(MIDu,dtype=float,sep=' ')
                     if (line_split[0] == 'FragmentName') | (line_split[0] == 'Fragment Name'):
                         FragmentName = line_split[1]
-                    if (line_split[0] == 'CM'):
-                        CM = line_split[1]
-                        CM = None if CM == '' else CM
 
-            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None)
+            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=None, MIDc=None, PeakArea=None)

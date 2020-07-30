@@ -18,9 +18,8 @@ def main(fragment=None,TextFile=None,AtomLabeled='C'):
     #create a Fragment object if one was not passed to this function
     fragment = Inputs.fragment
 
-    #create a correction matrix if one is not provided in the Fragment object
-    if fragment.CM is None:
-        fragment.create_correction_matrix(Input.AtomLabeled)
+    #create a correction matrix
+    fragment.create_correction_matrix(Inputs.AtomLabeled)
 
     #calculate the corrected MID
     fragment.calc_corrected_mid()
