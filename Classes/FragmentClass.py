@@ -14,9 +14,6 @@ class Fragment:
         self.CMi = None
         self.PeakArea = PeakArea
 
-        if CM != None:
-            self.CMi = np.linalg.pinv(CM) #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
-
     # instance method to assign new values to a Fragment object
     def assign(self,attribute,NewValue):
         if attribute == 'name':
@@ -31,6 +28,8 @@ class Fragment:
             self.MIDc = NewValue
         if attribute == 'CM':
             self.CM = NewValue
+        if attribute == 'CMi':
+            self.CMi = NewValue
         if attribute == 'PeakArea':
             self.PeakArea = NewValue
 
@@ -121,7 +120,7 @@ class Fragment:
         #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
         CMi = np.linalg.pinv(CM)
 
-        self.CM = CM
+        self.CM[AtomLabeled] = CM
         self.CMi = CMi
 
     def calc_corrected_mid(self):

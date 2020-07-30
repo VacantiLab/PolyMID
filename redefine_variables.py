@@ -16,7 +16,7 @@ fragment = Fragment(formula=formula,MetaboliteAtoms=MetaboliteAtoms,MIDu=MIDu,CM
 #Run Command with text file input
 #Run this from the directory containing the Pesciolini folder
 from Pesciolini import PolyMID
-TextFile = '/Users/nate/git_hub_projects/Pesciolini/PolyMID/example_input.txt'
+TextFile = '/Users/nate/git_hub_projects/Pesciolini/PolyMID/ExampleInputWithoutCM.txt'
 PolyMID.main(TextFile=TextFile)
 
 

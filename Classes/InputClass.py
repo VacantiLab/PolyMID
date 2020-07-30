@@ -1,5 +1,5 @@
 class Input:
-    # Initializer a Formula Instance and its attributes
+    #Initializer a Formula Instance and its attributes
     def __init__(self,fragment,TextFile,AtomLabeled):
         self.fragment = fragment
         self.TextFile = TextFile
@@ -7,7 +7,7 @@ class Input:
         self.FragmentOrText = True #True if there are paratmers OR a text file provided, but not both
         self.AllRequired = True #True if all required parameters are provided directly or through the text file
 
-    # Method for calculating natural MID of a Formula object
+    #Method for checking input given correctly and importing values
     def check_and_import(self):
         #Detemrine if the inputs were passed to the function properly
         #import fragment values if in a txt file
@@ -16,6 +16,7 @@ class Input:
         from Pesciolini import Fragment
         import numpy as np
         from Pesciolini import get_directory
+        from Pesciolini import TextToCM
 
         #If both inputs are None, then a GUI prompts for a .txt file input
         if ((self.fragment==None) & (self.TextFile==None)):
@@ -27,14 +28,16 @@ class Input:
         PassedCorrectly2 = IsFragment | IsTextFile
         self.FragmentOrText = PassedCorrectly1 & PassedCorrectly2
 
-        # Get parameter values from text file if that is where they are provided
+        #Get parameter values from text file if that is where they are provided
         if self.FragmentOrText & (not(self.TextFile is None)):
-            # initialize variables
+            #Initialize variables
             FragmentName = None
             formula = None
             CanAcquireLabel = None
             MIDu = None
             MIDc = None
+            #CM is initialized as a dictionary with None entries for atoms
+            CM = {'C':None, 'H':None, 'N':None, 'O':None}
 
             #import values from text file
             with open(self.TextFile, 'r') as read_file:
@@ -51,5 +54,12 @@ class Input:
                         MIDu = np.fromstring(MIDu,dtype=float,sep=' ')
                     if (line_split[0] == 'FragmentName') | (line_split[0] == 'Fragment Name'):
                         FragmentName = line_split[1]
+                    if (line_split[0] == 'CM'):
+                        if line_split[1] == 'None':
+                            CM = CM
+                        #If the text file contains information on CM
+                        #    That information is added to the already initialized CM dictionary
+                        if line_split[1] != 'None':
+                            CM = TextToCM(line_split[1],CM)
 
-            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=None, MIDc=None, PeakArea=None)
+            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None)
