@@ -114,7 +114,7 @@ class Fragment:
             #     MIDs will NOT have to be shortened here because they are all set to have the same length as the longest theoretical MID
             if len(correction_matrix_dict[i]) < n_theoretical_mid_entries:
                 n_zeros_needed = n_theoretical_mid_entries - len(correction_matrix_dict[i])
-                correction_matrix_dict[i] = np.pad(correction_matrix_dict[i],(0,n_zeros_needed))
+                correction_matrix_dict[i] = np.pad(correction_matrix_dict[i],(0,n_zeros_needed),mode='constant')
 
         #make the correction matrix dictionary into a matrix
         CM = pandas.DataFrame(correction_matrix_dict)
