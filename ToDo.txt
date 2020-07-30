@@ -10,6 +10,8 @@ x In the fragment class, work on create_correction_matrix
 x     make the MIDs the same length by adding zeros to make all of them the same length as the longest MID in the correction matrix
 x     instead of having a 'MetaboliteAtoms' attribute, have a 'CanAcquireLabel' attribute
 x         I think it will be used identically, so just renaming an attribute of the Fragment class to be more reflective of what it is
+-     In the fragment class make CM a dictionary with entries for C, H, N, and O.
+-         make a way to specify this in the text file
 - Call the software package PolyMID
 -     Two functions should be PolyMID.correct() and PolyMID.natural()
 - Have options for high resolution data
