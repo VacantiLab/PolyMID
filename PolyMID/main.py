@@ -1,4 +1,4 @@
-def main(fragment=None,TextFile=None):
+def main(fragment=None,TextFile=None,AtomLabeled='C'):
 
     import pdb
     import numpy as np
@@ -7,7 +7,7 @@ def main(fragment=None,TextFile=None):
     from Pesciolini import Input
 
     #Initialize the Inputs variable as an Input object
-    Inputs = Input(fragment,TextFile)
+    Inputs = Input(fragment,TextFile,AtomLabeled)
 
     #Check if imputs were passed correctly and import the attributes to the Inputs variable from the fragment variable or the text file
     Inputs.check_and_import()
@@ -20,7 +20,7 @@ def main(fragment=None,TextFile=None):
 
     #create a correction matrix if one is not provided in the Fragment object
     if fragment.CM is None:
-        fragment.create_correction_matrix()
+        fragment.create_correction_matrix(Input.AtomLabeled)
 
     #calculate the corrected MID
     fragment.calc_corrected_mid()

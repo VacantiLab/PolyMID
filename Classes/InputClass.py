@@ -1,8 +1,9 @@
 class Input:
     # Initializer a Formula Instance and its attributes
-    def __init__(self,fragment,TextFile):
+    def __init__(self,fragment,TextFile,AtomLabeled):
         self.fragment = fragment
         self.TextFile = TextFile
+        self.AtomLabeled = AtomLabeled
         self.FragmentOrText = True #True if there are paratmers OR a text file provided, but not both
         self.AllRequired = True #True if all required parameters are provided directly or through the text file
 
@@ -50,12 +51,10 @@ class Input:
                     if (line_split[0] == 'MIDu'):
                         MIDu = line_split[1]
                         MIDu = np.fromstring(MIDu,dtype=float,sep=' ')
-                    if (line_split[0] == 'AtomLabeled') | (line_split[0] == 'Atom Labeled'):
-                        AtomLabeled = line_split[1]
                     if (line_split[0] == 'FragmentName') | (line_split[0] == 'Fragment Name'):
                         FragmentName = line_split[1]
                     if (line_split[0] == 'CM'):
                         CM = line_split[1]
                         CM = None if CM == '' else CM
 
-            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, AtomLabeled=AtomLabeled, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None)
+            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None)

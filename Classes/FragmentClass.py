@@ -1,7 +1,7 @@
 class Fragment:
 
     # Initializer and Instance Attributes
-    def __init__(self,formula,CanAcquireLabel,MIDu,AtomLabeled,FragmentName,CM,MIDc,PeakArea):
+    def __init__(self,formula,CanAcquireLabel,MIDu,FragmentName,CM,MIDc,PeakArea):
         from Pesciolini import Formula
         import numpy as np
 
@@ -13,7 +13,6 @@ class Fragment:
         self.CM = CM
         self.CMi = None
         self.PeakArea = PeakArea
-        self.AtomLabeled = AtomLabeled
 
         if CM != None:
             self.CMi = np.linalg.pinv(CM) #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
@@ -30,15 +29,13 @@ class Fragment:
             self.MIDu = NewValue
         if attribute == 'MIDc':
             self.MIDc = NewValue
-        if attribute == 'AtomLabeled':
-            self.AtomLabeled = NewValue
         if attribute == 'CM':
             self.CM = NewValue
         if attribute == 'PeakArea':
             self.PeakArea = NewValue
 
     # instance method to create correction matrix for a Fragment object
-    def create_correction_matrix(self):
+    def create_correction_matrix(self,AtomLabeled):
 
         from pdb import set_trace
         import numpy as np
@@ -57,11 +54,11 @@ class Fragment:
 
         #find the index of the number of the atom which can acquire a label in the formula for the full fragment
         #    it is used in creating the correction matrix below because successive quantities of this atom need to be subtracted and a heavy atom put in its place
-        atom_index = np.where(broken_formula==self.AtomLabeled)[0][0]
+        atom_index = np.where(broken_formula==AtomLabeled)[0][0]
         atom_quantity_index = atom_index+1 #refering to full fragment
 
         #the number of rows of the correction matrix is equal to the quantity of the atom being corrected for that are in the fragment and the original metabolite
-        atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.AtomLabeled) #this does not refer to the full fragment!
+        atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,AtomLabeled) #this does not refer to the full fragment!
 
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
