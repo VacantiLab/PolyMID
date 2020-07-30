@@ -31,7 +31,7 @@ class Input:
             # initialize variables
             FragmentName = None
             formula = None
-            MetaboliteAtoms = None
+            CanAcquireLabel = None
             MIDu = None
             MIDc = None
             CM = None
@@ -45,8 +45,8 @@ class Input:
                     line_split[1] = line_split[1].strip()
                     if (line_split[0] == 'formula') | (line_split[0] == 'Formula'):
                         formula = line_split[1]
-                    if (line_split[0] == 'MetaboliteAtoms') | (line_split[0] == 'Metabolite Atoms'):
-                        MetaboliteAtoms = line_split[1]
+                    if (line_split[0] == 'CanAcquireLabel') | (line_split[0] == 'Metabolite Atoms'):
+                        CanAcquireLabel = line_split[1]
                     if (line_split[0] == 'MIDu'):
                         MIDu = line_split[1]
                         MIDu = np.fromstring(MIDu,dtype=float,sep=' ')
@@ -58,4 +58,4 @@ class Input:
                         CM = line_split[1]
                         CM = None if CM == '' else CM
 
-            self.fragment = Fragment(formula=formula, MetaboliteAtoms=MetaboliteAtoms, MIDu=MIDu, AtomLabeled=AtomLabeled, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None)
+            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, AtomLabeled=AtomLabeled, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None)

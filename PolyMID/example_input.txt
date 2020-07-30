@@ -1,6 +1,6 @@
 FragmentName: pyruvate174
 Formula: C6H12NO3Si
-MetaboliteAtoms: C3H3O2
+CanAcquireLabel: C3H3O2
 MIDu: 0.854 0.104 0.0388 0.00280
 AtomLabeled: C
 CM:
