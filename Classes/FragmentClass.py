@@ -5,6 +5,12 @@ class Fragment:
         from Pesciolini import Formula
         import numpy as np
 
+        #The CM attribute must be a dictionary
+        #    The method create_correction_matrix() adds a key to CM
+        if type(CM) is not dict:
+            print('Error: When defining a Fragment object, the input, CM, must be a dictionary.')
+            return
+
         self.name = FragmentName
         self.Formula = Formula(formula)
         self.CanAcquireLabel = Formula(CanAcquireLabel)

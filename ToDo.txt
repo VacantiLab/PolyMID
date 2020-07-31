@@ -12,6 +12,7 @@ x     instead of having a 'MetaboliteAtoms' attribute, have a 'CanAcquireLabel' 
 x         I think it will be used identically, so just renaming an attribute of the Fragment class to be more reflective of what it is
 x     In the fragment class make CM a dictionary with entries for C, H, N, and O.
 x         make a way to specify this in the text file
+-         have an option for the library file to be updated with a calculated CM
 - Test that a text file can be input by the GUI
 - Call the software package PolyMID
 -     Two functions should be PolyMID.correct() and PolyMID.natural()
