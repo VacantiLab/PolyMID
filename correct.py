@@ -1,4 +1,4 @@
-def main(fragment=None,TextFile=None,AtomLabeled='C'):
+def correct(fragment=None,TextFile=None,AtomLabeled='C'):
 
     import numpy as np
     import pdb
@@ -33,5 +33,5 @@ def main(fragment=None,TextFile=None,AtomLabeled='C'):
     fragment.calc_corrected_mid()
 
     #Return the corrected MID
-    print('\n\nThe corrected MID has been successfully calculated and returned as a numpy array.')
+    print('\nThe corrected MID has been successfully calculated and returned as a numpy array.')
     return(fragment.MIDc)

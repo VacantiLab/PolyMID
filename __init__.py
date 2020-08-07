@@ -6,3 +6,4 @@ from .SupportingFunctions.TextToCM import TextToCM
 from .Classes.FragmentClass import Fragment
 from .Classes.FormulaClass import Formula
 from .Classes.InputClass import Input
+from PolyMID.correct import correct

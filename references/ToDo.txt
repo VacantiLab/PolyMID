@@ -13,8 +13,9 @@ x         I think it will be used identically, so just renaming an attribute of 
 x     In the fragment class make CM a dictionary with entries for C, H, N, and O.
 x         make a way to specify this in the text file
 -         have an option for the library file to be updated with a calculated CM - do this outside of polymid.correct
-- Test that a text file can be input by the GUI
+x Test that a text file can be input by the GUI
 - Call the software package PolyMID
--     Two functions should be PolyMID.correct() and PolyMID.natural()
+x     Function call should me PolyMID.correct()
+-     Make PolyMID.natural()
 - Have options for high resolution data
 x Have an option to correct for incorporation of specific atoms (H, C, N, etc.)

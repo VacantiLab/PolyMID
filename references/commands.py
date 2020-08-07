@@ -15,9 +15,9 @@ fragment = Fragment(formula=formula,MetaboliteAtoms=MetaboliteAtoms,MIDu=MIDu,CM
 
 #Run Command with text file input
 #Run this from the directory containing the Pesciolini folder
-from Pesciolini import PolyMID
+import PolyMID
 TextFile = '/Users/nate/git_hub_projects/PolyMID/references/ExampleInputWithoutCM.txt'
-PolyMID.main(TextFile=TextFile)
+PolyMID.correct(TextFile=TextFile)
 
 
 fragment.create_correction_matrix()
