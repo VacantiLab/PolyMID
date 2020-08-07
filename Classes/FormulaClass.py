@@ -46,7 +46,7 @@ class Formula:
         import numpy as np
         import pandas
         import re
-        from Pesciolini import expand_polynomial
+        from PolyMID import expand_polynomial
 
         # Define the atomic isotopic abundances
         atom_abundances = dict()

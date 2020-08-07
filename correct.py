@@ -2,8 +2,8 @@ def main(fragment=None,TextFile=None,AtomLabeled='C'):
 
     import numpy as np
     import pdb
-    from Pesciolini import Fragment
-    from Pesciolini import Input
+    from PolyMID import Fragment
+    from PolyMID import Input
     from pdb import set_trace
 
     #Initialize the Inputs variable as an Input object

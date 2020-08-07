@@ -2,7 +2,7 @@ class Fragment:
 
     # Initializer and Instance Attributes
     def __init__(self,formula,CanAcquireLabel,MIDu,FragmentName,MIDc,PeakArea,CM):
-        from Pesciolini import Formula
+        from PolyMID import Formula
         import numpy as np
 
         #The CM attribute must be a dictionary
@@ -47,8 +47,8 @@ class Fragment:
         import re
         import copy
         import pandas
-        from Pesciolini import quantity_of_atom
-        from Pesciolini import Formula
+        from PolyMID import quantity_of_atom
+        from PolyMID import Formula
 
         #break the formula up so atoms and quantities are consecutive entries in a numpy array
         broken_formula = np.array(re.findall('[A-Z][a-z]?|[0-9]+', self.Formula.formula))

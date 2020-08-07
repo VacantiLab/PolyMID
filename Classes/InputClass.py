@@ -13,10 +13,10 @@ class Input:
         #import fragment values if in a txt file
 
         from pdb import set_trace
-        from Pesciolini import Fragment
+        from PolyMID import Fragment
         import numpy as np
-        from Pesciolini import get_directory
-        from Pesciolini import TextToCM
+        from PolyMID import get_directory
+        from PolyMID import TextToCM
 
         #If both inputs are None, then a GUI prompts for a .txt file input
         if ((self.fragment==None) & (self.TextFile==None)):
