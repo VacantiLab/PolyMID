@@ -7,3 +7,4 @@ from .Classes.FragmentClass import Fragment
 from .Classes.FormulaClass import Formula
 from .Classes.InputClass import Input
 from PolyMID.correct import correct
+from PolyMID.natural import natural
