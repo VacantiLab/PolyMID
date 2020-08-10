@@ -10,6 +10,12 @@ def correct(fragment=None,TextFile=None,AtomLabeled='C'):
     Inputs = Input(fragment,TextFile,AtomLabeled)
 
     #Check if imputs were passed correctly and import the attributes to the Inputs variable from the fragment variable or the text file
+    #    One of the arguemtns fragment or TextFile to correct() should be None. Both cannot have values.
+    #    If fragment has a value other than None, it will be used to define Input.fragment
+    #    If TextFile has a value, it will be read as a directory to a .txt file to reference to define Input.fragment
+    #        The format of this .txt file is provided in the References folder
+    #    If neither has a value, the user will be prompted to provide a .txt file with the fragment definition
+    #        The format of this .txt file is provided in the References folder
     Inputs.check_and_import()
     if not Inputs.FragmentOrText:
         print('Either a Fragment object or a TextFile should be passed to CorrectMID.main(), but not both.')

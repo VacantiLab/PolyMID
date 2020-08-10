@@ -10,6 +10,7 @@ class Input:
     #Method for checking input given correctly and importing values
     def check_and_import(self):
         #Detemrine if the inputs were passed to the function properly
+        #    One of the arguemtns fragment or TextFile to correct() should be None. Both cannot have values.
         #import fragment values if in a txt file
 
         from pdb import set_trace
@@ -29,7 +30,7 @@ class Input:
         self.FragmentOrText = PassedCorrectly1 & PassedCorrectly2
 
         #Get parameter values from text file if that is where they are provided
-        if self.FragmentOrText & (not(self.TextFile is None)):
+        if self.FragmentOrText & IsTextFile:
             #Initialize variables
             FragmentName = None
             formula = None

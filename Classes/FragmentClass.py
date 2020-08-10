@@ -6,9 +6,10 @@ class Fragment:
         import numpy as np
 
         #The CM attribute must be a dictionary
-        #    The method create_correction_matrix() adds a key to CM
+        #    The method create_correction_matrix() adds a key to CM.
+        #    Each key corresponds to the correction matrix for a specific element (e.g. C, H, N, or O)
         if type(CM) is not dict:
-            print('Error: When defining a Fragment object, the input, CM, must be a dictionary.')
+            raise Exception('When defining a Fragment object, the input, CM, must be a dictionary.')
             return
 
         self.name = FragmentName
@@ -46,7 +47,6 @@ class Fragment:
         import numpy as np
         import re
         import copy
-        import pandas
         from PolyMID import quantity_of_atom
         from PolyMID import Formula
 
@@ -119,9 +119,12 @@ class Fragment:
                 correction_matrix_dict[i] = np.pad(correction_matrix_dict[i],(0,n_zeros_needed),mode='constant')
 
         #make the correction matrix dictionary into a matrix
-        CM = pandas.DataFrame(correction_matrix_dict)
-        CM = pandas.DataFrame.transpose(CM)
-        CM = np.asarray(CM)
+        n_keys = len(correction_matrix_dict.keys())
+        n_MID_entries = len(correction_matrix_dict[0])
+        CM = np.zeros((n_keys,n_MID_entries))
+        for key in correction_matrix_dict.keys():
+            CM[key,] = correction_matrix_dict[key]
+
 
         #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
         CMi = np.linalg.pinv(CM)
