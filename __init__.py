@@ -6,5 +6,6 @@ from .SupportingFunctions.TextToCM import TextToCM
 from .Classes.FragmentClass import Fragment
 from .Classes.FormulaClass import Formula
 from .Classes.InputClass import Input
+from .Classes.AtomClass import Atom
 from PolyMID.correct import correct
 from PolyMID.natural import natural

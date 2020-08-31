@@ -3,8 +3,10 @@ class Formula:
     def __init__(self,formula):
         self.FormulaInput = formula
         self.formula = None
+        self.AtomArray = None
         self.NaturalMID = None
         self.FormatFormula()
+        self.CreateAtomArray()
 
     def FormatFormula(self):
         # This method redefines the formula attribute of the Formula class
@@ -33,6 +35,36 @@ class Formula:
         # Redefine the formula attribute of the Formula obeject
         self.formula = FormulaToEdit
 
+    def CreateAtomArray(self):
+        # This method creates an array of atom objects corresponding to the formula
+
+        # Import required modules
+        from pdb import set_trace
+        import numpy as np
+        import re
+        from PolyMID import Atom
+
+        # Break the fragment formula up into its atomic symbol and letter components
+        broken_formula = np.array(re.findall('[A-Z][a-z]?|[0-9]+', self.formula))
+        #    '[A-Z][a-z]?|[0-9]+': A capital letter [A-Z], followed by a lowercase letter [a-z], which is optional '?', or '|' a number '[0-9]', and possibly more numbers '+'
+        #    example: this command will take formula = C6H12N1O3Si1 and return broken_formula = array(['C','6','H','12','N','1','O','3','Si','1'])
+        #        all components are strings
+
+        # Get separate arrays containing the atomic symbols and corresponding formula numbers
+        odd_indices = np.array(range(1,len(broken_formula),2)) #all of the odd indices of the array broken_formula
+        even_indices = np.array(range(0,len(broken_formula),2)) #all of the even indices of the array broken_formula
+        formula_numbers = broken_formula[odd_indices].astype(np.int) #the atomic numbers array
+        formula_atoms = broken_formula[even_indices] #the atomic symbols array
+
+        AtomArray = []
+        AtomCounter = 0
+        for atom in formula_atoms:
+            AtomStoich = formula_numbers[AtomCounter]
+            AtomArray.append(Atom(atom,AtomStoich))
+            AtomCounter = AtomCounter + 1
+
+        self.AtomArray = AtomArray
+
 
     # Method for calculating natural MID of a Formula object
     def calc_natural_mid(self):
@@ -44,7 +76,6 @@ class Formula:
         # Import required modules
         from pdb import set_trace
         import numpy as np
-        import pandas
         import re
         from PolyMID import expand_polynomial
 
