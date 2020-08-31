@@ -12,13 +12,14 @@ x     instead of having a 'MetaboliteAtoms' attribute, have a 'CanAcquireLabel' 
 x         I think it will be used identically, so just renaming an attribute of the Fragment class to be more reflective of what it is
 x     In the fragment class make CM a dictionary with entries for C, H, N, and O.
 x         make a way to specify this in the text file
--     If possible, eliminate the use of pandas by using matrices or multidimensional numpy arrays instead of pandas data frames
+x     If possible, eliminate the use of pandas by using matrices or multidimensional numpy arrays instead of pandas data frames
 x Test that a text file can be input by the GUI
 x Call the software package PolyMID
 x     Function call should me PolyMID.correct()
 x     Make PolyMID.natural()
 - Have options for high resolution data
 x Have an option to correct for incorporation of specific atoms (H, C, N, etc.)
+- Have an option to specify tracer proportion (e.g. 50% of glucose is the tracer) and relative atom enrichment of labeled atoms (of the atoms that are supposed to be labeled, 97% are labeled).
 
 
 Outside of PolyMID correct() and natural():
