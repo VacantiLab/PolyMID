@@ -34,3 +34,7 @@ Would need to set the current director to that containing the module with correc
 
 https://realpython.com/python3-object-oriented-programming/
 https://timothybramlett.com/How_to_create_a_Python_Package_with___init__py.html
+
+
+2020-08-31
+The Formula class now defines an AtomArray of Atom Objects. This should be used going forward to calculate natural MIDs (for molecules containing 0 Hv atoms and 1 or multiple Hv atoms)
