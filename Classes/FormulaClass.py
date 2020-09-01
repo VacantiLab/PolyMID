@@ -1,10 +1,12 @@
 class Formula:
     # Initializer a Formula Instance and its attributes
-    def __init__(self,formula):
+    def __init__(self,formula,AtomLabeled,HighRes):
         self.FormulaInput = formula
         self.formula = None
         self.AtomArray = None
         self.NaturalMID = None
+        self.AtomLabeled = AtomLabeled
+        self.HighRes = HighRes
         self.FormatFormula()
         self.CreateAtomArray()
 
@@ -60,7 +62,7 @@ class Formula:
         AtomCounter = 0
         for atom in formula_atoms:
             AtomStoich = formula_numbers[AtomCounter]
-            AtomArray.append(Atom(atom,AtomStoich))
+            AtomArray.append(Atom(atom,AtomStoich,AtomLabeled=self.AtomLabeled,HighRes=self.HighRes))
             AtomCounter = AtomCounter + 1
 
         self.AtomArray = AtomArray

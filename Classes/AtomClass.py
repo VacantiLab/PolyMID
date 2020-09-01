@@ -1,13 +1,15 @@
 class Atom:
 
     # Initializer and Instance Attributes
-    def __init__(self,AtomSymbol,AtomStoich):
+    def __init__(self,AtomSymbol,AtomStoich,AtomLabeled,HighRes):
         import numpy as np
         from pdb import set_trace
 
         self.symbol = AtomSymbol
         self.stoich = AtomStoich
         self.MID = None
+        self.AtomLabeled = AtomLabeled
+        self.HighRes = HighRes
 
         # Retrieve the Atom MID from the text file PolyMID/SupportingFiles/AtomMIDs.txt
         self.ReadMID()
@@ -32,7 +34,21 @@ class Atom:
         PolyMID_Path = os.path.abspath(PolyMID.__file__)
         PolyMID_Path = PolyMID_Path.split(sep='/')
         PolyMID_Path = PolyMID_Path[:-1]
-        AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDs.txt'
+
+        # If the atom is not part of a fragment measured on a high resolution instrument
+        #     Consider its heavy isotopes
+        if not self.HighRes:
+            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDs.txt'
+
+        # If the atom is part of a fragment measured on a high resolution instrument and it is the atom which carries a label (i.e. the one whose mass isotopomers are measured)
+        #     Consider its heavy isotopes
+        if self.HighRes & (self.symbol == self.AtomLabeled):
+            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDs.txt'
+
+        # If the atom is part of a fragment measured on a high resolution instrument and it is not the atom which carries a label (i.e. one whose mass isotopomers are not measured)
+        #     Do not consider its heavy isotopes
+        if self.HighRes & (self.symbol != self.AtomLabeled):
+            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDsHighRes.txt'
 
         with open(AtomMIDs_txtPath,'r') as AtomMIDsFile:
             for line in AtomMIDsFile:
