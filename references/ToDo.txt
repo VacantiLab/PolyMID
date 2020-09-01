@@ -17,7 +17,7 @@ x Test that a text file can be input by the GUI
 x Call the software package PolyMID
 x     Function call should me PolyMID.correct()
 x     Make PolyMID.natural()
-- Have options for high resolution data
+x Have options for high resolution data
 x Have an option to correct for incorporation of specific atoms (H, C, N, etc.)
 - Have an option to specify tracer proportion (e.g. 50% of glucose is the tracer) and relative atom enrichment of labeled atoms (of the atoms that are supposed to be labeled, 97% are labeled).
 - Try to remove the use of pandas from expand_polynomial() function.
