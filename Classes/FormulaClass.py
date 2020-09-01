@@ -120,6 +120,8 @@ class Formula:
         atom_mids_dict = {}
 
         # Determine the number of atoms in the fragment (not unique atoms)
+        #     EDIT: Have total atoms be an attribute of a formula object
+        #     OR: an easier way to do this may be to recreate the formula_numbers variable
         n_atoms = np.sum(formula_numbers)
 
         # Initialize the atom counter, this tracks the identity of the atom
