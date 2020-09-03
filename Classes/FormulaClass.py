@@ -5,8 +5,8 @@ class Formula:
         self.formula = None
         self.AtomArray = None
         self.NaturalMID = None
-        self.AtomLabeled = AtomLabeled
-        self.HighRes = HighRes
+        self.AtomLabeled = AtomLabeled # A string indicating the atom that is considered to be labeled
+        self.HighRes = HighRes # A boolean indicating whether this formula is considered to be of a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes are considered for different atoms
         self.FormatFormula()
         self.CreateAtomArray()
 

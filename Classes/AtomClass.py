@@ -6,10 +6,10 @@ class Atom:
         from pdb import set_trace
 
         self.symbol = AtomSymbol
-        self.stoich = AtomStoich
-        self.MID = None
-        self.AtomLabeled = AtomLabeled
-        self.HighRes = HighRes
+        self.stoich = AtomStoich # The quantity of the atom in the molecule
+        self.MID = None # The isotopic abundances of the atom
+        self.AtomLabeled = AtomLabeled # A string indicating the atom that is considered to be labeled
+        self.HighRes = HighRes # A boolean indicating whether this atom is considered to be part of a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes relative to those of other atoms are considered
 
         # Retrieve the Atom MID from the text file PolyMID/SupportingFiles/AtomMIDs.txt
         self.ReadMID()

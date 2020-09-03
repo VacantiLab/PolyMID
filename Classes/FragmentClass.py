@@ -18,8 +18,8 @@ class Fragment:
         self.CM = CM
         self.CMi = None
         self.PeakArea = PeakArea
-        self.AtomLabeled = AtomLabeled
-        self.HighRes = HighRes
+        self.AtomLabeled = AtomLabeled # A string indicating the atom that is considered to be labeled
+        self.HighRes = HighRes # A boolean indicating whether this fragment is considered to be a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes are considered for different atoms
         self.Formula = Formula(formula=formula,AtomLabeled=self.AtomLabeled,HighRes=self.HighRes)
         self.CanAcquireLabel = Formula(formula=CanAcquireLabel,AtomLabeled=self.AtomLabeled,HighRes=self.HighRes)
 
