@@ -63,4 +63,4 @@ class Atom:
                     self.MID = np.asarray(AtomMID_FloatArray)
                     if self.symbol == 'Hv':
                         coefficient = self.Tracer.TracerEnrichment*self.Tracer.LabelEnrichment
-                        self.MID = coefficient*self.MID + (1-coefficient)*self.Tracer.AtomLabeled.MID
+                        self.MID = coefficient*self.MID + (1-coefficient)*self.Tracer.NaturalLabeledAtomMID
