@@ -61,6 +61,8 @@ class Atom:
                     AtomMID_StringArray = AtomMID_String.split(sep=' ')
                     AtomMID_FloatArray = [float(i) for i in AtomMID_StringArray]
                     self.MID = np.asarray(AtomMID_FloatArray)
+                    # Consider Tracer and Label enrichment by having the heavy atom be components of the heavy atom MID and the natural atom MID
                     if self.symbol == 'Hv':
                         coefficient = self.Tracer.TracerEnrichment*self.Tracer.LabelEnrichment
+                        set_trace()
                         self.MID = coefficient*self.MID + (1-coefficient)*self.Tracer.NaturalLabeledAtomMID
