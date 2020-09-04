@@ -19,7 +19,8 @@ x     Function call should me PolyMID.correct()
 x     Make PolyMID.natural()
 x Have options for high resolution data
 x Have an option to correct for incorporation of specific atoms (H, C, N, etc.)
-- Have an option to specify tracer proportion (e.g. 50% of glucose is the tracer) and relative atom enrichment of labeled atoms (of the atoms that are supposed to be labeled, 97% are labeled).
+x Have an option to specify tracer proportion (e.g. 50% of glucose is the tracer) and relative atom enrichment of labeled atoms (of the atoms that are supposed to be labeled, 97% are labeled).
+- Make the calculation of the Hv atom MID work if the MIDs in the text file for Hv and the labeled atom are different lengths (defining AtomClass.py line 68)
 - Try to remove the use of pandas from expand_polynomial() function.
 
 
