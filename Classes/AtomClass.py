@@ -1,14 +1,14 @@
 class Atom:
 
     # Initializer and Instance Attributes
-    def __init__(self,AtomSymbol,AtomStoich,AtomLabeled,HighRes):
+    def __init__(self,AtomSymbol,AtomStoich,Tracer,HighRes):
         import numpy as np
         from pdb import set_trace
 
         self.symbol = AtomSymbol
         self.stoich = AtomStoich # The quantity of the atom in the molecule
         self.MID = None # The isotopic abundances of the atom
-        self.AtomLabeled = AtomLabeled # A string indicating the atom that is considered to be labeled
+        self.Tracer = Tracer # a tracer object with information about the tracer
         self.HighRes = HighRes # A boolean indicating whether this atom is considered to be part of a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes relative to those of other atoms are considered
 
         # Retrieve the Atom MID from the text file PolyMID/SupportingFiles/AtomMIDs.txt
@@ -42,12 +42,12 @@ class Atom:
 
         # If the atom is part of a fragment measured on a high resolution instrument and it is the atom which carries a label (i.e. the one whose mass isotopomers are measured)
         #     Consider its heavy isotopes
-        if self.HighRes & (self.symbol == self.AtomLabeled):
+        if self.HighRes & (self.symbol == self.Tracer.AtomLabeled):
             AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDs.txt'
 
         # If the atom is part of a fragment measured on a high resolution instrument and it is not the atom which carries a label (i.e. one whose mass isotopomers are not measured)
         #     Do not consider its heavy isotopes
-        if self.HighRes & (self.symbol != self.AtomLabeled):
+        if self.HighRes & (self.symbol != self.Tracer.AtomLabeled):
             AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDsHighRes.txt'
 
         with open(AtomMIDs_txtPath,'r') as AtomMIDsFile:
@@ -61,3 +61,5 @@ class Atom:
                     AtomMID_StringArray = AtomMID_String.split(sep=' ')
                     AtomMID_FloatArray = [float(i) for i in AtomMID_StringArray]
                     self.MID = np.asarray(AtomMID_FloatArray)
+                    if self.symbol == 'Hv':
+                        self.MID = self.Tracer.TracerEnrichment*self.Tracer.LabelEnrichment*self.MID

@@ -1,11 +1,11 @@
 class Formula:
     # Initializer a Formula Instance and its attributes
-    def __init__(self,formula,AtomLabeled,HighRes):
+    def __init__(self,formula,Tracer,HighRes):
         self.FormulaInput = formula
         self.formula = None
         self.AtomArray = None
         self.NaturalMID = None
-        self.AtomLabeled = AtomLabeled # A string indicating the atom that is considered to be labeled
+        self.Tracer = Tracer # A Tracer object with information about the tracer
         self.HighRes = HighRes # A boolean indicating whether this formula is considered to be of a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes are considered for different atoms
         self.FormatFormula()
         self.CreateAtomArray()
@@ -62,7 +62,7 @@ class Formula:
         AtomCounter = 0
         for atom in formula_atoms:
             AtomStoich = formula_numbers[AtomCounter]
-            AtomArray.append(Atom(atom,AtomStoich,AtomLabeled=self.AtomLabeled,HighRes=self.HighRes))
+            AtomArray.append(Atom(atom,AtomStoich,Tracer=self.Tracer,HighRes=self.HighRes))
             AtomCounter = AtomCounter + 1
 
         self.AtomArray = AtomArray

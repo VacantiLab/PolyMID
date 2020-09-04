@@ -1,15 +1,18 @@
-def correct(fragment=None,TextFile=None,AtomLabeled='C',HighRes=False):
+def correct(fragment=None,TextFile=None,AtomLabeled='C',TracerEnrichment=1,LabelEnrichment=1,HighRes=False):
 
     # Inputs:
     #     fragment: A fragment object containing information of the fragment whose MID is being corrected for natural isotopic abundances
     #     TextFile: A character that is the path to a .txt file containing information of the fragment whose MID is being corrected for natural isotopic abundances
     #     AtomLabeled: A character that is the chemical symbol of the atom which is assumed to be labeled in the fragment whose MID is being corrected for natural isotopic abundances
+    #     TracerEnrichment: The percent of the molecule assumed to be the tracer that is actually the tracer (e.g. 50% of glucose is [U-13C6]glucose)
+    #     LabelEnrichment: The percent of the atom that is assumed to be labeled that is actually labeled (e.g. 99% of the atoms said to be 13C in [U-13C6]glucose are actually 13C)
     #     HighRes: A booleon indicating whether the data is high resoloution or not
     #         i.e. whether M1, M2, M3 are aggregate measurements of heavy isotopes of all atoms (not HighRes) or just the atom that is labeled (HighRes)
-    #         This input is only used if the fragment information is read from a text file
-    #             Otherwise HighRes is already an attribute of the fragment input
     #         Note: Correcting high resolution data is achieved by setting all atom MIDs in the atom objects to [1 0 0] except that of the AtomLabeled
     #             This is accomplished in the definition of an Atom object where atom MIDs for high resolution data are taken from a separate file
+    #     This inputs AtomLabeled, TracerEnrichment, LabelEnrichment, and HighRes are only used if a text file is specified via the TextFile input or via the GUI for text file selection
+    #             Otherwise these inpiuts are already an attributes of the fragment input
+    #                 AtomLabeled, TracerEnrichment, and LabelEnrichment are attributes of a Tracer object
 
     # Outputs:
     #     fragment.MIDc: The MID corrected for natural isotopic abundances
@@ -18,10 +21,11 @@ def correct(fragment=None,TextFile=None,AtomLabeled='C',HighRes=False):
     import pdb
     from PolyMID import Fragment
     from PolyMID import Input
+    from PolyMID import Tracer
     from pdb import set_trace
 
     #Initialize the Inputs variable as an Input object
-    Inputs = Input(fragment,TextFile,AtomLabeled,HighRes)
+    Inputs = Input(fragment=fragment,TextFile=TextFile,AtomLabeled=AtomLabeled,TracerEnrichment=TracerEnrichment,LabelEnrichment=LabelEnrichment,HighRes=HighRes)
 
     #Check if imputs were passed correctly and import the attributes to the Inputs variable from the fragment variable or the text file
     #    One of the arguemtns fragment or TextFile to correct() should be None. Both cannot have values.

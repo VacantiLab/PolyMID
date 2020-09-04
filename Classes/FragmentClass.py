@@ -1,7 +1,7 @@
 class Fragment:
 
     # Initializer and Instance Attributes
-    def __init__(self,formula,CanAcquireLabel,MIDu,FragmentName,MIDc,PeakArea,CM,AtomLabeled,HighRes):
+    def __init__(self,formula,CanAcquireLabel,MIDu,FragmentName,MIDc,PeakArea,CM,Tracer,HighRes):
         from PolyMID import Formula
         import numpy as np
 
@@ -18,10 +18,10 @@ class Fragment:
         self.CM = CM
         self.CMi = None
         self.PeakArea = PeakArea
-        self.AtomLabeled = AtomLabeled # A string indicating the atom that is considered to be labeled
+        self.Tracer = Tracer # A string indicating the atom that is considered to be labeled
         self.HighRes = HighRes # A boolean indicating whether this fragment is considered to be a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes are considered for different atoms
-        self.Formula = Formula(formula=formula,AtomLabeled=self.AtomLabeled,HighRes=self.HighRes)
-        self.CanAcquireLabel = Formula(formula=CanAcquireLabel,AtomLabeled=self.AtomLabeled,HighRes=self.HighRes)
+        self.Formula = Formula(formula=formula,Tracer=self.Tracer,HighRes=self.HighRes)
+        self.CanAcquireLabel = Formula(formula=CanAcquireLabel,Tracer=self.Tracer,HighRes=self.HighRes)
 
     # instance method to assign new values to a Fragment object
     def assign(self,attribute,NewValue):
@@ -61,11 +61,11 @@ class Fragment:
 
         #find the index of the number of the atom which can acquire a label in the formula for the full fragment
         #    it is used in creating the correction matrix below because successive quantities of this atom need to be subtracted and a heavy atom put in its place
-        atom_index = np.where(broken_formula==self.AtomLabeled)[0][0]
+        atom_index = np.where(broken_formula==self.Tracer.AtomLabeled)[0][0]
         atom_quantity_index = atom_index+1 #refering to full fragment
 
         #the number of rows of the correction matrix is equal to the quantity of the atom being corrected for that are in the fragment and the original metabolite
-        atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.AtomLabeled) #this does not refer to the full fragment!
+        atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.Tracer.AtomLabeled) #this does not refer to the full fragment!
 
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
@@ -90,7 +90,7 @@ class Fragment:
                 new_formula = new_formula + broken_formula_correct[j]
 
             #make a Formula object
-            new_formula = Formula(formula=new_formula,AtomLabeled=self.AtomLabeled,HighRes=self.HighRes)
+            new_formula = Formula(formula=new_formula,Tracer=self.Tracer,HighRes=self.HighRes)
 
             #get the mid due to natural abundances of the updated formula (with one or more heavy atoms)
             new_formula.calc_natural_mid()
@@ -131,7 +131,7 @@ class Fragment:
         #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
         CMi = np.linalg.pinv(CM)
 
-        self.CM[self.AtomLabeled] = CM
+        self.CM[self.Tracer.AtomLabeled] = CM
         self.CMi = CMi
 
     def calc_corrected_mid(self):

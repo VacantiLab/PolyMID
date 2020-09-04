@@ -1,12 +1,14 @@
 class Input:
     #Initializer a Formula Instance and its attributes
-    def __init__(self,fragment,TextFile,AtomLabeled,HighRes):
+    def __init__(self,fragment,TextFile,AtomLabeled,TracerEnrichment,LabelEnrichment,HighRes):
+        from PolyMID import Tracer
+
         self.fragment = fragment
         self.TextFile = TextFile
-        self.AtomLabeled = AtomLabeled
         self.FragmentOrText = True #True if there are paratmers OR a text file provided, but not both
         self.AllRequired = True #True if all required parameters are provided directly or through the text file
         self.HighRes = HighRes
+        self.Tracer = Tracer(AtomLabeled,TracerEnrichment,LabelEnrichment)
 
     #Method for checking input given correctly and importing values
     def check_and_import(self):
@@ -64,4 +66,4 @@ class Input:
                         if line_split[1] != 'None':
                             CM = TextToCM(line_split[1],CM)
 
-            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, AtomLabeled=self.AtomLabeled, HighRes=self.HighRes)
+            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, Tracer=self.Tracer, HighRes=self.HighRes)
