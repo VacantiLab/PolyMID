@@ -29,6 +29,7 @@ class Atom:
         import os.path
         import numpy as np
         import PolyMID
+        from PolyMID import PadToEqualLength
         from pdb import set_trace
 
         PolyMID_Path = os.path.abspath(PolyMID.__file__)
@@ -65,4 +66,7 @@ class Atom:
                     if self.symbol == 'Hv':
                         coefficient = self.Tracer.TracerEnrichment*self.Tracer.LabelEnrichment
                         set_trace()
-                        self.MID = coefficient*self.MID + (1-coefficient)*self.Tracer.NaturalLabeledAtomMID
+                        array1 = self.MID
+                        array2 = self.Tracer.NaturalLabeledAtomMID
+                        array1,array2 = PadToEqualLength(array1,array2)
+                        self.MID = coefficient*array1 + (1-coefficient)*array2
