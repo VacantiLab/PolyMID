@@ -5,6 +5,7 @@ x    I don't like the specification of n_rel_abun. Get rid of this by storing at
 x    Why are the entries in the atom_abundances dictionary pandas.Series instead of np.arrays?
 x        Do not need to be, changed them to np.arrays.
 x    Make the atoms MIDs an attribute of an object that can be changed - done by using text file to insert them
+-        Allow the user to specify where the program gets the AtomMIDs txt file from: This is done in the AtomClass definition file. You will have to pass a directory to the Atom object.
 x In the expand_polynomial function, shorten factored_aggregated in a way that considers the resulting MID values
 x In the fragment class, work on create_correction_matrix
 x     make the MIDs the same length by adding zeros to make all of them the same length as the longest MID in the correction matrix
@@ -20,8 +21,9 @@ x     Make PolyMID.natural()
 x Have options for high resolution data
 x Have an option to correct for incorporation of specific atoms (H, C, N, etc.)
 x Have an option to specify tracer proportion (e.g. 50% of glucose is the tracer) and relative atom enrichment of labeled atoms (of the atoms that are supposed to be labeled, 97% are labeled).
-- Make the calculation of the Hv atom MID work if the MIDs in the text file for Hv and the labeled atom are different lengths (defining AtomClass.py line 68)
-- Try to remove the use of pandas from expand_polynomial() function.
+x Make the calculation of the Hv atom MID work if the MIDs in the text file for Hv and the labeled atom are different lengths (defining AtomClass.py line 68)
+- Remove the use of pandas from expand_polynomial() function IF data frames are not used as they are intended to be (unordered and columns labeled).
+- create child classes instead of passing everything down the line from input to atom
 
 
 
