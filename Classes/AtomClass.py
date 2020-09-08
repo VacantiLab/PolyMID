@@ -65,7 +65,9 @@ class Atom:
                     # Consider Tracer and Label enrichment by having the heavy atom be components of the heavy atom MID and the natural atom MID
                     if self.symbol == 'Hv':
                         coefficient = self.Tracer.TracerEnrichment*self.Tracer.LabelEnrichment
-                        set_trace()
+                        #    The coefficient is the product of these two enrichments because that provides the probability that an atom considered to be labeled will actually be labeled
+                        # The arrays must be the same length to make a linear combination of both of them
+                        #     Ensure they are the same length by appending 0s to the shorter one
                         array1 = self.MID
                         array2 = self.Tracer.NaturalLabeledAtomMID
                         array1,array2 = PadToEqualLength(array1,array2)
