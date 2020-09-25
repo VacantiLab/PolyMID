@@ -7,6 +7,7 @@ class Formula:
         self.NaturalMID = None
         self.Tracer = Tracer # A Tracer object with information about the tracer
         self.HighRes = HighRes # A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
+        self.FormatFormula()
         self.CreateAtomArray()
 
     def FormatFormula(self):

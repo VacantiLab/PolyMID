@@ -7,7 +7,7 @@ class Input:
         self.TextFile = TextFile
         self.FragmentOrText = True #True if there are paratmers OR a text file provided, but not both
         self.AllRequired = True #True if all required parameters are provided directly or through the text file
-        self.HighRes = HighRes
+        self.HighRes = HighRes # A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
         self.Tracer = Tracer(AtomLabeled,TracerEnrichment,LabelEnrichment)
 
     #Method for checking input given correctly and importing values
