@@ -24,6 +24,13 @@ x Have an option to specify tracer proportion (e.g. 50% of glucose is the tracer
 x Make the calculation of the Hv atom MID work if the MIDs in the text file for Hv and the labeled atom are different lengths (defining AtomClass.py line 68)
 - Remove the use of pandas from expand_polynomial() function IF data frames are not used as they are intended to be (unordered and columns labeled).
 - create child classes instead of passing everything down the line from input to atom
+-     not sure this is appropriate because 'formula' is an attribute of 'fragment' and child definitions would be recursive
+- Get all inputs from the text file or from the fragment object
+
+
+Not related to program function
+- Get the proper license to share this
+- package it in pip
 
 
 
