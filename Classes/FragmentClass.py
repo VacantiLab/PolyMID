@@ -19,7 +19,7 @@ class Fragment:
         self.CMi = None
         self.PeakArea = PeakArea
         self.Tracer = Tracer # A string indicating the atom that is considered to be labeled
-        self.HighRes = HighRes # A boolean indicating whether this fragment is considered to be a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes are considered for different atoms
+        self.HighRes = HighRes # A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
         self.Formula = Formula(formula=formula,Tracer=self.Tracer,HighRes=self.HighRes)
         self.CanAcquireLabel = Formula(formula=CanAcquireLabel,Tracer=self.Tracer,HighRes=self.HighRes)
 

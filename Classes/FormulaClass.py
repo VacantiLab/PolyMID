@@ -6,8 +6,7 @@ class Formula:
         self.AtomArray = None
         self.NaturalMID = None
         self.Tracer = Tracer # A Tracer object with information about the tracer
-        self.HighRes = HighRes # A boolean indicating whether this formula is considered to be of a molecule measured on a high resolution instrument, i.e. whether differences in mass increases due to heavy isotopes are considered for different atoms
-        self.FormatFormula()
+        self.HighRes = HighRes # A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
         self.CreateAtomArray()
 
     def FormatFormula(self):
