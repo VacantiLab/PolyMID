@@ -1,19 +1,20 @@
-def correct(fragment=None,TextFile=None,AtomLabeled='C',TracerEnrichment=1,LabelEnrichment=1,HighRes='none'):
+def correct(fragment=None,TextFile=None):
 
     # Inputs:
     #     fragment: A fragment object containing information of the fragment whose MID is being corrected for natural isotopic abundances
     #     TextFile: A character that is the path to a .txt file containing information of the fragment whose MID is being corrected for natural isotopic abundances
-    #     AtomLabeled: A character that is the chemical symbol of the atom which is assumed to be labeled in the fragment whose MID is being corrected for natural isotopic abundances
-    #     TracerEnrichment: The percent of the molecule assumed to be the tracer that is actually the tracer (e.g. 50% of glucose is [U-13C6]glucose)
-    #     LabelEnrichment: The percent of the atom that is assumed to be labeled that is actually labeled (e.g. 99% of the atoms said to be 13C in [U-13C6]glucose are actually 13C)
-    #     HighRes: A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
-    #         can also be 'all' or 'none'
-    #         i.e. whether M1, M2, M3 are aggregate measurements of heavy isotopes of all atoms (low resolution, indicated by HighRes='none') or just the atom that is labeled and those not indicated in HighRes
-    #         Note: Correcting high resolution data is achieved by setting all atom MIDs, for the elements indicated in HighRes, in the atom objects to [1 0 0] except that of the AtomLabeled
-    #             This is accomplished in the definition of an Atom object where atom MIDs for high resolution data are taken from a separate file
-    #     This inputs AtomLabeled, TracerEnrichment, LabelEnrichment, and HighRes are only used if a text file is specified via the TextFile input or via the GUI for text file selection
-    #             Otherwise these inpiuts are already an attributes of the fragment input
-    #                 AtomLabeled, TracerEnrichment, and LabelEnrichment are attributes of a Tracer object
+
+    #     Defined within the fragment object:
+    #         AtomLabeled: A character that is the chemical symbol of the atom which is assumed to be labeled in the fragment whose MID is being corrected for natural isotopic abundances
+    #         TracerEnrichment: The percent of the molecule assumed to be the tracer that is actually the tracer (e.g. 50% of glucose is [U-13C6]glucose)
+    #         LabelEnrichment: The percent of the atom that is assumed to be labeled that is actually labeled (e.g. 99% of the atoms said to be 13C in [U-13C6]glucose are actually 13C)
+    #         HighRes: A  list of strings indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
+    #             can also be 'all' or 'none'
+    #             i.e. whether M1, M2, M3 are aggregate measurements of heavy isotopes of all atoms (low resolution, indicated by HighRes='none') or just the atom that is labeled and those not indicated in HighRes
+    #             Note: Correcting high resolution data is achieved by setting all atom MIDs, for the elements indicated in HighRes, in the atom objects to [1 0 0] except that of the AtomLabeled
+    #                 This is accomplished in the definition of an Atom object where atom MIDs for high resolution data are taken from a separate file
+    #             Note: this is now entered as a list separated by spaces in the input text file
+
 
     # Outputs:
     #     fragment.MIDc: The MID corrected for natural isotopic abundances
@@ -25,11 +26,8 @@ def correct(fragment=None,TextFile=None,AtomLabeled='C',TracerEnrichment=1,Label
     from PolyMID import Tracer
     from pdb import set_trace
 
-    if HighRes == 'none':
-        HighRes = np.array([],dtype='str')
-
     #Initialize the Inputs variable as an Input object
-    Inputs = Input(fragment=fragment,TextFile=TextFile,AtomLabeled=AtomLabeled,TracerEnrichment=TracerEnrichment,LabelEnrichment=LabelEnrichment,HighRes=HighRes)
+    Inputs = Input(fragment=fragment,TextFile=TextFile)
 
     #Check if imputs were passed correctly and import the attributes to the Inputs variable from the fragment variable or the text file
     #    One of the arguemtns fragment or TextFile to correct() should be None. Both cannot have values.
@@ -49,6 +47,7 @@ def correct(fragment=None,TextFile=None,AtomLabeled='C',TracerEnrichment=1,Label
 
     #Create a correction matrix if it was not an input
     #    the CM attribute of a Fragment object is a dictionary with keys corresponding to different atom identities
+    AtomLabeled = fragment.Tracer.AtomLabeled
     if fragment.CM[AtomLabeled] is None:
         fragment.create_correction_matrix()
 

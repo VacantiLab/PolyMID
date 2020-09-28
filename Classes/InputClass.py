@@ -1,14 +1,12 @@
 class Input:
     #Initializer a Formula Instance and its attributes
-    def __init__(self,fragment,TextFile,AtomLabeled,TracerEnrichment,LabelEnrichment,HighRes):
+    def __init__(self,fragment,TextFile):
         from PolyMID import Tracer
 
         self.fragment = fragment
         self.TextFile = TextFile
         self.FragmentOrText = True #True if there are paratmers OR a text file provided, but not both
         self.AllRequired = True #True if all required parameters are provided directly or through the text file
-        self.HighRes = HighRes # A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
-        self.Tracer = Tracer(AtomLabeled,TracerEnrichment,LabelEnrichment)
 
     #Method for checking input given correctly and importing values
     def check_and_import(self):
@@ -18,6 +16,7 @@ class Input:
 
         from pdb import set_trace
         from PolyMID import Fragment
+        from PolyMID import Tracer
         import numpy as np
         from PolyMID import get_directory
         from PolyMID import TextToCM
@@ -49,15 +48,37 @@ class Input:
                     line_split = line.split(':')
                     line_split[0] = line_split[0].strip()
                     line_split[1] = line_split[1].strip()
+
                     if (line_split[0] == 'formula') | (line_split[0] == 'Formula'):
                         formula = line_split[1]
+
                     if (line_split[0] == 'CanAcquireLabel') | (line_split[0] == 'Metabolite Atoms'):
                         CanAcquireLabel = line_split[1]
+
                     if (line_split[0] == 'MIDu'):
                         MIDu = line_split[1]
                         MIDu = np.fromstring(MIDu,dtype=float,sep=' ')
+
                     if (line_split[0] == 'FragmentName') | (line_split[0] == 'Fragment Name'):
                         FragmentName = line_split[1]
+
+                    if (line_split[0] == 'AtomLabeled') | (line_split[0] == 'Atom Labeled'):
+                        AtomLabeled = line_split[1]
+
+                    if (line_split[0] == 'TracerEnrichment') | (line_split[0] == 'Tracer Enrichment'):
+                        TracerEnrichment = float(line_split[1])
+
+                    if (line_split[0] == 'LabelEnrichment') | (line_split[0] == 'Label Enrichment'):
+                        LabelEnrichment = float(line_split[1])
+
+                    if (line_split[0] == 'HighRes') | (line_split[0] == 'High Res'):
+                        HighRes = line_split[1]
+                        if HighRes == 'none':
+                            HighRes = np.array([],dtype='str')
+                        # convert to a list of the elements that are resolved with high resolution
+                        if (HighRes!='none') & (HighRes!='all'):
+                            HighRes = HighRes.strip().split(' ')
+
                     if (line_split[0] == 'CM'):
                         if line_split[1] == 'None':
                             CM = CM
@@ -66,4 +87,5 @@ class Input:
                         if line_split[1] != 'None':
                             CM = TextToCM(line_split[1],CM)
 
-            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, Tracer=self.Tracer, HighRes=self.HighRes)
+            Tracer = Tracer(AtomLabeled,TracerEnrichment,LabelEnrichment)
+            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, Tracer=Tracer, HighRes=HighRes)
