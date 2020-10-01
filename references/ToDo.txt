@@ -27,12 +27,19 @@ x create child classes instead of passing everything down the line from input to
 x     this is not appropriate because 'formula' is an attribute of 'fragment' and child definitions would be recursive
 x Get all inputs from the text file or from the fragment object
 - In input class, make sure initialization of CM works - predefined list of atoms?
+-     CM is also specific to enrichment. Maybe remove the option to save CM for the time being
 - Have the format of the input text file explained in the comments of correct.py
+- replace MIDu with MIDm
+- read multiple fragments from same text file
+- change AtomLabeled to LabeledElement
+- make the correct program start with capital C
+
 
 
 Not related to program function
 - Get the proper license to share this (MIT License looks good?)
 - package it in pip
+-     add numpy and pandas as dependencies
 - copyright PolyMID
 
 

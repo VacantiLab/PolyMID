@@ -1,0 +1,25 @@
+Directions for building and uploading a pip package:
+https://packaging.python.org/tutorials/packaging-projects/
+
+
+Commands needed after setuptools and wheel are upgraded:
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload --repository testpypi dist/*
+
+
+Logging into TestPyPi:
+username: __token__
+
+Whatever your token is
+
+
+Installing the package:
+python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps PolyMID==0.0.5
+
+This one works with specifying the version:
+pip install -i https://test.pypi.org/simple/ PolyMID==0.0.5
+
+Note: Including .txt files in the distribution was difficult. Directions that work are here:
+https://stackoverflow.com/questions/1612733/including-non-python-files-with-setup-py
