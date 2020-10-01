@@ -9,5 +9,5 @@ from .Classes.FormulaClass import Formula
 from .Classes.InputClass import Input
 from .Classes.AtomClass import Atom
 from .Classes.TracerClass import Tracer
-from PolyMID.correct import correct
-from PolyMID.natural import natural
+from PolyMID.Correct import Correct
+from PolyMID.Natural import Natural

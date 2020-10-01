@@ -1,10 +1,10 @@
 class Tracer:
 
     # Initializer and Instance Attributes
-    def __init__(self,AtomLabeled,TracerEnrichment,LabelEnrichment):
+    def __init__(self,LabeledElement,TracerEnrichment,LabelEnrichment):
         from pdb import set_trace
 
-        self.AtomLabeled = AtomLabeled # A string indicating the atom that is considered to be labeled
+        self.LabeledElement = LabeledElement # A string indicating the atom that is considered to be labeled
         self.TracerEnrichment = TracerEnrichment
         self.LabelEnrichment = LabelEnrichment
         self.NaturalLabeledAtomMID = None # The MID of the labeled atom if it were unlabeled (needed when tracer and/or label enrichments are specified)
@@ -32,7 +32,7 @@ class Tracer:
                 FileAtomSymbol = line_split[0].strip()
                 FileAtomMID_String = line_split[1].strip()
 
-                if FileAtomSymbol == self.AtomLabeled:
+                if FileAtomSymbol == self.LabeledElement:
                     AtomMID_String = FileAtomMID_String
                     AtomMID_StringArray = AtomMID_String.split(sep=' ')
                     AtomMID_FloatArray = [float(i) for i in AtomMID_StringArray]

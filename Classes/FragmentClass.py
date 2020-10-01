@@ -1,7 +1,7 @@
 class Fragment:
 
     # Initializer and Instance Attributes
-    def __init__(self,formula,CanAcquireLabel,MIDu,FragmentName,MIDc,PeakArea,CM,Tracer,HighRes):
+    def __init__(self,formula,CanAcquireLabel,MIDm,FragmentName,MIDc,PeakArea,CM,Tracer,HighRes):
         from PolyMID import Formula
         import numpy as np
 
@@ -13,7 +13,7 @@ class Fragment:
             return
 
         self.name = FragmentName
-        self.MIDu = MIDu
+        self.MIDm = MIDm
         self.MIDc = MIDc
         self.CM = CM
         self.CMi = None
@@ -31,8 +31,8 @@ class Fragment:
             self.formula = NewValue
         if attribute == 'CanAcquireLabel':
             self.CanAcquireLabel = NewValue
-        if attribute == 'MIDu':
-            self.MIDu = NewValue
+        if attribute == 'MIDm':
+            self.MIDm = NewValue
         if attribute == 'MIDc':
             self.MIDc = NewValue
         if attribute == 'CM':
@@ -61,11 +61,11 @@ class Fragment:
 
         #find the index of the number of the atom which can acquire a label in the formula for the full fragment
         #    it is used in creating the correction matrix below because successive quantities of this atom need to be subtracted and a heavy atom put in its place
-        atom_index = np.where(broken_formula==self.Tracer.AtomLabeled)[0][0]
+        atom_index = np.where(broken_formula==self.Tracer.LabeledElement)[0][0]
         atom_quantity_index = atom_index+1 #refering to full fragment
 
         #the number of rows of the correction matrix is equal to the quantity of the atom being corrected for that are in the fragment and the original metabolite
-        atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.Tracer.AtomLabeled) #this does not refer to the full fragment!
+        atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.Tracer.LabeledElement) #this does not refer to the full fragment!
 
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
@@ -111,8 +111,8 @@ class Fragment:
             # The number of theoretical MID entries in the correction matrix must be the same as the number of measured MID entries for the matrix algebra to work
             #     If the number of theoretical MID entries is less, it is increased
             #     The case where n_theoretical_mid_entries is greater (the usual case) is handled later by increasing the number of measured MID entries
-            if n_theoretical_mid_entries < len(self.MIDu):
-                n_theoretical_mid_entries = len(self.MIDu)
+            if n_theoretical_mid_entries < len(self.MIDm):
+                n_theoretical_mid_entries = len(self.MIDm)
 
             # Lengthen each theoretical MID with given quantities of heavy atoms to the specified length of the theoretical MIDs
             #     MIDs will NOT have to be shortened here because they are all set to have the same length as the longest theoretical MID
@@ -131,7 +131,7 @@ class Fragment:
         #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
         CMi = np.linalg.pinv(CM)
 
-        self.CM[self.Tracer.AtomLabeled] = CM
+        self.CM[self.Tracer.LabeledElement] = CM
         self.CMi = CMi
 
     def calc_corrected_mid(self):
@@ -147,12 +147,12 @@ class Fragment:
 
         #the measured MID must have the same number of entries as each of the theoretical MIDs
         #    if it is short, add zeros to make up for the difference
-        MIDu = self.MIDu
-        if len(MIDu) < n_theoretical_mid_entries:
-            mid_u_appendage = np.zeros(n_theoretical_mid_entries-len(MIDu))
-            MIDu = np.append(MIDu,mid_u_appendage)
+        MIDm = self.MIDm
+        if len(MIDm) < n_theoretical_mid_entries:
+            mid_u_appendage = np.zeros(n_theoretical_mid_entries-len(MIDm))
+            MIDm = np.append(MIDm,mid_u_appendage)
 
         #calculate corrected MID
-        MIDc = np.dot(MIDu,CMi)
+        MIDc = np.dot(MIDm,CMi)
         MIDc = MIDc/sum(MIDc)
         self.assign('MIDc',MIDc)

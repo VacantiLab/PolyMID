@@ -37,7 +37,7 @@ class Input:
             FragmentName = None
             formula = None
             CanAcquireLabel = None
-            MIDu = None
+            MIDm = None
             MIDc = None
             #CM is initialized as a dictionary with None entries for atoms
             CM = {'C':None, 'H':None, 'N':None, 'O':None}
@@ -55,15 +55,15 @@ class Input:
                     if (line_split[0] == 'CanAcquireLabel') | (line_split[0] == 'Metabolite Atoms'):
                         CanAcquireLabel = line_split[1]
 
-                    if (line_split[0] == 'MIDu'):
-                        MIDu = line_split[1]
-                        MIDu = np.fromstring(MIDu,dtype=float,sep=' ')
+                    if (line_split[0] == 'MIDm'):
+                        MIDm = line_split[1]
+                        MIDm = np.fromstring(MIDm,dtype=float,sep=' ')
 
                     if (line_split[0] == 'FragmentName') | (line_split[0] == 'Fragment Name'):
                         FragmentName = line_split[1]
 
-                    if (line_split[0] == 'AtomLabeled') | (line_split[0] == 'Atom Labeled'):
-                        AtomLabeled = line_split[1]
+                    if (line_split[0] == 'LabeledElement') | (line_split[0] == 'Labeled Element'):
+                        LabeledElement = line_split[1]
 
                     if (line_split[0] == 'TracerEnrichment') | (line_split[0] == 'Tracer Enrichment'):
                         TracerEnrichment = float(line_split[1])
@@ -87,5 +87,5 @@ class Input:
                         if line_split[1] != 'None':
                             CM = TextToCM(line_split[1],CM)
 
-            Tracer = Tracer(AtomLabeled,TracerEnrichment,LabelEnrichment)
-            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDu=MIDu, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, Tracer=Tracer, HighRes=HighRes)
+            Tracer = Tracer(LabeledElement,TracerEnrichment,LabelEnrichment)
+            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDm=MIDm, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, Tracer=Tracer, HighRes=HighRes)
