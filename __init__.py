@@ -6,7 +6,7 @@ from .SupportingFunctions.TextToCM import TextToCM
 from .SupportingFunctions.PadToEqualLength import PadToEqualLength
 from .Classes.FragmentClass import Fragment
 from .Classes.FormulaClass import Formula
-from .Classes.InputClass import Input
+from .Classes.InputClass import InputClass
 from .Classes.AtomClass import Atom
 from .Classes.TracerClass import Tracer
 from PolyMID.Correct import Correct

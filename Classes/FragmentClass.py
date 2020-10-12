@@ -5,13 +5,6 @@ class Fragment:
         from PolyMID import Formula
         import numpy as np
 
-        #The CM attribute must be a dictionary
-        #    The method create_correction_matrix() adds a key to CM.
-        #    Each key corresponds to the correction matrix for a specific element (e.g. C, H, N, or O)
-        if type(CM) is not dict:
-            raise Exception('When defining a Fragment object, the input, CM, must be a dictionary.')
-            return
-
         self.name = FragmentName
         self.MIDm = MIDm
         self.MIDc = MIDc
@@ -131,7 +124,7 @@ class Fragment:
         #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
         CMi = np.linalg.pinv(CM)
 
-        self.CM[self.Tracer.LabeledElement] = CM
+        self.CM = CM
         self.CMi = CMi
 
     def calc_corrected_mid(self):

@@ -1,8 +1,10 @@
-def Correct(fragment=None,TextFile=None):
+def Correct(CorrectInput=None):
 
     # Inputs:
-    #     fragment: A fragment object containing information of the fragment whose MID is being corrected for natural isotopic abundances
-    #     TextFile: A character that is the path to a .txt file containing information of the fragment whose MID is being corrected for natural isotopic abundances
+    #     CorrectInput:
+    #         Can be a fragment object containing information of the fragment whose MID is being corrected for natural isotopic abundances
+    #         Can be a string representing a path to a text file contining the information to make a fragment object
+    #         Can be None, in which case the user is prompted to select a text file containing the above information using a GUI
 
     #     Defined within the fragment object:
     #         LabeledElement: A character that is the chemical symbol of the atom which is assumed to be labeled in the fragment whose MID is being corrected for natural isotopic abundances
@@ -23,41 +25,21 @@ def Correct(fragment=None,TextFile=None):
     import pandas as pd
     import pdb
     from PolyMID import Fragment
-    from PolyMID import Input
+    from PolyMID import InputClass
     from PolyMID import Tracer
     from pdb import set_trace
 
     #Initialize the Inputs variable as an Input object
-    Inputs = Input(fragment=fragment,TextFile=TextFile)
-
-    #Check if imputs were passed correctly and import the attributes to the Inputs variable from the fragment variable or the text file
-    #    One of the arguemtns fragment or TextFile to correct() should be None. Both cannot have values.
-    #    If fragment has a value other than None, it will be used to define Input.fragment
-    #    If TextFile has a value, it will be read as a directory to a .txt file to reference to define Input.fragment
-    #        The format of this .txt file is provided in the References folder
-    #    If neither has a value, the user will be prompted to provide a .txt file with the fragment definition
-    #        The format of this .txt file is provided in the References folder
-    Inputs.check_and_import()
-    if not Inputs.FragmentOrText:
-        print('Either a Fragment object or a TextFile should be passed to CorrectMID.main(), but not both.')
-        return
+    InputObject = InputClass(CorrectInput)
 
     print('\nCalculating corrected MIDs...')
 
     #Create a Fragment object
     #    If a fragment object was passed to this function, this will be equivalent
-    fragment = Inputs.fragment
+    fragment = InputObject.fragment
 
-    #Create a correction matrix if it was not an input
-    #    the CM attribute of a Fragment object is a dictionary with keys corresponding to different atom identities
-    LabeledElement = fragment.Tracer.LabeledElement
-    if fragment.CM[LabeledElement] is None:
-        fragment.create_correction_matrix()
-
-    #If there is already a correction matrix, calculate its inverse
-    #    CMi is not a dictionary and is calculated every time a correction is performed for an atom
-    if fragment.CM[LabeledElement] is not None:
-        fragment.assign('CMi',np.linalg.pinv(fragment.CM[LabeledElement]))
+    #Create a correction matrix and calculate its inverse
+    fragment.create_correction_matrix()
 
     #Calculate the corrected MID
     fragment.calc_corrected_mid()
