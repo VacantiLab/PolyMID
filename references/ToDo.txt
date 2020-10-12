@@ -26,8 +26,8 @@ x Make the calculation of the Hv atom MID work if the MIDs in the text file for 
 x create child classes instead of passing everything down the line from input to atom
 x     this is not appropriate because 'formula' is an attribute of 'fragment' and child definitions would be recursive
 x Get all inputs from the text file or from the fragment object
-- In input class, make sure initialization of CM works - predefined list of atoms?
--     CM is also specific to enrichment. Store CMs in a separate text file.
+x In input class, make sure initialization of CM works - predefined list of atoms?
+x     CM is also specific to enrichment. Store CMs in a separate text file.
 - Have the format of the input text file explained in the comments of correct.py
 x replace MIDu with MIDm
 - read multiple fragments from same text file

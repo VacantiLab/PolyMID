@@ -79,13 +79,16 @@ class Input:
                         if (HighRes!='none') & (HighRes!='all'):
                             HighRes = HighRes.strip().split(' ')
 
-                    if (line_split[0] == 'CM'):
-                        if line_split[1] == 'None':
-                            CM = CM
-                        #If the text file contains information on CM
-                        #    That information is added to the already initialized CM dictionary
-                        if line_split[1] != 'None':
-                            CM = TextToCM(line_split[1],CM)
+                    # For now CM must be calculated every time and is not stored
+                    #     A future release will include the ability to store CM for specific values
+                    #         The element labeled, the tracer enrichment and the label enrichment all impact CM
+                    #if (line_split[0] == 'CM'):
+                    #    if line_split[1] == 'None':
+                    #        CM = CM
+                    #    #If the text file contains information on CM
+                    #    #    That information is added to the already initialized CM dictionary
+                    #    if line_split[1] != 'None':
+                    #        CM = TextToCM(line_split[1],CM)
 
             Tracer = Tracer(LabeledElement,TracerEnrichment,LabelEnrichment)
             self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDm=MIDm, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, Tracer=Tracer, HighRes=HighRes)
