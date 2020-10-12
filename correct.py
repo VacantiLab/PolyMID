@@ -19,7 +19,7 @@ def Correct(CorrectInput=None):
 
 
     # Outputs:
-    #     fragment.MIDc: The MID corrected for natural isotopic abundances
+    #     fragment: A fragment object where the corrected MID is stored as a numpy array in fragment.MIDc
 
     import numpy as np
     import pandas as pd
@@ -32,7 +32,7 @@ def Correct(CorrectInput=None):
     #Initialize the Inputs variable as an Input object
     InputObject = InputClass(CorrectInput)
 
-    print('\nCalculating corrected MIDs...')
+    print('\nCalculating the corrected MID...')
 
     #Create a Fragment object
     #    If a fragment object was passed to this function, this will be equivalent
@@ -44,13 +44,14 @@ def Correct(CorrectInput=None):
     #Calculate the corrected MID
     fragment.calc_corrected_mid()
 
-    #Return the corrected MID
-    print('The corrected MIDs are as follows:\n')
+    #Print the corrected MID
+    print('The corrected MID is as follows:\n')
     MIDc = pd.DataFrame(fragment.MIDc)
     MIDc = MIDc.transpose()
     MIDc.columns=['M0','M1','M2','M3']
     MIDc.index=[fragment.name]
+    pd.set_option("display.precision", 8) #set to print 8 decimals by default
     print(MIDc)
     print('\n\n')
 
-    return(fragment.MIDc)
+    return(fragment)
