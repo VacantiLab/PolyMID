@@ -30,7 +30,6 @@ x In input class, make sure initialization of CM works - predefined list of atom
 x     CM is also specific to enrichment. Store CMs in a separate text file.
 - Have the format of the input text file explained in the comments of correct.py
 x replace MIDu with MIDm
-- read multiple fragments from same text file
 x change AtomLabeled to LabeledElement
 x make the correct and natural programs start with capitals
 x input the text file using the prompt if nothing is specified: already did this!
