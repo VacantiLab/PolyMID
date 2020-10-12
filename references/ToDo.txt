@@ -28,11 +28,11 @@ x     this is not appropriate because 'formula' is an attribute of 'fragment' an
 x Get all inputs from the text file or from the fragment object
 x In input class, make sure initialization of CM works - predefined list of atoms?
 x     CM is also specific to enrichment. Store CMs in a separate text file.
-- Have the format of the input text file explained in the comments of correct.py
 x replace MIDu with MIDm
 x change AtomLabeled to LabeledElement
 x make the correct and natural programs start with capitals
 x input the text file using the prompt if nothing is specified: already did this!
+- make the matrix multiplication consistent with what is in the manuscript.
 
 
 
@@ -46,3 +46,4 @@ Not related to program function
 
 Outside of PolyMID correct() and natural():
 - Have an option for the library file to be updated with a calculated CM - do this outside of polymid.correct
+- Documentation explaining the format of the input text file
