@@ -20,6 +20,7 @@ def Correct(fragment=None,TextFile=None):
     #     fragment.MIDc: The MID corrected for natural isotopic abundances
 
     import numpy as np
+    import pandas as pd
     import pdb
     from PolyMID import Fragment
     from PolyMID import Input
@@ -41,6 +42,8 @@ def Correct(fragment=None,TextFile=None):
         print('Either a Fragment object or a TextFile should be passed to CorrectMID.main(), but not both.')
         return
 
+    print('\nCalculating corrected MIDs...')
+
     #Create a Fragment object
     #    If a fragment object was passed to this function, this will be equivalent
     fragment = Inputs.fragment
@@ -60,5 +63,12 @@ def Correct(fragment=None,TextFile=None):
     fragment.calc_corrected_mid()
 
     #Return the corrected MID
-    print('\nThe corrected MID has been successfully calculated and returned as a numpy array.')
+    print('The corrected MIDs are as follows:\n')
+    MIDc = pd.DataFrame(fragment.MIDc)
+    MIDc = MIDc.transpose()
+    MIDc.columns=['M0','M1','M2','M3']
+    MIDc.index=[fragment.name]
+    print(MIDc)
+    print('\n\n')
+
     return(fragment.MIDc)
