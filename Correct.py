@@ -48,9 +48,13 @@ def Correct(CorrectInput=None):
     print('The corrected MID is as follows:\n')
     MIDc = pd.DataFrame(fragment.MIDc)
     MIDc = MIDc.transpose()
-    MIDc.columns=['M0','M1','M2','M3']
+    nColumns = MIDc.shape[1]
+    MIDcColumns = np.array([])
+    ColumnNumbersList = list(range(nColumns))
+    for i in ColumnNumbersList:
+        MIDc = MIDc.rename(columns={i:'M'+ str(i)})
     MIDc.index=[fragment.name]
-    pd.set_option("display.precision", 8) #set to print 8 decimals by default
+    pd.set_option("display.precision", 3) #set to print 8 decimals by default
     print(MIDc)
     print('\n\n')
 
