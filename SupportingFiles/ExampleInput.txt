@@ -1,0 +1,8 @@
+FragmentName: pyruvate174
+Formula: C6H12NO3Si
+CanAcquireLabel: C3H3O2
+MIDm: 0.854 0.104 0.0388 0.00280
+LabeledElement: C
+TracerEnrichment: 1
+LabelEnrichment: 1
+HighRes: none

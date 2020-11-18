@@ -33,6 +33,13 @@ x change AtomLabeled to LabeledElement
 x make the correct and natural programs start with capitals
 x input the text file using the prompt if nothing is specified: already did this!
 - make the matrix multiplication consistent with what is in the manuscript.
+- combinatorial heavy isotopes at M2 and beyond
+-    e.g. heavy C and H can make M2, but as it is now that area is considered M1 due to 13C if H is considered resolved
+-       to compensate, in correction matrix from M1 and larger remove the probability that there are any heavy isotopes that are not the labeled atom and re-normalize
+- account for heavy atoms not distinguished at M1: skip this, too complicated
+-    say 2H is not distinguished at M1 but is at heavier mass isotopomers
+-       to compensate, in correction matrix add back the probability that there is 1 2H at M1 and renormalize
+-           This is the sum of P2H*P12C^nC*P16O^nO
 
 
 
