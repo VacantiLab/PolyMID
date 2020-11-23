@@ -1,9 +1,17 @@
 class Fragment:
 
     # Initializer and Instance Attributes
-    def __init__(self,formula,CanAcquireLabel,MIDm,FragmentName,MIDc,PeakArea,CM,Tracer,HighRes):
+    def __init__(self,FragmentName,FragmentFormula,CanAcquireLabel,MIDm,LabeledElement,TracerEnrichment,LabelEnrichment,HighRes,MIDc=None,PeakArea=None,CM=None):
+
         from PolyMID import Formula
+        from PolyMID import Tracer
         import numpy as np
+        from pdb import set_trace
+
+        # MIDm and HighRes may be passed as python lists
+        #     They must be converted to numpy arrays
+        MIDm = np.array(MIDm)
+        HighRes = np.array(HighRes)
 
         self.name = FragmentName
         self.MIDm = MIDm
@@ -11,9 +19,9 @@ class Fragment:
         self.CM = CM
         self.CMi = None
         self.PeakArea = PeakArea
-        self.Tracer = Tracer # A string indicating the atom that is considered to be labeled
+        self.Tracer = Tracer(LabeledElement,TracerEnrichment,LabelEnrichment)
         self.HighRes = HighRes # A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
-        self.Formula = Formula(formula=formula,Tracer=self.Tracer,HighRes=self.HighRes)
+        self.Formula = Formula(formula=FragmentFormula,Tracer=self.Tracer,HighRes=self.HighRes)
         self.CanAcquireLabel = Formula(formula=CanAcquireLabel,Tracer=self.Tracer,HighRes=self.HighRes)
 
     # instance method to assign new values to a Fragment object

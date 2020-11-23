@@ -13,7 +13,7 @@ class InputClass:
         ReadFromTextFile = (isinstance(CorrectInput,str)) | (CorrectInput is None)
 
         if not ReadFromTextFile:
-            self.fragment=Input
+            self.fragment=CorrectInput
 
         if ReadFromTextFile:
 
@@ -36,8 +36,8 @@ class InputClass:
                     line_split[0] = line_split[0].strip()
                     line_split[1] = line_split[1].strip()
 
-                    if (line_split[0] == 'formula') | (line_split[0] == 'Formula'):
-                        formula = line_split[1]
+                    if (line_split[0] == 'FragmentFormula') | (line_split[0] == 'Fragment Formula'):
+                        FragmentFormula = line_split[1]
 
                     if (line_split[0] == 'CanAcquireLabel') | (line_split[0] == 'Metabolite Atoms'):
                         CanAcquireLabel = line_split[1]
@@ -66,5 +66,4 @@ class InputClass:
                         if (HighRes!='none') & (HighRes!='all'):
                             HighRes = HighRes.strip().split(' ')
 
-            Tracer = Tracer(LabeledElement,TracerEnrichment,LabelEnrichment)
-            self.fragment = Fragment(formula=formula, CanAcquireLabel=CanAcquireLabel, MIDm=MIDm, FragmentName=FragmentName, CM=CM, MIDc=None, PeakArea=None, Tracer=Tracer, HighRes=HighRes)
+            self.fragment = Fragment(FragmentName=FragmentName, FragmentFormula=FragmentFormula, CanAcquireLabel=CanAcquireLabel, MIDm=MIDm, LabeledElement=LabeledElement, TracerEnrichment=TracerEnrichment, LabelEnrichment=LabelEnrichment, HighRes=HighRes, MIDc=None, PeakArea=None, CM=CM)
