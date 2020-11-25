@@ -4,22 +4,31 @@ https://packaging.python.org/tutorials/packaging-projects/
 
 Commands needed after setuptools and wheel are upgraded:
 
+Create the package contents
 python3 setup.py sdist bdist_wheel
 
+Upload
+Practice pypi:
 python3 -m twine upload --repository testpypi dist/*
+
+Real pypi:
+python3 -m twine upload dist/*
 
 
 Logging into TestPyPi:
 username: __token__
 
-Whatever your token is
+Whatever your token is (created in the settings menu of your pipy account)
 
 
 Installing the package:
-python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps PolyMID==0.0.5
+python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps PolyMID==1.0.0
 
 This one works with specifying the version:
-pip install -i https://test.pypi.org/simple/ PolyMID==0.0.5
+pip install -i https://test.pypi.org/simple/ PolyMID==1.0.0
 
 Note: Including .txt files in the distribution was difficult. Directions that work are here:
 https://stackoverflow.com/questions/1612733/including-non-python-files-with-setup-py
+
+See the line in the setup.py file that is in the PolyMID package folder in the Dropbox folder for PolyMID.
+    There is a line in the file: package_data={'': ['*.txt']} that takes care of uploading text files
