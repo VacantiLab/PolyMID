@@ -140,7 +140,7 @@ class Fragment:
         import numpy as np
         from pdb import set_trace
 
-        #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
+        #find the inverse of the correction matrix
         CMi = self.CMi
 
         #the theoretical MIDs are the rows of the correction matrix.
