@@ -124,13 +124,13 @@ class Fragment:
         #make the correction matrix dictionary into a matrix
         n_keys = len(correction_matrix_dict.keys())
         n_MID_entries = len(correction_matrix_dict[0])
-        CM = np.zeros((n_keys,n_MID_entries))
+        CM = np.zeros((n_MID_entries,n_keys))
+        CM_rows = np.arange(0,n_MID_entries)
         for key in correction_matrix_dict.keys():
-            CM[key,] = correction_matrix_dict[key]
+            CM[CM_rows,key] = correction_matrix_dict[key]
 
-
-        #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
-        CMi = np.linalg.pinv(CM)
+        #find the inverse of the correction matrix
+        CMi = np.linalg.inv(CM)
 
         self.CM = CM
         self.CMi = CMi
@@ -138,13 +138,14 @@ class Fragment:
     def calc_corrected_mid(self):
 
         import numpy as np
+        from pdb import set_trace
 
         #find the right inverse (pseudo-inverse in numpy jargon) of the correction matrix
         CMi = self.CMi
 
         #the theoretical MIDs are the rows of the correction matrix.
         #    Their length corresponds to the number of rows of the right inverse of the correcion matrix
-        n_theoretical_mid_entries = CMi.shape[0]
+        n_theoretical_mid_entries = CMi.shape[1]
 
         #the measured MID must have the same number of entries as each of the theoretical MIDs
         #    if it is short, add zeros to make up for the difference
@@ -154,6 +155,6 @@ class Fragment:
             MIDm = np.append(MIDm,mid_u_appendage)
 
         #calculate corrected MID
-        MIDc = np.dot(MIDm,CMi)
+        MIDc = np.dot(CMi,MIDm)
         MIDc = MIDc/sum(MIDc)
         self.assign('MIDc',MIDc)
