@@ -39,17 +39,17 @@ class Atom:
         # If the atom is not part of a fragment measured on a high resolution instrument
         #     Consider its heavy isotopes
         if (self.symbol not in self.HighRes) & ('all' not in self.HighRes):
-            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDs.txt'
+            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomIMDs.txt'
 
         # If the atom is the atom which carries a label (i.e. the one whose mass isotopomers are measured)
         #     Consider its heavy isotopes
         if self.symbol == self.Tracer.LabeledElement:
-            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDs.txt'
+            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomIMDs.txt'
 
         # If the atom is part of a fragment measured on a high resolution instrument and it is not the atom which carries a label (i.e. one whose mass isotopomers are not measured)
         #     Do not consider its heavy isotopes
         if ((self.symbol in self.HighRes)|('all' in self.HighRes)) & (self.symbol != self.Tracer.LabeledElement):
-            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDsHighRes.txt'
+            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomIMDsHighRes.txt'
 
         with open(AtomMIDs_txtPath,'r') as AtomMIDsFile:
             for line in AtomMIDsFile:
