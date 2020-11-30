@@ -24,7 +24,7 @@ class Tracer:
         PolyMID_Path = PolyMID_Path.split(sep='/')
         PolyMID_Path = PolyMID_Path[:-1]
 
-        AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomMIDs.txt'
+        AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomIMDs.txt'
 
         with open(AtomMIDs_txtPath,'r') as AtomMIDsFile:
             for line in AtomMIDsFile:
