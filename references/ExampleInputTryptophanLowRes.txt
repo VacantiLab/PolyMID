@@ -1,5 +1,5 @@
 FragmentName: tryptophan_protonated
-Formula: C11H13N2O2
+FragmentFormula: C11H13N2O2
 CanAcquireLabel: C11H13N2O2
 MIDm: 0.88236 0.11059 0.0070466 0
 LabeledElement: C
