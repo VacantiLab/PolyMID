@@ -27,29 +27,33 @@ class Atom:
         # This method opens the text file defining the AtomMIDs and imports that information into the attribute MID as a numpy array
 
         import os.path
+        import os
         import numpy as np
         import PolyMID
         from PolyMID import PadToEqualLength
         from pdb import set_trace
 
+        # Get the character used to separate directories in the operating system
+        slash = os.sep
+
         PolyMID_Path = os.path.abspath(PolyMID.__file__)
-        PolyMID_Path = PolyMID_Path.split(sep='/')
+        PolyMID_Path = PolyMID_Path.split(sep=slash)
         PolyMID_Path = PolyMID_Path[:-1]
 
         # If the atom is not part of a fragment measured on a high resolution instrument
         #     Consider its heavy isotopes
         if (self.symbol not in self.HighRes) & ('all' not in self.HighRes):
-            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomIMDs.txt'
+            AtomMIDs_txtPath = slash.join(PolyMID_Path) + slash + 'SupportingFiles' + slash + 'AtomIMDs.txt'
 
         # If the atom is the atom which carries a label (i.e. the one whose mass isotopomers are measured)
         #     Consider its heavy isotopes
         if self.symbol == self.Tracer.LabeledElement:
-            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomIMDs.txt'
+            AtomMIDs_txtPath = slash.join(PolyMID_Path) + slash + 'SupportingFiles' + slash + 'AtomIMDs.txt'
 
         # If the atom is part of a fragment measured on a high resolution instrument and it is not the atom which carries a label (i.e. one whose mass isotopomers are not measured)
         #     Do not consider its heavy isotopes
         if ((self.symbol in self.HighRes)|('all' in self.HighRes)) & (self.symbol != self.Tracer.LabeledElement):
-            AtomMIDs_txtPath = '/'.join(PolyMID_Path) + '/SupportingFiles/AtomIMDsHighRes.txt'
+            AtomMIDs_txtPath = slash.join(PolyMID_Path) + slash + 'SupportingFiles' + slash + 'AtomIMDsHighRes.txt'
 
         with open(AtomMIDs_txtPath,'r') as AtomMIDsFile:
             for line in AtomMIDsFile:
