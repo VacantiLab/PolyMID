@@ -131,7 +131,6 @@ class Fragment:
 
         #find the inverse of the correction matrix
         #    Use the Moore–Penrose pseudo-inverse because the matrix is not necessarily square and the linear problem is "over specified"
-        set_trace()
         CMi = np.linalg.pinv(CM)
         #    CMi = np.linalg.inv(CM) would give the inverse of a square matrix
 
