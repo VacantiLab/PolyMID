@@ -32,7 +32,7 @@ def Correct(CorrectInput=None):
     #Initialize the Inputs variable as an Input object
     InputObject = InputClass(CorrectInput)
 
-    print('\nCalculating the corrected MID...')
+    print('\nCalculating the corrected MID...\n')
 
     #Create a Fragment object
     #    If a fragment object was passed to this function, this will be equivalent
@@ -45,7 +45,7 @@ def Correct(CorrectInput=None):
     fragment.calc_corrected_mid()
 
     #Print the corrected MID
-    print('The corrected MID is as follows:\n')
+    print('The corrected MID is as follows:')
     MIDc = pd.DataFrame(fragment.MIDc)
     MIDc = MIDc.transpose()
     nColumns = MIDc.shape[1]
@@ -56,6 +56,8 @@ def Correct(CorrectInput=None):
     MIDc.index=[fragment.name]
     pd.set_option("display.precision", 3) #set to print 8 decimals by default
     print(MIDc)
-    print('\n\n')
+    print('\n')
+    print('The sum of squared residuals is: ' + str("{:.2e}".format(fragment.SSE)))
+    print('\n')
 
     return(fragment)

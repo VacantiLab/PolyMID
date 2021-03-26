@@ -23,6 +23,8 @@ class Fragment:
         self.HighRes = HighRes # A numpy array indicating which elements have heavy isotopes whose mass differences are resolved from the mass differences due to heavy isotopes of the tracer element
         self.Formula = Formula(formula=FragmentFormula,Tracer=self.Tracer,HighRes=self.HighRes)
         self.CanAcquireLabel = Formula(formula=CanAcquireLabel,Tracer=self.Tracer,HighRes=self.HighRes)
+        self.SSE = None
+        self.residuals = None
 
     # instance method to assign new values to a Fragment object
     def assign(self,attribute,NewValue):
@@ -42,6 +44,10 @@ class Fragment:
             self.CMi = NewValue
         if attribute == 'PeakArea':
             self.PeakArea = NewValue
+        if attribute == 'SSE':
+            self.SSE = NewValue
+        if attribute == 'residuals':
+            self.residuals = NewValue
 
     # instance method to create correction matrix for a Fragment object
     def create_correction_matrix(self):
@@ -143,6 +149,9 @@ class Fragment:
         import numpy as np
         from pdb import set_trace
 
+        #load the correction matrix
+        CM = self.CM
+
         #find the inverse of the correction matrix
         CMi = self.CMi
 
@@ -161,3 +170,9 @@ class Fragment:
         MIDc = np.dot(CMi,MIDm)
         MIDc = MIDc/sum(MIDc)
         self.assign('MIDc',MIDc)
+
+        MIDm_predicted = np.dot(CM,MIDc)
+        MIDm_residuals = MIDm_predicted - MIDm
+        MIDm_SSE = sum(np.square(MIDm_residuals))
+        self.assign('SSE',MIDm_SSE)
+        self.assign('residuals',MIDm_residuals)
