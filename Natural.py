@@ -1,4 +1,4 @@
-def Natural(formula,LabeledElement='C',HighRes=False):
+def Natural(formula,LabeledElement='C',HighRes='none'):
     # Inputs:
     # formula: a string representing the formula whose natural MID is being calculated
     # LabeledElement: A character that is the chemical symbol of the atom which is assumed to be labeled in the fragment whose MID is being corrected for natural isotopic abundances
@@ -14,10 +14,13 @@ def Natural(formula,LabeledElement='C',HighRes=False):
 
     #Import necessary packages and object classes
     from PolyMID import Formula
+    from PolyMID import Tracer
     from pdb import set_trace
 
+    tracer = Tracer(LabeledElement=LabeledElement,TracerEnrichment=1,LabelEnrichment=1)
+
     #Create a formula object
-    formula = Formula(formula=formula,LabeledElement=LabeledElement,HighRes=HighRes)
+    formula = Formula(formula=formula,Tracer=tracer,HighRes=HighRes)
     #     The Formula object designation takes LabeledElement and HighRes inputs
     #         If HighRes is False, LabeledElement does not matter (which is default behaviour)
     #         High resolution natural MIDs can be calculated by specifying HighRes and LabeledElement, where LabeledElement is the atom contributing heavy isotopes
