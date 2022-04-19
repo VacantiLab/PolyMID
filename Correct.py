@@ -1,10 +1,14 @@
-def Correct(CorrectInput=None):
+def Correct(CorrectInput=None,Full_NC=False):
 
     # Inputs:
     #     CorrectInput:
     #         Can be a fragment object containing information of the fragment whose MID is being corrected for natural isotopic abundances
     #         Can be a string representing a path to a text file contining the information to make a fragment object
     #         Can be None, in which case the user is prompted to select a text file containing the above information using a GUI
+
+    #     Full_NC:
+    #         A boolean specifying whether to correct for abundance of the fully labeled C and N metabolite
+    #             The fully labeled C and N metabolite is used as an internal standard in extracullar flux measurements
 
     #     Defined within the fragment object:
     #         LabeledElement: A character that is the chemical symbol of the atom which is assumed to be labeled in the fragment whose MID is being corrected for natural isotopic abundances

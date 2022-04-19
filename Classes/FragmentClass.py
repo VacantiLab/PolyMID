@@ -58,6 +58,7 @@ class Fragment:
         import copy
         from PolyMID import quantity_of_atom
         from PolyMID import Formula
+        import copy
 
         #break the formula up so atoms and quantities are consecutive entries in a numpy array
         broken_formula = np.array(re.findall('[A-Z][a-z]?|[0-9]+', self.Formula.formula))
@@ -74,6 +75,16 @@ class Fragment:
         #the number of rows of the correction matrix is equal to the quantity of the atom being corrected for that are in the fragment and the original metabolite
         atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.Tracer.LabeledElement) #this does not refer to the full fragment!
 
+        # Consider the fully labeled C and N fragment
+        if Full_NC:
+            #find the index of the number of the nitrogens which are labeled on the internal standard
+            #    it is used in creating the correction matrix below because this quantity of nitrogen atoms need to be subtracted and a heavy atom put in its place
+            nitrogen_index = np.where(broken_formula=='N')[0][0]
+            nitrogen_quantity_index = atom_index+1 #refering to full fragment
+            nitrogen_quantity = quantity_of_atom(self.CanAcquireLabel.formula,'N') #this does not refer to the full fragment!
+            labeled_atom_quantity = copy.copy(atom_quantity)
+            atom_quantity = atom_quantity + nitrogen_quantity
+
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
         n_formula_entries_heavy = len(broken_formula)
@@ -83,6 +94,12 @@ class Fragment:
         broken_formula_correct = copy.copy(broken_formula) #initialize the array to carry the formula with a heavy atom
         correction_matrix_dict = dict() #initialize a dictionary to hold the rows of the correction matrix
         for i in range(0,atom_quantity+1):
+
+            # Adjust indexing parameters to replace metabolite nitrogens with labeled nitrogens if considering fully labeled N and C internal standard
+            if Full_NC & (i > labeled_atom_quantity):
+                atom_quantity_index = nitrogen_quantity_index
+                i = i - labeled_atom_quantity
+
             #subtract an atom of interest from the formula
             broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(np.int) - i
             broken_formula_correct[atom_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
