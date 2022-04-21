@@ -1,7 +1,7 @@
 class Fragment:
 
     # Initializer and Instance Attributes
-    def __init__(self,FragmentName,FragmentFormula,CanAcquireLabel,MIDm,LabeledElement,TracerEnrichment,LabelEnrichment,HighRes,MIDc=None,PeakArea=None,CM=None):
+    def __init__(self,FragmentName,FragmentFormula,CanAcquireLabel,MIDm,LabeledElement,TracerEnrichment,LabelEnrichment,HighRes,MIDc=None,PeakArea=None,CM=None,Full_NC=False):
 
         from PolyMID import Formula
         from PolyMID import Tracer
@@ -25,6 +25,7 @@ class Fragment:
         self.CanAcquireLabel = Formula(formula=CanAcquireLabel,Tracer=self.Tracer,HighRes=self.HighRes)
         self.SSE = None
         self.residuals = None
+        self.Full_NC = Full_NC
 
     # instance method to assign new values to a Fragment object
     def assign(self,attribute,NewValue):
@@ -76,14 +77,19 @@ class Fragment:
         atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.Tracer.LabeledElement) #this does not refer to the full fragment!
 
         # Consider the fully labeled C and N fragment
-        if Full_NC:
+        range_extendor = 0
+        if self.Full_NC:
             #find the index of the number of the nitrogens which are labeled on the internal standard
             #    it is used in creating the correction matrix below because this quantity of nitrogen atoms need to be subtracted and a heavy atom put in its place
             nitrogen_index = np.where(broken_formula=='N')[0][0]
-            nitrogen_quantity_index = atom_index+1 #refering to full fragment
-            nitrogen_quantity = quantity_of_atom(self.CanAcquireLabel.formula,'N') #this does not refer to the full fragment!
-            labeled_atom_quantity = copy.copy(atom_quantity)
-            atom_quantity = atom_quantity + nitrogen_quantity
+            nitrogen_quantity_index = nitrogen_index+1 #refering to full fragment
+            nitrogen_quantity_metabolite = quantity_of_atom(self.CanAcquireLabel.formula,'N') #this does not refer to the full fragment!
+
+            carbon_index = np.where(broken_formula=='C')[0][0]
+            carbon_quantity_index = carbon_index+1 #refering to full fragment
+            carbon_quantity_metabolite = quantity_of_atom(self.CanAcquireLabel.formula,'C') #this does not refer to the full fragment!
+
+            range_extendor = 1
 
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
@@ -93,20 +99,30 @@ class Fragment:
         #    these mids fill the rows of the correction matrix
         broken_formula_correct = copy.copy(broken_formula) #initialize the array to carry the formula with a heavy atom
         correction_matrix_dict = dict() #initialize a dictionary to hold the rows of the correction matrix
-        for i in range(0,atom_quantity+1):
+        for i in range(0,atom_quantity+1+range_extendor):
 
             # Adjust indexing parameters to replace metabolite nitrogens with labeled nitrogens if considering fully labeled N and C internal standard
-            if Full_NC & (i > labeled_atom_quantity):
-                atom_quantity_index = nitrogen_quantity_index
-                i = i - labeled_atom_quantity
+            if self.Full_NC & (i == atom_quantity+1):
+                carbon_quantity_full = quantity_of_atom(self.Formula.formula,'C')
+                broken_formula_correct[carbon_quantity_index] = carbon_quantity_full - carbon_quantity_metabolite
+                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
 
-            #subtract an atom of interest from the formula
-            broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(np.int) - i
-            broken_formula_correct[atom_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
+                nitrogen_quantity_full = quantity_of_atom(self.Formula.formula,'N')
+                broken_formula_correct[carbon_quantity_index] = nitrogen_quantity_full - nitrogen_quantity_metabolite
+                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
 
-            #replace that atom with a heavy atom
-            broken_formula_correct[n_formula_entries+1] = broken_formula[n_formula_entries+1].astype(np.int) + i
-            broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(np.str)
+                #replace that atom with a heavy atom
+                broken_formula_correct[n_formula_entries+1] = carbon_quantity_metabolite + nitrogen_quantity_metabolite
+                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(np.str)
+
+            if i < atom_quantity+1:
+                #subtract an atom of interest from the formula
+                broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(np.int) - i
+                broken_formula_correct[atom_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
+
+                #replace that atom with a heavy atom
+                broken_formula_correct[n_formula_entries+1] = broken_formula[n_formula_entries+1].astype(np.int) + i
+                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(np.str)
 
             #update the string version of the formula from the array version
             new_formula = ''

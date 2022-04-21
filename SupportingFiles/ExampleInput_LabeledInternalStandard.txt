@@ -1,0 +1,9 @@
+FragmentName: glutamine431
+FragmentFormula: C19H43O3N2Si3
+CanAcquireLabel: C5H7O3N2
+MIDm: 0.4849 0.1873 0.0862 0.0216 0.0052 0.0018 0.0079 0.1402 0.0438 0.0210
+LabeledElement: C
+TracerEnrichment: 1
+LabelEnrichment: 1
+HighRes: none
+Full NC Labeled Internal Standard: True

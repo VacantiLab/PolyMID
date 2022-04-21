@@ -28,6 +28,7 @@ class InputClass:
             MIDm = None
             MIDc = None
             CM = None
+            Full_NC = False
 
             #import values from text file
             with open(CorrectInput, 'r') as read_file:
@@ -66,4 +67,11 @@ class InputClass:
                         if (HighRes!='none') & (HighRes!='all'):
                             HighRes = HighRes.strip().split(' ')
 
-            self.fragment = Fragment(FragmentName=FragmentName, FragmentFormula=FragmentFormula, CanAcquireLabel=CanAcquireLabel, MIDm=MIDm, LabeledElement=LabeledElement, TracerEnrichment=TracerEnrichment, LabelEnrichment=LabelEnrichment, HighRes=HighRes, MIDc=None, PeakArea=None, CM=CM)
+                    if (line_split[0] == 'FullNC_LabeledInternalStandard') | (line_split[0] == 'Full NC Labeled Internal Standard'):
+                        if line_split[1] == 'True':
+                            Full_NC = True
+                        if line_split[1] == 'False':
+                            Full_NC = False
+
+
+            self.fragment = Fragment(FragmentName=FragmentName, FragmentFormula=FragmentFormula, CanAcquireLabel=CanAcquireLabel, MIDm=MIDm, LabeledElement=LabeledElement, TracerEnrichment=TracerEnrichment, LabelEnrichment=LabelEnrichment, HighRes=HighRes, MIDc=None, PeakArea=None, CM=CM, Full_NC=Full_NC)
