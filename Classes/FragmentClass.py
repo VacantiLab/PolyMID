@@ -25,7 +25,7 @@ class Fragment:
         self.CanAcquireLabel = Formula(formula=CanAcquireLabel,Tracer=self.Tracer,HighRes=self.HighRes)
         self.SSE = None
         self.residuals = None
-        self.Full_NC = Full_NC
+        self.Full_NC = Full_NC #A boolean specifying whether to correct for abundance of the fully labeled C and N metabolite
 
     # instance method to assign new values to a Fragment object
     def assign(self,attribute,NewValue):
@@ -76,7 +76,7 @@ class Fragment:
         #the number of rows of the correction matrix is equal to the quantity of the atom being corrected for that are in the fragment and the original metabolite
         atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.Tracer.LabeledElement) #this does not refer to the full fragment!
 
-        # Consider the fully labeled C and N fragment
+        # Consider the fully labeled C and N fragment if using the fully labeled internal standard
         range_extendor = 0
         if self.Full_NC:
             #find the index of the number of the nitrogens which are labeled on the internal standard
@@ -101,7 +101,7 @@ class Fragment:
         correction_matrix_dict = dict() #initialize a dictionary to hold the rows of the correction matrix
         for i in range(0,atom_quantity+1+range_extendor):
 
-            # Adjust indexing parameters to replace metabolite nitrogens with labeled nitrogens if considering fully labeled N and C internal standard
+            # Adjust formula indexing parameters to replace all metabolite nitrogens and carbons with labeled nitrogens and carbons if considering fully labeled N and C internal standard
             if self.Full_NC & (i == atom_quantity+1):
                 carbon_quantity_full = quantity_of_atom(self.Formula.formula,'C')
                 broken_formula_correct[carbon_quantity_index] = carbon_quantity_full - carbon_quantity_metabolite
@@ -115,6 +115,7 @@ class Fragment:
                 broken_formula_correct[n_formula_entries+1] = carbon_quantity_metabolite + nitrogen_quantity_metabolite
                 broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(np.str)
 
+            # Only iteratively convert atomic species to labeled atoms if the current heavy atom substitution is not the one where the fully labeled internal standard is considered
             if i < atom_quantity+1:
                 #subtract an atom of interest from the formula
                 broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(np.int) - i
