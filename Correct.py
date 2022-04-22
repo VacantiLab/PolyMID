@@ -1,4 +1,4 @@
-def Correct(CorrectInput=None,Full_NC=False):
+def Correct(CorrectInput=None,Full_NC=False,verbose=False):
 
     # Inputs:
     #     CorrectInput:
@@ -9,6 +9,8 @@ def Correct(CorrectInput=None,Full_NC=False):
     #     Full_NC:
     #         A boolean specifying whether to correct for abundance of the fully labeled C and N metabolite
     #             The fully labeled C and N metabolite is used as an internal standard in extracullar flux measurements
+    #     verbose:
+    #         A boolean indicating whether to print summary information after running
 
     #     Defined within the fragment object:
     #         LabeledElement: A character that is the chemical symbol of the atom which is assumed to be labeled in the fragment whose MID is being corrected for natural isotopic abundances
@@ -63,9 +65,11 @@ def Correct(CorrectInput=None,Full_NC=False):
         MIDc = MIDc.rename(columns={i:'M'+ str(i)})
     MIDc.index=[fragment.name]
     pd.set_option("display.precision", 3) #set to print 8 decimals by default
-    print(MIDc)
-    print('\n')
-    print('The sum of squared residuals is: ' + str("{:.2e}".format(fragment.SSE)))
-    print('\n')
+
+    if verbose:
+        print(MIDc)
+        print('\n')
+        print('The sum of squared residuals is: ' + str("{:.2e}".format(fragment.SSE)))
+        print('\n')
 
     return(fragment)
