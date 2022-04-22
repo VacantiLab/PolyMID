@@ -48,7 +48,7 @@ def Correct(CorrectInput=None,Full_NC=False,verbose=False):
     if fragment.CM is None:
         fragment.create_correction_matrix()
 
-    if fragment.CM not None:
+    if not (fragment.CM is None):
         fragment.assign(CMi,np.linalg.pinv(CM))
 
     #Calculate the corrected MID
