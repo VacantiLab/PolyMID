@@ -43,7 +43,11 @@ def Correct(CorrectInput=None,Full_NC=False):
     fragment = InputObject.fragment
 
     #Create a correction matrix and calculate its inverse
-    fragment.create_correction_matrix()
+    if fragment.CM is None:
+        fragment.create_correction_matrix()
+
+    if fragment.CM not None:
+        fragment.assign(CMi,np.linalg.pinv(CM))
 
     #Calculate the corrected MID
     fragment.calc_corrected_mid()
