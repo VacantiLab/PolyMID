@@ -68,7 +68,6 @@ def Correct(CorrectInput=None,Full_NC=False,verbose=False):
         MIDc.index=[fragment.name]
         pd.set_option("display.precision", 3) #set to print 8 decimals by default
 
-
         print(MIDc)
         print('\n')
         print('The sum of squared residuals is: ' + str("{:.2e}".format(fragment.SSE)))
