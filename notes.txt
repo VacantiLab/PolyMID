@@ -1,3 +1,6 @@
 Done in the ExFlux branch:
 
 The fully labeled n and c fragment is considered in the fragment class definition under the create_correlation_matrix method definition
+
+Can run the integrate function with (after importing PolyMID):
+PolyMID.Integrate()

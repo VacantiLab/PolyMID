@@ -1,0 +1,1 @@
+- I now use the gcms10.yml file which should work with any version of Miniconda3
