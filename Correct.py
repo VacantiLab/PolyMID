@@ -38,7 +38,8 @@ def Correct(CorrectInput=None,Full_NC=False,verbose=False):
     #Initialize the Inputs variable as an Input object
     InputObject = InputClass(CorrectInput)
 
-    print('\nCalculating the corrected MID...\n')
+    if verbose:
+        print('\nCalculating the corrected MID...\n')
 
     #Create a Fragment object
     #    If a fragment object was passed to this function, this will be equivalent
@@ -56,7 +57,7 @@ def Correct(CorrectInput=None,Full_NC=False,verbose=False):
 
     #Print the corrected MID
     if verbose:
-    print('The corrected MID is as follows:')
+        print('The corrected MID is as follows:')
 
         MIDc = pd.DataFrame(fragment.MIDc)
         MIDc = MIDc.transpose()
