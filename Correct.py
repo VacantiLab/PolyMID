@@ -55,18 +55,20 @@ def Correct(CorrectInput=None,Full_NC=False,verbose=False):
     fragment.calc_corrected_mid()
 
     #Print the corrected MID
-    print('The corrected MID is as follows:')
-    MIDc = pd.DataFrame(fragment.MIDc)
-    MIDc = MIDc.transpose()
-    nColumns = MIDc.shape[1]
-    MIDcColumns = np.array([])
-    ColumnNumbersList = list(range(nColumns))
-    for i in ColumnNumbersList:
-        MIDc = MIDc.rename(columns={i:'M'+ str(i)})
-    MIDc.index=[fragment.name]
-    pd.set_option("display.precision", 3) #set to print 8 decimals by default
-
     if verbose:
+    print('The corrected MID is as follows:')
+
+        MIDc = pd.DataFrame(fragment.MIDc)
+        MIDc = MIDc.transpose()
+        nColumns = MIDc.shape[1]
+        MIDcColumns = np.array([])
+        ColumnNumbersList = list(range(nColumns))
+        for i in ColumnNumbersList:
+            MIDc = MIDc.rename(columns={i:'M'+ str(i)})
+        MIDc.index=[fragment.name]
+        pd.set_option("display.precision", 3) #set to print 8 decimals by default
+
+
         print(MIDc)
         print('\n')
         print('The sum of squared residuals is: ' + str("{:.2e}".format(fragment.SSE)))
