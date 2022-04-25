@@ -1,0 +1,404 @@
+#the other apparent pyruvate is not pyruvate based on labeling
+#retention time (min): 6.76
+metabolite: pyruvate_mox_tbdms
+retention index: 1323 
+peak profile: 174.0 3409971.0 0.849 0.108 0.04 0.003
+FRAGMENT: pyruvate_174
+formula: C6H12N1O3Si1
+metabolite atoms: C3H3O2
+mzs: 174 175 176 177 178 179
+
+#retention time (min): 11.16
+metabolite: lactate_2tbdms
+retention index: 1487
+peak profile: 233.0 3938959.0 0.744 0.17 0.073 0.011 0.002 261.0 6514892.0 0.719 0.186 0.08 0.012 0.002
+FRAGMENT: lactate_233
+formula: C10H25O2Si2
+metabolite atoms: C2H4O2
+mzs: 233 234 235 236 237 238
+FRAGMENT: lactate_261
+formula: C11H25O3Si2
+metabolite atoms: C3H4O3
+mzs: 261 262 263 264 265 266 267
+
+#retention time (min): 12.31
+metabolite: alanine_2tbdms
+retention index: 1527
+peak profile: 232 1000000 0.75 0.20 0.05 260 1000000 0.75 0.20 0.05
+FRAGMENT: alanine_232
+formula: C10H26O1N1Si2
+metabolite atoms:C2H7N1O1
+mzs: 232 233 234 235 236
+FRAGMENT: alanine_260
+formula: C11H26O2N1Si2
+metabolite atoms: C3H7N1O2
+mzs: 260 261 262 263 264 265
+
+#retention time (min): 13.61
+metabolite: glycine_2tbdms
+retention index: 1569.8
+peak profile: 218 100000 0.75 0.20 0.05 246 100000 0.75 0.20 0.05
+FRAGMENT: glycine_246
+formula: C10H24O2N1Si2
+metabolite atoms:C2H3O2N1
+mzs: 246 247 248 249 250 251
+FRAGMENT: glycine_218
+formula: C9H24O1N1Si2
+metabolite atoms: C1H3O1N1
+mzs: 218 219 220 221 222
+
+#retention time (min): 15.51
+metabolite: valine_2tbdms
+retention index: 1633.5
+peak profile: 260 100000 0.75 0.20 0.05 288 100000 0.75 0.20 0.05
+FRAGMENT: valine_288
+formula: C13H30O2N1Si2
+metabolite atoms: C5H9O2N1
+mzs: 288 289 290 291 292 293 294 295 296
+FRAGMENT: valine_260
+formula: C12H30O1N1Si2
+metabolite atoms: C4H9O1N1
+mzs: 260 261 262 263 264 265 266 267
+
+#retention time (min): 15.96
+metabolite: norvaline_2tbdms
+retention index: 1647.4
+peak profile: 260 100000 0.75 0.20 0.05 288 100000 0.75 0.20 0.05
+FRAGMENT: norvaline_288
+formula: C13H30O2N1Si2
+metabolite atoms: C5H9O2N1
+mzs: 288 289 290 291 292 293 294 295 296
+FRAGMENT: norvaline_260
+formula: C12H30O1N1Si2
+metabolite atoms: C4H9O1N1
+mzs: 260 261 262 263 264 265 266 267
+
+#retention time (min): 16.53
+metabolite: leucine_2tbdms
+retention index: 1666.6
+peak profile: 200 100000 0.75 0.20 0.05 274 100000 0.75 0.20 0.05
+FRAGMENT: leucine_274
+formula: C13H32O1N1Si2
+metabolite atoms: C5H11O1N1
+mzs: 274 275 276 277 278 279 280 281 282
+FRAGMENT: leucine_200
+formula: C11H26N1Si1
+metabolite atoms: C5H11N1
+mzs: 200 201 202 203 204 205 206 207 208
+
+#retention time (min): 17.61
+metabolite: isoleucine_2tbdms
+retention index: 1702.6
+peak profile: 200 100000 0.75 0.20 0.05 274 100000 0.75 0.20 0.05
+FRAGMENT: isoleucine_274
+formula: C13H32O1N1Si2
+metabolite atoms: C5H11O1N1
+mzs: 274 275 276 277 278 279 280 281 282
+FRAGMENT: isoleucine_200
+formula: C11H26N1Si1
+metabolite atoms: C5H11N1
+mzs: 200 201 202 203 204 205 206 207 208
+
+#retention time (min): 18.82
+metabolite: urea_2tbdms
+retention index: 1727.0
+peak profile: 231 100000 0.75 0.20 0.05
+FRAGMENT: urea_231
+formula: C9H23O1N2Si2
+metabolite atoms: C1H2O1N2
+mzs: 231 232 233 234 235
+
+metabolite: putrescine_2tbdms
+retention index: 1731.3
+peak profile: 259 100000 0.75 0.20 0.05 316 100000 0.75 0.20 0.05
+FRAGMENT: putrescine_259
+formula: C12H31N2Si2
+metabolite atoms: C4H10N2
+mzs: 259 260 261 262 263 264 265 266
+
+#GABA: C4H9O2N1, 103g/mol
+#GABA(TBDMS)2: C16H37N1O2Si2, 331g/mol
+metabolite: GABA_2tbdms
+retention index: 1769.0
+peak profile: 274 100000 0.75 0.20 0.05 258 100000 0.75 0.20 0.05 147 100000 0.75 0.20 0.05 316 100000 0.75 0.25 200 100000 0.75 0.25 216 100000 0.75 0.25
+FRAGMENT: GABA_274 #loss of -C(CH3)3, 57g/mol, 272 is a contaminant usually around 10,000 to 100,000 ion counts in 6-well plate extraction
+formula: C12H28O2N1Si2
+metabolite atoms: C4H7N1O2
+mzs: 274 275 276 277 278 278 279 280
+FRAGMENT: GABA_258 #loss of -C(CH3)3, 57g/mol and O, 16g/mol (uncertain); Lower abundance than 274 but clean. Quantification consistent with 274 (T47D vs. HCC1419). Labeling questionable because of uncertain formula.
+formula: C12H28N1O1Si2
+metabolite atoms: C4H7N1O1
+mzs: 258 259 260 261 262
+FRAGMENT: GABA_316 #loss of -CH3, 15g/mol, lower abundance than 274 and 258. 321 is a minor contaminant; quantities consistent with 274 and 258 (T47D vs. HCC1419).
+formula: C15H34N1O2Si2
+metabolite atoms: C4H7N1O2
+mzs: 316 317 318 319 320
+#FRAGMENT: GABA_200 #loss of -OSi(CH3)2(C4H9), 131g/mol (uncertain); Quantities inconsistent with 274 (T47D vs. HCC1419). Possibly a contaminant with 272 that makes this not useful.
+#formula: C10H22N1O1Si1
+#metabolite atoms: C4H7N1O1
+#mzs: 200 201 202 203 204
+#FRAGMENT: GABA_216 #loss of -Si(CH3)2(C4H9), 115g/mol; Quantities inconsistent with 274 (T47D vs. HCC1419). Possibly a contaminant with 272 that makes this not useful.
+#formula: C10H22N1O2Si1
+#metabolite atoms: C4H7N1O2
+#mzs: 216 217 218 219 220
+#FRAGMENT: GABA_147 #no clue
+#formula: 
+#metabolite atoms: 
+# added by Nate Vacanti, standard run 2020-03-17
+#     272 and 230 are contaminations in cells. Maybe these are derivatives of GABA (CACA and/or TACA) where the carbon backbone is dehydrogenated.
+
+#retention time (min): 20.49
+metabolite: succinate_2tbdms
+retention index: 1797.9
+peak profile: 147 100000 0.75 0.20 0.05 289 100000 0.75 0.20 0.05
+FRAGMENT: succinate_289
+formula: C12H25O4Si2
+metabolite atoms: C4H4O4
+mzs: 289 290 291 292 293 294 295 296
+
+#retention time (min): 20.96
+metabolite: fumarate_2tbdms
+retention index: 1813.1
+peak profile: 287 100000 0.75 0.20 0.05
+FRAGMENT: fumarate_287
+formula: C12H23O4Si2
+metabolite atoms: C4H2O4
+mzs: 287 288 289 290 291 292 293 294
+
+#retention time (min): 21.11
+metabolite: uracil_2tbdms_tautomer1
+retention index: 1801.1
+peak profile: 283 100000 0.75 0.20 0.05
+FRAGMENT: uracil_283
+formula: C12H23O2N2Si2
+metabolite atoms: C4H2O2N2
+mzs: 283 284 285 286 287 288 289 290
+
+#likely the original fragment
+metabolite: uracil_2tbdms_tautomer2
+retention index: 1816.9
+peak profile: 283 100000 0.75 0.20 0.05
+FRAGMENT: uracil_283
+formula: C12H23O2N2Si2
+metabolite atoms: C4H2O2N2
+mzs: 283 284 285 286 287 288 289 290
+
+#retention time (min): 24.53
+metabolite: serine_3tbdms
+retention index: 1937.6
+peak profile: 288 100000 0.75 0.20 0.05 302 100000 0.75 0.20 0.05 362 100000 0.75 0.20 0.05 390 100000 0.75 0.20 0.05
+FRAGMENT: serine_390
+formula: C17H40O3N1Si3
+metabolite atoms: C3H4O3N1
+mzs: 390 391 392 393 394 395 396
+FRAGMENT: serine_362
+formula: C16H40O2N1Si3
+metabolite atoms: C2H4O2N1
+mzs: 362 363 364 365 366 367
+FRAGMENT: serine_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 305 306 307
+FRAGMENT: serine_288
+formula: C14H34O1N1Si2
+metabolite atoms: C2H4O1N1
+mzs: 288 289 290 291 292 293
+
+#retention time (min): 25.09
+metabolite: threonine_3tbdms
+retention index: 1957.8
+peak profile: 376 100000 0.75 0.20 0.05 404 100000 0.75 0.20 0.05
+FRAGMENT: threonine_404
+formula: C18H42O3N1Si3
+metabolite atoms: C4H6O3N1
+mzs: 404 405 406 407 408 409 410
+FRAGMENT: threonine_376
+formula: C17H42O2N1Si3
+metabolite atoms: C3H6O2N1
+mzs: 376 377 378 379 380 381 382
+
+#retention time (min): 26.13
+metabolite: methionine_2tbdms
+retention index: 1995.1
+peak profile: 218 100000 0.75 0.20 0.05 320 100000 0.75 0.20 0.05
+FRAGMENT: methionine_320
+formula: C13H30O2N1S1Si2
+metabolite atoms: C5H9O2N1S1
+mzs: 320 321 322 323 324 325 326 327 328
+FRAGMENT: methionine_218
+formula: C10H24N1S1Si1
+metabolite atoms: C4H9N1S1
+mzs: 218 219 220 221 222 223 224 225
+
+#retention time (min): 27.70
+metabolite: cytosine_2tbdms
+retention index: 2033.8
+peak profile: 282 100000 0.75 0.20 0.05
+FRAGMENT: cytosine_282
+formula: C12H24O1N3Si2
+metabolite atoms: C4H3O1N3
+mzs: 282 283 284 285 286 287 288 289
+
+#the other apparent aKGs are not aKG based on labeling
+#retention time (min): 28.31
+metabolite: alpha-ketoglutarate_mox_2tbdms
+retention index: 2074.8
+peak profile: 346 100000 0.75 0.20 0.05
+FRAGMENT: alpha-ketoglutarate_346
+formula: C14H28O5N1Si2
+metabolite atoms: C5H4O4
+mzs: 346 347 348 349 350 351 352 353 354
+
+#retention time (min): 28.8
+metabolite: malate_3tbdms
+retention index: 2093.6
+peak profile: 419 100000 0.75 0.20 0.05 287 100000 0.75 0.20 0.05
+FRAGMENT: malate_419
+formula: C18H39O5Si3
+metabolite atoms: C4H3O5
+mzs: 419 420 421 422 423 424 425 426
+
+#retention time (min): 29.47
+metabolite: phenylalanine_2tbdms
+retention index: 2119.8
+peak profile: 234 100000 0.75 0.20 0.05 336 100000 0.75 0.20 0.05
+FRAGMENT: phenylalanine_234
+formula: C14H24N1Si1
+metabolite atoms: C8H9N1
+mzs: 234 235 236 237 238 239 240 241 242 243
+FRAGMENT: phenylalanine_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 305 306
+FRAGMENT: phenylalanine_308
+formula: C16H24O1N1Si2
+metabolite atoms: C8H9O1N1
+mzs: 308 309 310 311 312 313 314 315 316 317
+FRAGMENT: phenylalanine_336
+formula: C17H24O2N1Si2
+metabolite atoms: C9H9O2N1
+mzs: 336 337 338 339 340 341 342 343 344 345
+
+#retention time (min): 29.88
+metabolite: aspartate_3tbdms
+retention index: 2134.7
+peak profile: 302 100000 0.75 0.20 0.05 390 100000 0.75 0.20 0.05 418 100000 0.75 0.20 0.05
+FRAGMENT: aspartate_418
+formula: C18H40O4N1Si3
+metabolite atoms: C4H4O4N1
+mzs: 418 419 420 421 422 423 424 425
+FRAGMENT: aspartate_390
+formula: C17H40O3N1Si3
+metabolite atoms: C3H4O3N1
+mzs: 390 391 392 393 394 395 396
+FRAGMENT: aspartate_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 305 306 307
+
+#retention time (min): 31.55
+metabolite: 2-hydroxyglutarate_3tbdms
+retention index: 2199.1
+peak profile: 433 100000 0.75 0.20 0.05
+FRAGMENT: 2-hydroxyglutarate_433
+formula: C19H14O5Si3
+metabolite atoms: C5H5O5
+mzs: 433 434 435 436 437 438 439 440 441
+
+#retention time (min): 32.25
+metabolite: proline_2tbdms
+retention index: 2227.0
+peak profile: 258 100000 0.75 0.20 0.05
+FRAGMENT: proline_258
+formula: C12H28O1N1Si2
+metabolite atoms: C4H7O2N1
+mzs: 258 259 260 261 262 263 264 265 266
+
+#retention time (min): 33.0
+metabolite: glutamate_3tbdms
+retention index: 2255.7
+peak profile: 330 100000 0.75 0.20 0.05 432 100000 0.75 0.20 0.05
+FRAGMENT: glutamate_432
+formula: C19H42O4N1Si3
+metabolite atoms: C5H6O4N1
+mzs: 432 433 434 435 436 437 438 439 440
+FRAGMENT: glutamate_330
+formula: C16H36O2N1Si2
+metabolite atoms: C4H6O3N1
+mzs: 330 331 332 333 334 335 336 337
+
+#retention time (min): 33.26
+metabolite: phosphoenolpyruvate_3tbdms
+retention index: 2267.7
+peak profile: 453 100000 0.75 0.20 0.05
+FRAGMENT: phosphoenolpyruvate_453
+formula: C17H38O6P1Si3
+metabolite atoms: C3H2O6P1
+mzs: 453 454 455 456 457 458 459
+
+#retention time (min): 37.48
+metabolite: lysine_3tbdms
+retention index: 2328.1
+peak profile: 431 100000 0.75 0.20 0.05 329 100000 0.75 0.20 0.05
+FRAGMENT: lysine_431
+formula: C20H47O2N2Si3
+metabolite atoms: C6H11O2N2
+mzs: 431 432 433 434 435 436 437 438 439 440
+FRAGMENT: lysine_329
+formula: C17H41N2Si2
+metabolite atoms: C5H11N2
+mzs: 329 330 331 332 333 334 335 336 337
+
+#retention time (min): 37.48
+metabolite: glutamine_3tbdms
+retention index: 2442.4
+peak profile: 431 100000 0.75 0.20 0.05
+FRAGMENT: glutamine_431
+formula: C19H43O3N2Si3
+metabolite atoms: C5H7O3N2
+mzs: 431 432 433 434 435 436 437 438 439
+
+#retention time (min): 38.11
+metabolite: glycerol-phosphate1_tbdms
+retention index: 2470.8
+peak profile: 571 100000 0.75 0.20 0.05
+FRAGMENT: glycerol-3-phosphate_571
+formula: C23H56O6P1Si4
+metabolite atoms: C3H5O6P1
+mzs: 571 572 573 574 575 576 577
+
+#retention time (min): 6.76
+metabolite: glycerol-phosphate2_tbdms
+retention index: 2519.8
+peak profile: 571 100000 0.75 0.20 0.05
+FRAGMENT: glycerol-3-phosphate_571
+formula: C23H56O6P1Si4
+metabolite atoms: C3H5O6P1
+mzs: 571 572 573 574 575 576 577
+
+#second citrate not present in labeling expts
+#retention time (min): 40.25
+metabolite: citrate_4tbdms
+retention index: 2566
+peak profile: 459.0 3987581.0 0.612 0.235 0.115 0.029 0.007 0.001 591.0 2542667.0 0.533 0.265 0.142 0.045 0.013 0.003
+FRAGMENT: citrate_591
+formula: C26H55O7Si4
+metabolite atoms: C6H4O7
+mzs: 591 592 593 594 595 596 597 598 599 600
+FRAGMENT: citrate_459
+formula: C20H39O6Si3
+metabolite atoms: C6H3O6
+mzs: 459 460 461 462 463 464 465 466 467 468
+
+#retention time (min): 42.72
+metabolite: tyrosine_3tbdms
+retention index: 2633.1
+peak profile: 302 100000 0.75 0.20 0.05 466 100000 0.75 0.20 0.05
+FRAGMENT: tyrosine_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 306 306 307
+FRAGMENT: tyrosine_466
+formula: C23H44O3N1Si3
+metabolite atoms: C9H8O3N1
+mzs: 466 467 468 469 470 471 472 473 474 475
