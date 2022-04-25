@@ -11,3 +11,5 @@ from .Classes.AtomClass import Atom
 from .Classes.TracerClass import Tracer
 from PolyMID.Correct import Correct
 from PolyMID.Natural import Natural
+from PolyMID import AnalyzeSpectra
+from PolyMID.AnalyzeSpectra import Integrate
