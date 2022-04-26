@@ -89,7 +89,7 @@ class Fragment:
             carbon_quantity_index = carbon_index+1 #refering to full fragment
             carbon_quantity_metabolite = quantity_of_atom(self.CanAcquireLabel.formula,'C') #this does not refer to the full fragment!
 
-            range_extendor = 1
+            range_extendor = nitrogen_quantity_metabolite
 
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
