@@ -1,6 +1,7 @@
-Done in the ExFlux branch:
+Input MIDs of actual internal standards as the last column of correction matrices to account for contamination of not fully labeled molecules in the standards.
 
-The fully labeled n and c fragment is considered in the fragment class definition under the create_correlation_matrix method definition
+Allow for deconvolution of peaks by only integrating half of the peak (choose right or left half).
 
-Can run the integrate function with (after importing PolyMID):
-PolyMID.Integrate()
+Look into problems with histidine, arginine, proline, and tryptophan. We also need an asparagine standard.
+
+See what amino acids need to be added to my library.
