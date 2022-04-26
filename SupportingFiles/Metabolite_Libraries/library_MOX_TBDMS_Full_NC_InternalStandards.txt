@@ -1,0 +1,206 @@
+#retention time (min): 12.31
+metabolite: alanine_2tbdms
+retention index: 1527
+peak profile: 232 1000000 0.75 0.20 0.05 260 1000000 0.75 0.20 0.05
+FRAGMENT: alanine_232
+formula: C10H26O1N1Si2
+metabolite atoms:C2H7N1O1
+mzs: 232 233 234 235 236
+FRAGMENT: alanine_260
+formula: C11H26O2N1Si2
+metabolite atoms: C3H7N1O2
+mzs: 260 261 262 263 264 265
+
+#retention time (min): 13.61
+metabolite: glycine_2tbdms
+retention index: 1569.8
+peak profile: 218 100000 0.75 0.20 0.05 246 100000 0.75 0.20 0.05
+FRAGMENT: glycine_246
+formula: C10H24O2N1Si2
+metabolite atoms:C2H3O2N1
+mzs: 246 247 248 249 250 251
+FRAGMENT: glycine_218
+formula: C9H24O1N1Si2
+metabolite atoms: C1H3O1N1
+mzs: 218 219 220 221 222
+
+#retention time (min): 15.51
+metabolite: valine_2tbdms
+retention index: 1633.5
+peak profile: 260 100000 0.75 0.20 0.05 288 100000 0.75 0.20 0.05
+FRAGMENT: valine_288
+formula: C13H30O2N1Si2
+metabolite atoms: C5H9O2N1
+mzs: 288 289 290 291 292 293 294 295 296
+FRAGMENT: valine_260
+formula: C12H30O1N1Si2
+metabolite atoms: C4H9O1N1
+mzs: 260 261 262 263 264 265 266 267
+
+#retention time (min): 16.53
+metabolite: leucine_2tbdms
+retention index: 1666.6
+peak profile: 200 100000 0.75 0.20 0.05 274 100000 0.75 0.20 0.05
+FRAGMENT: leucine_274
+formula: C13H32O1N1Si2
+metabolite atoms: C5H11O1N1
+mzs: 274 275 276 277 278 279 280 281 282
+FRAGMENT: leucine_200
+formula: C11H26N1Si1
+metabolite atoms: C5H11N1
+mzs: 200 201 202 203 204 205 206 207 208
+
+#retention time (min): 17.61
+metabolite: isoleucine_2tbdms
+retention index: 1702.6
+peak profile: 200 100000 0.75 0.20 0.05 274 100000 0.75 0.20 0.05
+FRAGMENT: isoleucine_274
+formula: C13H32O1N1Si2
+metabolite atoms: C5H11O1N1
+mzs: 274 275 276 277 278 279 280 281 282
+FRAGMENT: isoleucine_200
+formula: C11H26N1Si1
+metabolite atoms: C5H11N1
+mzs: 200 201 202 203 204 205 206 207 208
+
+#retention time (min): 24.53
+metabolite: serine_3tbdms
+retention index: 1937.6
+peak profile: 288 100000 0.75 0.20 0.05 302 100000 0.75 0.20 0.05 362 100000 0.75 0.20 0.05 390 100000 0.75 0.20 0.05
+FRAGMENT: serine_390
+formula: C17H40O3N1Si3
+metabolite atoms: C3H4O3N1
+mzs: 390 391 392 393 394 395 396
+FRAGMENT: serine_362
+formula: C16H40O2N1Si3
+metabolite atoms: C2H4O2N1
+mzs: 362 363 364 365 366 367
+FRAGMENT: serine_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 305 306 307
+FRAGMENT: serine_288
+formula: C14H34O1N1Si2
+metabolite atoms: C2H4O1N1
+mzs: 288 289 290 291 292 293
+
+#retention time (min): 25.09
+metabolite: threonine_3tbdms
+retention index: 1957.8
+peak profile: 376 100000 0.75 0.20 0.05 404 100000 0.75 0.20 0.05
+FRAGMENT: threonine_404
+formula: C18H42O3N1Si3
+metabolite atoms: C4H6O3N1
+mzs: 404 405 406 407 408 409 410
+FRAGMENT: threonine_376
+formula: C17H42O2N1Si3
+metabolite atoms: C3H6O2N1
+mzs: 376 377 378 379 380 381 382
+
+#retention time (min): 26.13
+metabolite: methionine_2tbdms
+retention index: 1995.1
+peak profile: 218 100000 0.75 0.20 0.05 320 100000 0.75 0.20 0.05
+FRAGMENT: methionine_320
+formula: C13H30O2N1S1Si2
+metabolite atoms: C5H9O2N1S1
+mzs: 320 321 322 323 324 325 326 327 328
+FRAGMENT: methionine_218
+formula: C10H24N1S1Si1
+metabolite atoms: C4H9N1S1
+mzs: 218 219 220 221 222 223 224 225
+
+#retention time (min): 29.47
+metabolite: phenylalanine_2tbdms
+retention index: 2119.8
+peak profile: 234 100000 0.75 0.20 0.05 336 100000 0.75 0.20 0.05
+FRAGMENT: phenylalanine_234
+formula: C14H24N1Si1
+metabolite atoms: C8H9N1
+mzs: 234 235 236 237 238 239 240 241 242 243
+FRAGMENT: phenylalanine_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 305 306
+FRAGMENT: phenylalanine_308
+formula: C16H24O1N1Si2
+metabolite atoms: C8H9O1N1
+mzs: 308 309 310 311 312 313 314 315 316 317
+FRAGMENT: phenylalanine_336
+formula: C17H24O2N1Si2
+metabolite atoms: C9H9O2N1
+mzs: 336 337 338 339 340 341 342 343 344 345
+
+#retention time (min): 29.88
+metabolite: aspartate_3tbdms
+retention index: 2134.7
+peak profile: 302 100000 0.75 0.20 0.05 390 100000 0.75 0.20 0.05 418 100000 0.75 0.20 0.05
+FRAGMENT: aspartate_418
+formula: C18H40O4N1Si3
+metabolite atoms: C4H4O4N1
+mzs: 418 419 420 421 422 423 424 425
+FRAGMENT: aspartate_390
+formula: C17H40O3N1Si3
+metabolite atoms: C3H4O3N1
+mzs: 390 391 392 393 394 395 396
+FRAGMENT: aspartate_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 305 306 307
+
+#retention time (min): 32.25
+metabolite: proline_2tbdms
+retention index: 2227.0
+peak profile: 258 100000 0.75 0.20 0.05
+FRAGMENT: proline_258
+formula: C12H28O1N1Si2
+metabolite atoms: C4H7O2N1
+mzs: 258 259 260 261 262 263 264 265 266
+
+#retention time (min): 33.0
+metabolite: glutamate_3tbdms
+retention index: 2255.7
+peak profile: 330 100000 0.75 0.20 0.05 432 100000 0.75 0.20 0.05
+FRAGMENT: glutamate_432
+formula: C19H42O4N1Si3
+metabolite atoms: C5H6O4N1
+mzs: 432 433 434 435 436 437 438 439 440
+FRAGMENT: glutamate_330
+formula: C16H36O2N1Si2
+metabolite atoms: C4H6O3N1
+mzs: 330 331 332 333 334 335 336 337
+
+#retention time (min): 37.48
+metabolite: lysine_3tbdms
+retention index: 2328.1
+peak profile: 431 100000 0.75 0.20 0.05 329 100000 0.75 0.20 0.05
+FRAGMENT: lysine_431
+formula: C20H47O2N2Si3
+metabolite atoms: C6H11O2N2
+mzs: 431 432 433 434 435 436 437 438 439 440
+FRAGMENT: lysine_329
+formula: C17H41N2Si2
+metabolite atoms: C5H11N2
+mzs: 329 330 331 332 333 334 335 336 337
+
+#retention time (min): 37.48
+metabolite: glutamine_3tbdms
+retention index: 2442.4
+peak profile: 431 100000 0.75 0.20 0.05
+FRAGMENT: glutamine_431
+formula: C19H43O3N2Si3
+metabolite atoms: C5H7O3N2
+mzs: 431 432 433 434 435 436 437 438 439
+
+#retention time (min): 42.72
+metabolite: tyrosine_3tbdms
+retention index: 2633.1
+peak profile: 302 100000 0.75 0.20 0.05 466 100000 0.75 0.20 0.05
+FRAGMENT: tyrosine_302
+formula: C14H32O2N1Si2
+metabolite atoms: C2H2O2N1
+mzs: 302 303 304 306 306 307
+FRAGMENT: tyrosine_466
+formula: C23H44O3N1Si3
+metabolite atoms: C9H8O3N1
+mzs: 466 467 468 469 470 471 472 473 474 475
