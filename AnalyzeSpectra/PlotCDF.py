@@ -20,7 +20,7 @@ import importlib
 import numpy as np
 import copy
 import re
-from AnalyzeSpectra import get_directory
+from PolyMID.AnalyzeSpectra import get_directory
 
 from bokeh.io import curdoc
 from bokeh.layouts import column, row, layout, Spacer
