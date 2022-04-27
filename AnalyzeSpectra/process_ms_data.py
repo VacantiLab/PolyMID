@@ -1,7 +1,7 @@
 def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivity):
 
     import importlib #allows fresh importing of modules
-    import pdb #python debugger
+    from pdb import set_trace #python debugger
     from PolyMID.AnalyzeSpectra import savitzky_golay
     import bokeh.plotting as bkp #allows for making interactive plots with bokeh
     import numpy as np #this is numpy, allows for data frame and matrix handling
@@ -109,7 +109,7 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
         peak_start_i_dict[plotted_mz] = borders_prior_indices
         peak_end_i_dict[plotted_mz] = borders_after_indices
         peak_i_dict[plotted_mz] = indexes
-        peak_sat_dict = sat[indexes]
+        peak_sat_dict[plotted_mz] = sat[indexes]
         peak_max_dict[plotted_mz] = y_peak_vals_base_cor
 
         #plot baseline corrected data and the peak locations

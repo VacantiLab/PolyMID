@@ -1,4 +1,4 @@
-def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name):
+def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,peak_sat_dict):
     import importlib #allows fresh importing of modules
     from pdb import set_trace #python debugger
     import numpy as np #this is numpy, allows for data frame and matrix handling
@@ -48,6 +48,17 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
 
                 #if there is a peak, then integrate it to find its area
                 if peak_present:
+
+                    # If a peak is specified to need deconvolution, refelct the clean side of the peak
+                    AreaCoefficient = 1
+                    PeakReflect = metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['peak_reflection']
+                    if PeakReflect == 'right':
+                        peak_start_t_dict[i] = peak_sat_dict[i]
+                        AreaCoefficient = 2
+                    #if PeakReflect == 'left':
+                         # the end site of integration equals the site of the peak
+                        #AreaCoefficient = 2
+
                     possible_peak_starts = np.where(peak_start_t_dict[i] < rt)[0] #there must be at least one peak start before the rt because there is a peak
                     prosp_peak_start_nm = max(possible_peak_starts) #prospective peak start
                     x_start_i = peak_start_i_dict[i][prosp_peak_start_nm]
@@ -55,7 +66,7 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
                     x_range_i = np.arange(x_start_i,x_end_i)
                     x_range_t = x_data_numpy[x_range_i]
                     y_range_ic = ic_smooth_dict[i][x_range_i]
-                    integrated_area = scipy.integrate.simps(y_range_ic,x_range_t)
+                    integrated_area = AreaCoefficient*scipy.integrate.simps(y_range_ic,x_range_t)
                     metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['areas'] = np.append(metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['areas'],integrated_area)
 
             #record the total area for the fragment by summing the areas of all mz members of that fragment

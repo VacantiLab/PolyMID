@@ -150,6 +150,14 @@ def fragment_library(file_directory,Full_NC,metabolite_dict='none'):
                                         mzs_to_integrate = np.fromstring(fragment_line_item,dtype=float,sep=' ')
                                         metabolite_dict[metabolite_name]['fragments'][fragment_name]['mzs_to_integrate'] = mzs_to_integrate
 
+                                        #set the default behavior of peak reflection to not reflect the peak so it does not need to be specified
+                                        metabolite_dict[metabolite_name]['fragments'][fragment_name]['peak_reflection'] = 'none'
+
+                                    # when at the appropriate line, record whether the peak needs to be reflected
+                                    if fragment_line_n == metabolite_line_n + 4:
+                                        fragment_line_item = fragment_line_split[1].lstrip().rstrip()
+                                        PeakReflection = fragment_line_item
+                                        metabolite_dict[metabolite_name]['fragments'][fragment_name]['peak_reflection'] = PeakReflection
 
     #get a list of all of the metabolites
     metabolite_list = list(dict.keys(metabolite_dict))

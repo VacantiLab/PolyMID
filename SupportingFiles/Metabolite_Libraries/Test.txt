@@ -1,0 +1,9 @@
+#retention time (min): 32.25
+metabolite: proline_2tbdms
+retention index: 2227.0
+peak profile: 258 100000 0.75 0.20 0.05
+FRAGMENT: proline_258
+formula: C12H28O1N1Si2
+metabolite atoms: C4H7O2N1
+mzs: 258 259 260 261 262 263 264 265 266
+reflect peak: right
