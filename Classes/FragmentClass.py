@@ -89,7 +89,8 @@ class Fragment:
             carbon_quantity_index = carbon_index+1 #refering to full fragment
             carbon_quantity_metabolite = quantity_of_atom(self.CanAcquireLabel.formula,'C') #this does not refer to the full fragment!
 
-            range_extendor = nitrogen_quantity_metabolite
+            range_extendor = 1
+            # Accounts for the addition of a column corresponding to the fully labeled internal standard
 
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
@@ -105,11 +106,11 @@ class Fragment:
             if self.Full_NC & (i == atom_quantity+1):
                 carbon_quantity_full = quantity_of_atom(self.Formula.formula,'C')
                 broken_formula_correct[carbon_quantity_index] = carbon_quantity_full - carbon_quantity_metabolite
-                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
+                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[carbon_quantity_index].astype(np.str)
 
                 nitrogen_quantity_full = quantity_of_atom(self.Formula.formula,'N')
-                broken_formula_correct[carbon_quantity_index] = nitrogen_quantity_full - nitrogen_quantity_metabolite
-                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
+                broken_formula_correct[nitrogen_quantity_index] = nitrogen_quantity_full - nitrogen_quantity_metabolite
+                broken_formula_correct[nitrogen_quantity_index] = broken_formula_correct[nitrogen_quantity_index].astype(np.str)
 
                 #replace that atom with a heavy atom
                 broken_formula_correct[n_formula_entries+1] = carbon_quantity_metabolite + nitrogen_quantity_metabolite
