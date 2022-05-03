@@ -137,6 +137,11 @@ def match_fingerprint(ri_array,coelut_dict,coelut_dict_val,metabolite_dict,mz_va
                 intersection_index = np.where(ri_array==i)
                 intersection_indices = np.append(intersection_indices,intersection_index)
                 intersection_indices = intersection_indices.astype(int)
+            # If an mz in the group is not in the data set, add it along with 0s as recoreded values
+            if mz_to_max not in ic_smooth_dict.keys():
+                for key in ic_smooth_dict.keys():
+                    ic_smooth_dict[mz_to_max] = np.repeat(0,len(ic_smooth_dict[key]))
+                    break
             value_array = ic_smooth_dict[mz_to_max][intersection_indices]
             max_index = np.argmax(value_array)
             max_ri_index = intersection_indices[max_index]
