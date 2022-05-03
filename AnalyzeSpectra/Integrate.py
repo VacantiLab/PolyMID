@@ -148,7 +148,8 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
             if len(batches)>1:
                 alkane_file = np.array(alkane_file) #it is converted to a np array so the next line works
                 alkane_name = alkane_file[0].split('.')[0] #removes the .CDF from the end of the filename
-            alkane_name = alkane_file.split('.')[0] #removes the .CDF from the end of the filename
+            if len(batches)==1:
+                alkane_name = alkane_file.split('.')[0] #removes the .CDF from the end of the filename
 
             #Add the name of the alkane file to the beginning of the list
             files = np.insert(files,0,alkane_file)
