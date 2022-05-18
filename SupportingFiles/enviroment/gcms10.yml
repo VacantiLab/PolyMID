@@ -7,7 +7,7 @@ dependencies:
 - numpy=1.14
 - pandas=0.20
 - tk=8.6
-- bokeh=1.0
+- bokeh=2.3
 - pip=20.2
 
 - pip:
