@@ -43,27 +43,33 @@ def FindBorders(indexes,y_base_cor,sat):
             to_add = to_add+1
         borders_after_indices[j] = border_after_index + to_add #update the end border index
 
+
+        # Look for interfering peaks
+        # The blocks of code below was written to separately integrate interfering peaks
+        #     However it can cause messy peaks to be interpreted as multiple peaks and is thus commented out
+
         #if the beginning of a peak is before the location of the previous peak
             #the beginning of that peak is moved to the minimum location after the previous peak and before the current peak
-        if j > 0:
-            current_peak_index = indexes[j]
-            prior_peak_index = indexes[j-1]
-            prior_border_index = borders_prior_indices[j]
-            if prior_border_index < prior_peak_index:
-                local_min_index = np.argmin(y_base_cor[prior_peak_index:current_peak_index+1])
-                borders_prior_indices[j] = prior_peak_index + local_min_index
+        # if j > 0:
+        #     current_peak_index = indexes[j]
+        #     prior_peak_index = indexes[j-1]
+        #     prior_border_index = borders_prior_indices[j]
+        #     if prior_border_index < prior_peak_index:
+        #         local_min_index = np.argmin(y_base_cor[prior_peak_index:current_peak_index+1])
+        #         borders_prior_indices[j] = prior_peak_index + local_min_index
 
         #if the end of a peak is after the location of the next peak
             #the end of that peak is moved to the minimum location between the current and next peak
-        if j < len(indexes)-1:
-            current_peak_index = indexes[j]
-            next_peak_index = indexes[j+1]
-            after_border_index = borders_after_indices[j]
-            if next_peak_index < after_border_index:
-                local_min_index = np.argmin(y_base_cor[current_peak_index:next_peak_index+1])
-                borders_after_indices[j] = current_peak_index + local_min_index
+        # if j < len(indexes)-1:
+        #     current_peak_index = indexes[j]
+        #     next_peak_index = indexes[j+1]
+        #     after_border_index = borders_after_indices[j]
+        #     if next_peak_index < after_border_index:
+        #         local_min_index = np.argmin(y_base_cor[current_peak_index:next_peak_index+1])
+        #         borders_after_indices[j] = current_peak_index + local_min_index
 
         j = j+1
+
     borders_prior_indices = borders_prior_indices.astype(int)
     borders_after_indices = borders_after_indices.astype(int)
     return(borders_prior_indices,borders_after_indices)
