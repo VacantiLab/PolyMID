@@ -1,7 +1,7 @@
 def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivity):
 
     import importlib #allows fresh importing of modules
-    import pdb #python debugger
+    from pdb import set_trace #python debugger
     from PolyMID.AnalyzeSpectra import savitzky_golay
     import bokeh.plotting as bkp #allows for making interactive plots with bokeh
     import numpy as np #this is numpy, allows for data frame and matrix handling
@@ -9,6 +9,8 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
     import peakutils #allows for peak and baseline finding
     from PolyMID.AnalyzeSpectra import FindBorders
     from PolyMID.AnalyzeSpectra import ExtendBounds
+    import copy
+    from scipy import signal
 
     mz_to_plot = [174,175,176,177,178,179]
     mz_colors = ['red','green','blue','yellow','purple','orange']
@@ -55,9 +57,19 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
         if thres > 1:
             thres = 1
 
-        indexes = peakutils.indexes(y_data_smooth, thres=thres, min_dist=10)
-        #thres is the threshhold and is somehow relative (possible values are between 0 and 1)
-        #min dist is the minimum distance between peaks, I guess this is in terms of number of measurements since only one axis is provided
+        # Find the indices of peaks
+        indexes = signal.find_peaks(x=y_data_smooth,height=thres_numerator)[0]
+
+        # Find the intensities associated with the peaks
+        peak_values = y_data_smooth[indexes]
+
+        # Find the peak prominences and relative prominences
+        prominences = signal.peak_prominences(y_data_smooth, indexes, wlen=None)[0]
+        relative_prominence = prominences/peak_values
+
+        # enforce a relative peak prominence threshold
+        indices_of_peak_indices_to_keep = relative_prominence = prominences/peak_values >= 0.5
+        indexes = indexes[indices_of_peak_indices_to_keep]
 
         #a peak must be higher than the max radius points before and after it
         max_radius = 5

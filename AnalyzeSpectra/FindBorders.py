@@ -47,6 +47,7 @@ def FindBorders(indexes,y_base_cor,sat):
         # Look for interfering peaks
         # The blocks of code below was written to separately integrate interfering peaks
         #     However it can cause messy peaks to be interpreted as multiple peaks and is thus commented out
+        #     Now it would actually make no difference because peaks are filtered out that would be interfering at half height
 
         #if the beginning of a peak is before the location of the previous peak
             #the beginning of that peak is moved to the minimum location after the previous peak and before the current peak

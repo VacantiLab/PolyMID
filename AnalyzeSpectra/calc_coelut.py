@@ -5,6 +5,7 @@ def calc_coelut(peak_ri_dict,mz_vals,ri_array,ic_smooth_dict,peak_overlap_dictio
     #    the same peak can be considered eluting at neighboring ris because of the ri window
 
     import numpy as np
+    from pdb import set_trace
 
     #set the retention index window
     ri_window = 1.0

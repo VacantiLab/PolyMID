@@ -49,6 +49,7 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
     from PolyMID.AnalyzeSpectra import get_directory
     from PolyMID.AnalyzeSpectra import locate_overlap
     from PolyMID.AnalyzeSpectra import GetFileBatch
+    from PolyMID.AnalyzeSpectra import Add_FullNC_Peak_Profiles
 
     #retrieve file directory
     retrieve_directory_method = 'gui'
@@ -65,6 +66,11 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
         #process the library
         print('processing library...')
         metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC)
+
+        # If Full_NC is true, change the fragment peak profiles to be those of the Full_NC labeled fragments
+        #     This is done so the internal standard metabolite is found in the spectra even if the metabolite is not in the media sample
+        if Full_NC:
+            metabolite_dict = Add_FullNC_Peak_Profiles.Add_FullNC_Peak_Profiles(metabolite_dict,metabolite_list)
 
     if library_processed:
         #load the processed library
