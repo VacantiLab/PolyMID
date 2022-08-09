@@ -1,7 +1,7 @@
 def print_integrated_peaks(file_directory,samples,metabolite_list,file_data,corrected,Full_NC):
 
     import numpy as np
-    import pdb
+    from pdb import set_trace
 
     CorrectedOptionsArray = [True,False]
 

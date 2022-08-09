@@ -59,6 +59,7 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
 
         # Find the indices of peaks
         indexes = signal.find_peaks(x=y_data_smooth,height=thres_numerator)[0]
+        #     Enforcing a prominence here causes missed peaks
 
         # Find the intensities associated with the peaks
         peak_values = y_data_smooth[indexes]
