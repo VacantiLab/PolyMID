@@ -5,12 +5,12 @@ name: gcms
 dependencies:
 - python=3.6
 - ipython=7.16
-- numpy=1.14
+- numpy=1.16
 - pandas=0.20
 - tk=8.6
 - bokeh=2.3
 - pip=20.2
 
 - pip:
-  - netCDF4==1.2 # need to install HDF5 with brew in order to install netCDF4??
   - peakutils==1.0
+  - netCDF4==1.2 # need to install HDF5 with brew in order to install netCDF4? See environment_notes.txt

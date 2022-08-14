@@ -2,5 +2,5 @@
 -   has problems with netCDF4
 
 - Environment gcms.yml is now more up to date
-- I always have problems installing netCDF4 package. I need to install HDF5 version 1.12.2 with brew.
--     Can then install netCDF4 1.6.0 with pip
+- I always have problems installing netCDF4 package. I need to install HDF5 version 1.12.2 with: "brew install HDF5@1.12"
+-     Can then install netCDF4 1.6.0 with "pip install netCDF4==1.6"
