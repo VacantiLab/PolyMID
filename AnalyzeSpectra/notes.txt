@@ -3,3 +3,7 @@
 - the function is now run by running integrate() in integrate.py
 - first import AnalyzeSpectra from one directory above this directory
 - then AnalyzeSpectra.integrate() can be run
+
+
+Manual Integration tool
+- create an option that will integrate at a given RI range without the condition that a peak is there. The integrate tool is scipy.integrate.simps(y,x) in integrate_peaks.py
