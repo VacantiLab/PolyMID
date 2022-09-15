@@ -85,7 +85,7 @@ def match_fingerprint(ri_array,coelut_dict,coelut_dict_val,metabolite_dict,mz_va
     for mz_group_name in group_mz_list:
         group_mz_vals_all = np.append(group_mz_vals_all,mz_group_name)
         mz_group_length = len(ranked_fingerprint[mz_group_name])
-        to_add_then_append_array = np.arange(1,mz_group_length+1)
+        to_add_then_append_array = np.arange(1,mz_group_length)
         for i in to_add_then_append_array:
             to_append = mz_group_name + i
             # Only consider an mz value to determine peak location if intensities at that mz were recorded by the ms
@@ -334,7 +334,8 @@ def check_group(mz,ranked_fingerprint,peak_mz_array,peak_val_array,ri,mz_scan_en
     for i in mz_in_group:
         index_in_coelut = np.where(peak_mz_array==i)
         index_in_coelut_array = np.append(index_in_coelut_array,index_in_coelut)
-    if len(index_in_coelut_array) >= n_mz-1:
+    # All mz's need to be there
+    if len(index_in_coelut_array) >= n_mz:
         quantity_requirement = True
 
     #metabolites may labeled, so the mz group is extended and a new quantity requirement is set
@@ -347,7 +348,7 @@ def check_group(mz,ranked_fingerprint,peak_mz_array,peak_val_array,ri,mz_scan_en
     for i in mz_group_extended:
         index_in_coelut = np.where(peak_mz_array==i)
         index_in_coelut_array = np.append(index_in_coelut_array,index_in_coelut)
-    if len(index_in_coelut_array) >= n_mz_extended-2:
+    if len(index_in_coelut_array) >= n_mz_extended-1:
         quantity_requirement_with_shift = True
 
     #the value associated with the mz prior to that defining the group cannot be larger than
