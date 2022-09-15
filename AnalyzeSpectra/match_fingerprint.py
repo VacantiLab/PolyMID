@@ -340,16 +340,17 @@ def check_group(mz,ranked_fingerprint,peak_mz_array,peak_val_array,ri,mz_scan_en
 
     #metabolites may labeled, so the mz group is extended and a new quantity requirement is set
     #    this new quantity requirement OR the previous one must be satisfied to say the metabolite is present
-    index_in_coelut_array = np.array([])
-    last_mz_in_group = mz_in_group[n_mz-1]
-    mzs_to_append = np.array([last_mz_in_group+1,last_mz_in_group+2,last_mz_in_group+3])
-    mz_group_extended = np.append(mz_in_group,mzs_to_append)
-    n_mz_extended = len(mz_group_extended)
-    for i in mz_group_extended:
-        index_in_coelut = np.where(peak_mz_array==i)
-        index_in_coelut_array = np.append(index_in_coelut_array,index_in_coelut)
-    if len(index_in_coelut_array) >= n_mz_extended-1:
-        quantity_requirement_with_shift = True
+    # Commented out below for now because I believe it is causing problems
+    # index_in_coelut_array = np.array([])
+    # last_mz_in_group = mz_in_group[n_mz-1]
+    # mzs_to_append = np.array([last_mz_in_group+1,last_mz_in_group+2,last_mz_in_group+3])
+    # mz_group_extended = np.append(mz_in_group,mzs_to_append)
+    # n_mz_extended = len(mz_group_extended)
+    # for i in mz_group_extended:
+    #     index_in_coelut = np.where(peak_mz_array==i)
+    #     index_in_coelut_array = np.append(index_in_coelut_array,index_in_coelut)
+    # if len(index_in_coelut_array) >= n_mz_extended-1:
+    #     quantity_requirement_with_shift = True
 
     #the value associated with the mz prior to that defining the group cannot be larger than
     #    all of the first 4 values of the group
