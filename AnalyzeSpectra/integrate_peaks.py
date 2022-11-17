@@ -33,6 +33,7 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
         #iterate through the fragments of each metabolite and integrate
         for frag_iter in fragments_list:
             mzs_to_integrate = metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['mzs_to_integrate']
+            M0 = True # indicates the first mz indicated corresponds to M0
             for i in mzs_to_integrate:
                 #find the index of the peak corresponding to the given rt in the mz curve (the first peak is 0, the second 1, the third 2, ...)
                 peak_present = False
@@ -55,8 +56,31 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
                     x_range_i = np.arange(x_start_i,x_end_i)
                     x_range_t = x_data_numpy[x_range_i]
                     y_range_ic = ic_smooth_dict[i][x_range_i]
+
+                    # can specify certain fragments will be integrated only as the left or right side of the peak
+                    #     hard-coded for now
+                    Decon_Left_List = ['glucose-QuantOnly_273']
+                    Decon_Right_List = []
+
+                    if frag_iter in Decon_Left_List:
+                        # redefine the right border of the peak as the midway of the M0 peak
+                        if M0:
+                            domain_length = np.floor(0.5*len(x_range_t)).astype(int)
+                            max_peak_time = x_range_t[domain_length-1]
+                        x_range_t = x_range_t[x_range_t<max_peak_time]
+                        y_range_ic = y_range_ic[0:len(x_range_t)]
+
+                    if frag_iter in Decon_Right_List:
+                        if M0:
+                        # redefine the left border of the peak as the midway of the M0 peak
+                            domain_length = np.floor(0.5*len(x_range_t)).astype(int)
+                            min_peak_time = x_range_t[domain_length-1]
+                        x_range_t = x_range_t[x_range_t>min_peak_time]
+                        y_range_ic = y_range_ic[len(y_range_ic)-len(x_range_t):-1]
+
                     integrated_area = scipy.integrate.simps(y_range_ic,x_range_t)
                     metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['areas'] = np.append(metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['areas'],integrated_area)
+                    M0 = False # indicates the next mz in the loop is not M0
 
             #record the total area for the fragment by summing the areas of all mz members of that fragment
             metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['tot_area'] = np.sum(metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['areas'])
