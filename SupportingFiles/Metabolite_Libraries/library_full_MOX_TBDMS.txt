@@ -1,6 +1,6 @@
 #retention time (min): 6.76
 metabolite: pyruvate_mox_tbdms
-retention index: 1323 
+retention index: 1326 
 peak profile: 174.0 3409971.0 0.849 0.108 0.04 0.003
 FRAGMENT: pyruvate_174
 formula: C6H12N1O3Si1
@@ -9,7 +9,7 @@ mzs: 174 175 176 177 178 179
 
 #retention time (min): 11.16
 metabolite: lactate_2tbdms
-retention index: 1487
+retention index: 1482
 peak profile: 233.0 3938959.0 0.744 0.17 0.073 0.011 261.0 6514892.0 0.719 0.186 0.08 0.012
 FRAGMENT: lactate_233
 formula: C10H25O2Si2
@@ -22,7 +22,7 @@ mzs: 261 262 263 264 265 266 267
 
 #retention time (min): 12.31
 metabolite: alanine_2tbdms
-retention index: 1527
+retention index: 1522
 peak profile: 232 1000000 0.75 0.20 0.05 260 1000000 0.75 0.20 0.05
 FRAGMENT: alanine_232
 formula: C10H26O1N1Si2
@@ -144,7 +144,7 @@ mzs: 283 284 285 286 287 288 289 290
 #retention time (min): 20.96
 metabolite: fumarate_2tbdms
 retention index: 1813.1
-peak profile: 287 100000 0.75 0.20 0.05
+peak profile: 287 100000 0.75 0.20
 FRAGMENT: fumarate_287
 formula: C12H23O4Si2
 metabolite atoms: C4H2O4
