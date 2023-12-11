@@ -3,12 +3,18 @@ name: gcms
 #     Of course the dependencies of the specified packages need to be installed
 #         With the below version numbers speficied everything should be compatible for the software to work
 dependencies:
-- python=3.8
-- numpy=1.26
-- pandas=2.1
-- tk=8.6
+- python
+- numpy
+- pandas
+- tk
 - bokeh=2.3
 
-- pip:
-  - peakutils==1.3
-  - netCDF4==1.6 # need to install HDF5 with brew in order to install netCDF4? See environment_notes.txt
+# - python=3.12
+# - numpy=1.26
+# - pandas=2.1
+# - tk=8.6
+# - bokeh=2.3
+
+#- pip:
+#  - peakutils==1.3
+#  - netCDF4==1.6 # need to install HDF5 with brew in order to install netCDF4? See environment_notes.txt
