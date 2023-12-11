@@ -66,12 +66,12 @@ def find_ri_conversion(ic_smooth_dict,mz_vals,sat,coelut_dict_sat,coelut_dict_va
     alkane_elut_ind = alkane_elut_ind.astype('int')
 
     #find the number of carbons in the alkanes of those mz's above the threshold and convert to retention indices
-    alkane_nc_rec = alkane_nc_rec[[alkane_elut_ind]]
+    alkane_nc_rec = alkane_nc_rec[alkane_elut_ind]
     ri_rec = 100*alkane_nc_rec
 
     #find the indices corresponding to the scan number of those mz's above the threshold
-    alkane_mz_maxi = alkane_mz_maxi[[alkane_elut_ind]]
-    ri_sat = sat_array[[alkane_mz_maxi]]
+    alkane_mz_maxi = alkane_mz_maxi[alkane_elut_ind]
+    ri_sat = sat_array[alkane_mz_maxi]
 
     #Transform the sat array to an ri array
 
