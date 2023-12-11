@@ -35,7 +35,7 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
 
         #convert to numpy objects
         x_data_numpy = np.array(x_data)
-        y_data_numpy = y_data.as_matrix()
+        y_data_numpy = y_data.to_numpy()
 
         #smooth the data
         y_data_smooth = savitzky_golay.savitzky_golay(y_data_numpy, window_size=7, order=2, deriv=0, rate=1)
@@ -74,7 +74,7 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
 
         #a peak must be higher than the max radius points before and after it
         max_radius = 5
-        delete_indices = np.array([])
+        delete_indices = np.array([], dtype=int)
         index_counter = 0
         for index in indexes:
             point_to_test = y_data_smooth[index]
@@ -82,7 +82,7 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
                 neighbor_indices = np.arange(index-max_radius,index+max_radius,1)
                 keep_index = all(point_to_test >= y_data_smooth[entry] for entry in neighbor_indices)
                 if not keep_index:
-                    delete_indices = np.append(delete_indices,index_counter)
+                    delete_indices = np.append(delete_indices, int(index_counter))
             index_counter = index_counter+1
         indexes = np.delete(indexes,delete_indices)
 
