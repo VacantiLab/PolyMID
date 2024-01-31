@@ -1,4 +1,4 @@
-def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,Labeled_Element='C'):
+def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,Labeled_Element='C',Assume_All_MZs_Present=False):
     import importlib #allows fresh importing of modules
     from pdb import set_trace #python debugger
     import numpy as np #this is numpy, allows for data frame and matrix handling
@@ -40,6 +40,8 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
                 if i in mz_vals: #it is possible there were no values above threshhold recorded in the ms scan so there would be no entry for that mz in the data dictionary
                     if met_present: #the presence of the metabolite is checked here instead of outside the fragment iteration loop because the fragments are iterated through to fill with zeros for printing even if the metabolite is not present.
                                     #this seems inefficient and can be fixed later - integration is not really expensive at this point
+                        if Assume_All_MZs_Present:
+                            peak_present = True
                         if i in coelut_dict[ri]: #recall coelut dict has keys of ri and for each key is an array of mz's with peaks eluting at that ri
                             peak_present = True
 

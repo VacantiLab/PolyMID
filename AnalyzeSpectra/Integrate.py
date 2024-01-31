@@ -1,4 +1,4 @@
-def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=False, Labeled_Element='C'):
+def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=False, Labeled_Element='C',Assume_All_MZs_Present=False):
 
     # This script expects two tab-delimited text files to be stored where the data is stored
     #    The first is files_to_batch.txt
@@ -253,7 +253,7 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
             print('    integrating fragment mass isotopomers listed in library...')
             metabolite_dict_complete = integrate_peaks.integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,
                                                             peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,
-                                                            metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,Labeled_Element=Labeled_Element)
+                                                            metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,Labeled_Element=Labeled_Element,Assume_All_MZs_Present=Assume_All_MZs_Present)
             #fragment_dict: a dictionary containing information (including the mass isotopomer distributions) of each integrated metabolite fragment
 
             #Store the processed data for each filename in a dictionary
