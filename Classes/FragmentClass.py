@@ -106,25 +106,25 @@ class Fragment:
             if self.Full_NC & (i == atom_quantity+1):
                 carbon_quantity_full = quantity_of_atom(self.Formula.formula,'C')
                 broken_formula_correct[carbon_quantity_index] = carbon_quantity_full - carbon_quantity_metabolite
-                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[carbon_quantity_index].astype(np.str)
+                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[carbon_quantity_index].astype(str)
 
                 nitrogen_quantity_full = quantity_of_atom(self.Formula.formula,'N')
                 broken_formula_correct[nitrogen_quantity_index] = nitrogen_quantity_full - nitrogen_quantity_metabolite
-                broken_formula_correct[nitrogen_quantity_index] = broken_formula_correct[nitrogen_quantity_index].astype(np.str)
+                broken_formula_correct[nitrogen_quantity_index] = broken_formula_correct[nitrogen_quantity_index].astype(str)
 
                 #replace that atom with a heavy atom
                 broken_formula_correct[n_formula_entries+1] = carbon_quantity_metabolite + nitrogen_quantity_metabolite
-                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(np.str)
+                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(str)
 
             # Only iteratively convert atomic species to labeled atoms if the current heavy atom substitution is not the one where the fully labeled internal standard is considered
             if i < atom_quantity+1:
                 #subtract an atom of interest from the formula
-                broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(np.int) - i
-                broken_formula_correct[atom_quantity_index] = broken_formula_correct[atom_quantity_index].astype(np.str)
+                broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(int) - i
+                broken_formula_correct[atom_quantity_index] = broken_formula_correct[atom_quantity_index].astype(str)
 
                 #replace that atom with a heavy atom
-                broken_formula_correct[n_formula_entries+1] = broken_formula[n_formula_entries+1].astype(np.int) + i
-                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(np.str)
+                broken_formula_correct[n_formula_entries+1] = broken_formula[n_formula_entries+1].astype(int) + i
+                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(str)
 
             #update the string version of the formula from the array version
             new_formula = ''

@@ -55,7 +55,7 @@ class Formula:
         # Get separate arrays containing the atomic symbols and corresponding formula numbers
         odd_indices = np.array(range(1,len(broken_formula),2)) #all of the odd indices of the array broken_formula
         even_indices = np.array(range(0,len(broken_formula),2)) #all of the even indices of the array broken_formula
-        formula_numbers = broken_formula[odd_indices].astype(np.int) #the atomic numbers array
+        formula_numbers = broken_formula[odd_indices].astype(int) #the atomic numbers array
         formula_atoms = broken_formula[even_indices] #the atomic symbols array
 
         AtomArray = []
