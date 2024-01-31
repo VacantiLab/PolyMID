@@ -1,4 +1,4 @@
-def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name):
+def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,Labeled_Element='C'):
     import importlib #allows fresh importing of modules
     from pdb import set_trace #python debugger
     import numpy as np #this is numpy, allows for data frame and matrix handling
@@ -96,7 +96,7 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
                                             FragmentFormula = metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['formula'], \
                                             CanAcquireLabel = metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['metabolite_atoms'], \
                                             MIDm = metabolite_dict_complete[metabolite_iter]['fragments'][frag_iter]['mid'], \
-                                            LabeledElement = 'C', \
+                                            LabeledElement = Labeled_Element, \
                                             TracerEnrichment = 1, \
                                             LabelEnrichment = 1, \
                                             HighRes = 'none', \
