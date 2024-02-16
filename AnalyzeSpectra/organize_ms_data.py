@@ -17,7 +17,7 @@ def organize_ms_data(file_directory):
     mz = ncdf.variables['mass_values'] #all of the mz values for each of the 'intensity_values', all scans are concatenated as a single array
     si = ncdf.variables['scan_index'] #marks the python index of the starting position of each scan within the 'intensity_values'
     si = np.array(si)
-    si = np.unique(si)
+    #si = np.unique(si) #this is taken care of with si[sat_unique_indices]
     sat = np.array(list(ncdf.variables['scan_acquisition_time'])) #the scan acquisition times corresponding to each scan (over mz values)
     sat_unique_values, sat_unique_indices = np.unique(sat, return_index=True)
         # somehow their can be two entries for the same scan acquistion time
