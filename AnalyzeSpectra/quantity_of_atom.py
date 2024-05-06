@@ -12,6 +12,6 @@ def quantity_of_atom(mol_formula,atomic_id):
     atom_index = np.where(broken_mol_formula==atomic_id)[0][0]
     atom_quantity_index = atom_index+1
     atom_quantity = broken_mol_formula[atom_quantity_index]
-    atom_quantity = atom_quantity.astype(np.int)
+    atom_quantity = atom_quantity.astype(int)
 
     return(atom_quantity)
