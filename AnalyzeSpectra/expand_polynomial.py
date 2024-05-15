@@ -54,7 +54,7 @@ def expand_polynomial(a,b):
 
     #combine the relative mass isotopmer abundances for ab combinations with the same mass isotopomer mz value
     grouped = factored.groupby('m_isotopomer')
-    factored = grouped.aggregate(np.sum)
+    factored = grouped.aggregate('sum')
 
     #shorten factored to remove negligible values
     n_factored = len(factored)

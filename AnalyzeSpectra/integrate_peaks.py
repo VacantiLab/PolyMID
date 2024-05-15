@@ -1,4 +1,4 @@
-def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,Labeled_Element='C',Assume_All_MZs_Present=False):
+def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_i_dict,peak_end_i_dict,x_data_numpy,metabolite_dict,metabolite_list,ri_array,mz_vals,coelut_dict,coelut_dict_val,sample_name,Labeled_Element='C',Assume_All_MZs_Present=False,ri_window=3):
     import importlib #allows fresh importing of modules
     from pdb import set_trace #python debugger
     import numpy as np #this is numpy, allows for data frame and matrix handling
@@ -20,7 +20,6 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
     #iterate through the metabolite names so you can then iterate through the fragments of each metabolite for integration
     for metabolite_iter in metabolite_list:
         fragments_list = list(dict.keys(metabolite_dict[metabolite_iter]['fragments']))
-        ri_window = 3
         met_present,ri = match_fingerprint.match_fingerprint(ri_array,coelut_dict,coelut_dict_val,metabolite_dict,mz_vals,ic_smooth_dict,metabolite_iter,sample_name,ri_window)
         if met_present:
             rt = ri_to_rt.ri_to_rt(sat_array,ri_array,ri)
