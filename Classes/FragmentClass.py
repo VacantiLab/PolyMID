@@ -55,6 +55,7 @@ class Fragment:
 
         from pdb import set_trace
         import numpy as np
+        import pandas as pd
         import re
         import copy
         from PolyMID import quantity_of_atom
@@ -76,22 +77,6 @@ class Fragment:
         #the number of rows of the correction matrix is equal to the quantity of the atom being corrected for that are in the fragment and the original metabolite
         atom_quantity = quantity_of_atom(self.CanAcquireLabel.formula,self.Tracer.LabeledElement) #this does not refer to the full fragment!
 
-        # Consider the fully labeled C and N fragment if using the fully labeled internal standard
-        range_extendor = 0
-        if self.Full_NC:
-            #find the index of the number of the nitrogens which are labeled on the internal standard
-            #    it is used in creating the correction matrix below because this quantity of nitrogen atoms need to be subtracted and a heavy atom put in its place
-            nitrogen_index = np.where(broken_formula=='N')[0][0]
-            nitrogen_quantity_index = nitrogen_index+1 #refering to full fragment
-            nitrogen_quantity_metabolite = quantity_of_atom(self.CanAcquireLabel.formula,'N') #this does not refer to the full fragment!
-
-            carbon_index = np.where(broken_formula=='C')[0][0]
-            carbon_quantity_index = carbon_index+1 #refering to full fragment
-            carbon_quantity_metabolite = quantity_of_atom(self.CanAcquireLabel.formula,'C') #this does not refer to the full fragment!
-
-            range_extendor = 1
-            # Accounts for the addition of a column corresponding to the fully labeled internal standard
-
         #add the "heavy atom to the end of the broken formula array", initially its quantity is 0
         broken_formula = np.append(broken_formula,np.array(['Hv','0']))
         n_formula_entries_heavy = len(broken_formula)
@@ -100,31 +85,14 @@ class Fragment:
         #    these mids fill the rows of the correction matrix
         broken_formula_correct = copy.copy(broken_formula) #initialize the array to carry the formula with a heavy atom
         correction_matrix_dict = dict() #initialize a dictionary to hold the rows of the correction matrix
-        for i in range(0,atom_quantity+1+range_extendor):
+        for i in range(0,atom_quantity+1):
+            #subtract an atom of interest from the formula
+            broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(int) - i
+            broken_formula_correct[atom_quantity_index] = broken_formula_correct[atom_quantity_index].astype(str)
 
-            # Adjust formula indexing parameters to replace all metabolite nitrogens and carbons with labeled nitrogens and carbons if considering fully labeled N and C internal standard
-            if self.Full_NC & (i == atom_quantity+1):
-                carbon_quantity_full = quantity_of_atom(self.Formula.formula,'C')
-                broken_formula_correct[carbon_quantity_index] = carbon_quantity_full - carbon_quantity_metabolite
-                broken_formula_correct[carbon_quantity_index] = broken_formula_correct[carbon_quantity_index].astype(str)
-
-                nitrogen_quantity_full = quantity_of_atom(self.Formula.formula,'N')
-                broken_formula_correct[nitrogen_quantity_index] = nitrogen_quantity_full - nitrogen_quantity_metabolite
-                broken_formula_correct[nitrogen_quantity_index] = broken_formula_correct[nitrogen_quantity_index].astype(str)
-
-                #replace that atom with a heavy atom
-                broken_formula_correct[n_formula_entries+1] = carbon_quantity_metabolite + nitrogen_quantity_metabolite
-                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(str)
-
-            # Only iteratively convert atomic species to labeled atoms if the current heavy atom substitution is not the one where the fully labeled internal standard is considered
-            if i < atom_quantity+1:
-                #subtract an atom of interest from the formula
-                broken_formula_correct[atom_quantity_index] = broken_formula[atom_quantity_index].astype(int) - i
-                broken_formula_correct[atom_quantity_index] = broken_formula_correct[atom_quantity_index].astype(str)
-
-                #replace that atom with a heavy atom
-                broken_formula_correct[n_formula_entries+1] = broken_formula[n_formula_entries+1].astype(int) + i
-                broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(str)
+            #replace that atom with a heavy atom
+            broken_formula_correct[n_formula_entries+1] = broken_formula[n_formula_entries+1].astype(int) + i
+            broken_formula_correct[n_formula_entries+1] = broken_formula_correct[n_formula_entries+1].astype(str)
 
             #update the string version of the formula from the array version
             new_formula = ''
@@ -169,6 +137,14 @@ class Fragment:
         CM_rows = np.arange(0,n_MID_entries)
         for key in correction_matrix_dict.keys():
             CM[CM_rows,key] = correction_matrix_dict[key]
+
+        if self.Full_NC:
+            Standard_MID_DF = pd.read_csv('Internal_Standards.txt', delimiter='\t', index_col=0)
+            Unlabeled_MID = Standard_MID_DF.loc[0:9,self.Name]
+            Internal_Standard_MID = Standard_MID_DF.loc[10:19,self.Name]
+            CM = np.zeros((2,10))
+            CM[0,:] = Unlabeled_MID
+            CM[1,:] = Internal_Standard_MID
 
         #find the inverse of the correction matrix
         #    Use the Moore–Penrose pseudo-inverse because the matrix is not necessarily square and the linear problem is "over specified"
