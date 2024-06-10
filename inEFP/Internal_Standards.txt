@@ -1,0 +1,21 @@
+	alanine_232	alanine_260	glycine_246	glycine_218	valine_288	valine_260	leucine_274	leucine_200	isoleucine_274	isoleucine_200	serine_390	serine_362	serine_302	serine_288	threonine_404	threonine_376	methionine_320	methionine_218	phenylalanine_234	phenylalanine_302	phenylalanine_308	phenylalanine_336	aspartate_418	aspartate_390	aspartate_302	glutamate_432	glutamate_330	asparagine_417	lysine_431	lysine_329	glutamine_431	arginine_442	tyrosine_302	tyrosine_466	histidine_440	tryptophan_302	glucose_273	lactate_233	lactate_261
+US-M1																																						HPA_261	HPA_261
+US-M2																																							
+US-M3																																							
+US-M4																																							
+US-M5																																							
+US-M6																																							
+US-M7																																							
+US-M8																																							
+US-M9																																							
+US-M10																																							
+IS-M1																																							
+IS-M2																																							
+IS-M3																																							
+IS-M4																																							
+IS-M5																																							
+IS-M6																																							
+IS-M7																																							
+IS-M8																																							
+IS-M9																																							
+IS-M10																																							

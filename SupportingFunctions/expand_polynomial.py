@@ -65,7 +65,7 @@ def expand_polynomial(a,b):
     grouped = factored.groupby('m_isotopomer')
     #     the groupby method of a Pandas data frame returns a group object
     #         a grouped object has the aggregate method that takes a function as an input and returns a Pandas data frame
-    factored_aggregated = grouped.aggregate(np.sum)
+    factored_aggregated = grouped.aggregate("sum")
 
     # Shorten factored to remove negligible values
     #     Removes all values starting from the end of the MID that are less than the specified cut-off
