@@ -61,8 +61,6 @@ def print_integrated_peaks(file_directory,samples,metabolite_list,file_data,corr
                 mid_members = range(0,mid_length)
                 for M in mid_members:
                     fragment_mi_name = fragment + ' ' + 'M' + str(mid_members[M])
-                    if ((M==mid_members[mid_length-1]) & Full_NC):
-                        fragment_mi_name = fragment + ' ' + 'M' + str(mid_members[M]) + '_Full_NC'
                     file_object_text.write(fragment_mi_name)
                     file_object_text.write('\t')
                     for sample_name in samples:
