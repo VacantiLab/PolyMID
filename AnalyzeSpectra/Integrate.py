@@ -65,7 +65,7 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
     if not library_processed:
         #process the library
         print('processing library...')
-        metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC)
+        metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC,corrected=corrected)
 
         # If Full_NC is true, change the fragment peak profiles to be those of the Full_NC labeled fragments
         #     This is done so the internal standard metabolite is found in the spectra even if the metabolite is not in the media sample
@@ -83,7 +83,7 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
             metabolite_dict = pickle.load(library_file_object)
             metabolite_list = list(dict.keys(metabolite_dict))
         #Check for new metabolites
-        metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC,metabolite_dict=metabolite_dict)
+        metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC,metabolite_dict=metabolite_dict,corrected=corrected)
 
     #Save the library into a python readable file
     if not Full_NC:
