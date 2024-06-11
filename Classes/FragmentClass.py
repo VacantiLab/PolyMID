@@ -1,7 +1,7 @@
 class Fragment:
 
     # Initializer and Instance Attributes
-    def __init__(self,FragmentName,FragmentFormula,CanAcquireLabel,MIDm,LabeledElement,TracerEnrichment,LabelEnrichment,HighRes,MIDc=None,PeakArea=None,CM=None,Full_NC=False):
+    def __init__(self,FragmentName,FragmentFormula,CanAcquireLabel,MIDm,LabeledElement,TracerEnrichment,LabelEnrichment,HighRes,MIDc=None,PeakArea=None,CM=None,Full_NC=False,file_directory=None):
 
         from PolyMID import Formula
         from PolyMID import Tracer
@@ -26,6 +26,7 @@ class Fragment:
         self.SSE = None
         self.residuals = None
         self.Full_NC = Full_NC #A boolean specifying whether to correct for abundance of the fully labeled C and N metabolite
+        self.file_directory = file_directory
 
     # instance method to assign new values to a Fragment object
     def assign(self,attribute,NewValue):
@@ -139,12 +140,13 @@ class Fragment:
             CM[CM_rows,key] = correction_matrix_dict[key]
 
         if self.Full_NC:
-            Standard_MID_DF = pd.read_csv('Internal_Standards.txt', delimiter='\t', index_col=0)
-            Unlabeled_MID = Standard_MID_DF.loc[0:9,self.Name]
-            Internal_Standard_MID = Standard_MID_DF.loc[10:19,self.Name]
-            CM = np.zeros((2,10))
-            CM[0,:] = Unlabeled_MID
-            CM[1,:] = Internal_Standard_MID
+            Standard_MID_DF = pd.read_csv(self.file_directory + 'Internal_Standards.txt', delimiter='\t', index_col=0)
+            if self.name in Standard_MID_DF.columns:
+                Unlabeled_MID = Standard_MID_DF.loc[0:9,self.name]
+                Internal_Standard_MID = Standard_MID_DF.loc[10:19,self.Name]
+                CM = np.zeros((2,10))
+                CM[0,:] = Unlabeled_MID
+                CM[1,:] = Internal_Standard_MID
 
         #find the inverse of the correction matrix
         #    Use the Moore–Penrose pseudo-inverse because the matrix is not necessarily square and the linear problem is "over specified"

@@ -50,7 +50,7 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
     from PolyMID.AnalyzeSpectra import locate_overlap
     from PolyMID.AnalyzeSpectra import GetFileBatch
     from PolyMID.AnalyzeSpectra import Add_FullNC_Peak_Profiles
-
+    
     #retrieve file directory
     retrieve_directory_method = 'gui'
     file_directory = get_directory.get_directory(retrieve_directory_method)

@@ -144,7 +144,8 @@ def fragment_library(file_directory,Full_NC,metabolite_dict='none'):
                                                                     MIDc=None,
                                                                     PeakArea=None,
                                                                     CM=None,
-                                                                    Full_NC=Full_NC)
+                                                                    Full_NC=Full_NC,
+                                                                    file_directory=file_directory)
                                         fragment.create_correction_matrix()
                                         metabolite_dict[metabolite_name]['fragments'][fragment_name]['CM'] = fragment.CM
                                         #metabolite_dict[metabolite_name]['fragments'][fragment_name]['CM'] = create_correction_matrix.create_correction_matrix(frag_formula,metabolite_atoms)
