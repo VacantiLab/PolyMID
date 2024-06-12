@@ -57,43 +57,15 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
 
     #Get a list of all of the files in the specified directory
     files = listdir(file_directory)
+    
+    #process the library
+    print('processing library...')
+    metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC,corrected=corrected)
 
-    library_processed = 'library.p' in files
+    # If Full_NC is true, change the fragment peak profiles to be those of the Full_NC labeled fragments
+    #     This is done so the internal standard metabolite is found in the spectra even if the metabolite is not in the media sample
     if Full_NC:
-        library_processed = 'library_Full_NC.p' in files
-
-    if not library_processed:
-        #process the library
-        print('processing library...')
-        metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC,corrected=corrected)
-
-        # If Full_NC is true, change the fragment peak profiles to be those of the Full_NC labeled fragments
-        #     This is done so the internal standard metabolite is found in the spectra even if the metabolite is not in the media sample
-        if Full_NC:
-            metabolite_dict = Add_FullNC_Peak_Profiles.Add_FullNC_Peak_Profiles(metabolite_dict,metabolite_list)
-
-    if library_processed:
-        #load the processed library
-        print('opening previously processed library...')
-        if not Full_NC:
-            input_library_file = file_directory + 'library.p'
-        if Full_NC:
-            input_library_file = file_directory + 'library_Full_NC.p'
-        with open(input_library_file,'rb') as library_file_object:
-            metabolite_dict = pickle.load(library_file_object)
-            metabolite_list = list(dict.keys(metabolite_dict))
-        #Check for new metabolites
-        metabolite_dict,metabolite_list = fragment_library.fragment_library(file_directory=file_directory,Full_NC=Full_NC,metabolite_dict=metabolite_dict,corrected=corrected)
-
-    #Save the library into a python readable file
-    if not Full_NC:
-        output_library_file = file_directory + 'library.p'
-        with open(output_library_file,'wb') as library_file_object:
-            pickle.dump(metabolite_dict,library_file_object)
-    if Full_NC:
-        output_library_file = file_directory + 'library_Full_NC.p'
-        with open(output_library_file,'wb') as library_file_object:
-            pickle.dump(metabolite_dict,library_file_object)
+        metabolite_dict = Add_FullNC_Peak_Profiles.Add_FullNC_Peak_Profiles(metabolite_dict,metabolite_list)
 
     #Remove filenames that are not NetCDF files
     netcdf_pattern = re.compile('.cdf$|.netcdf$',re.IGNORECASE)
@@ -306,9 +278,9 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
 
     #Save the output data into a python readable file
     output_data_file = file_directory + 'processed_data.p'
-    file_object = open(output_data_file,'wb')
-    pickle.dump(file_data,file_object)
-    file_object.close()
+    #file_object = open(output_data_file,'wb')
+    #pickle.dump(file_data,file_object)
+    #file_object.close()
 
     #Print output to a text file_data
     print_integrated_peaks.print_integrated_peaks(file_directory,samples_all,metabolite_list,file_data,corrected,Full_NC)
