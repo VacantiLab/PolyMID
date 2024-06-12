@@ -1,4 +1,4 @@
-def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=False, Labeled_Element='C',Assume_All_MZs_Present=False,ri_window=3):
+def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=False, Labeled_Element='C',Assume_All_MZs_Present=False,ri_window=5):
 
     # This script expects two tab-delimited text files to be stored where the data is stored
     #    The first is files_to_batch.txt

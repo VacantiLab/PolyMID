@@ -140,11 +140,12 @@ class Fragment:
             CM[CM_rows,key] = correction_matrix_dict[key]
 
         if self.Full_NC:
+            MID_length = 15
             Standard_MID_DF = pd.read_csv(self.file_directory + 'Internal_Standards.txt', delimiter='\t', index_col=0)
             if self.name in Standard_MID_DF.columns:
-                Unlabeled_MID = Standard_MID_DF.loc[0:9,self.name]
-                Internal_Standard_MID = Standard_MID_DF.loc[10:19,self.Name]
-                CM = np.zeros((2,10))
+                Unlabeled_MID = Standard_MID_DF.loc[0:(MID_length-1),self.name]
+                Internal_Standard_MID = Standard_MID_DF.loc[MID_length:2*MID_length,self.Name]
+                CM = np.zeros((2,MID_length))
                 CM[0,:] = Unlabeled_MID
                 CM[1,:] = Internal_Standard_MID
 
