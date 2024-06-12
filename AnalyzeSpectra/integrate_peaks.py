@@ -60,8 +60,8 @@ def integrate_peaks(ic_smooth_dict,peak_start_t_dict,peak_end_t_dict,peak_start_
 
                     # can specify certain fragments will be integrated only as the left or right side of the peak
                     #     hard-coded for now
-                    #Decon_Left_List = ['glucose-QuantOnly_273']
-                    Decon_Left_List = []
+                    Decon_Left_List = ['glucose_273']
+                    #Decon_Left_List = []
                     Decon_Right_List = []
 
                     if frag_iter in Decon_Left_List:

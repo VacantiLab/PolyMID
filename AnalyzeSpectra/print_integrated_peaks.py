@@ -20,7 +20,7 @@ def print_integrated_peaks(file_directory,samples,metabolite_list,file_data,corr
         file_object_text = open(output_text_file,'w')
 
         samples_string = '\t'.join(samples)
-        file_object_text.write(' \t' + samples_string)
+        file_object_text.write(' \t' + samples_string + '\t' + 'theoretical' + '\t' + 'nothing')
         file_object_text.write('\n')
 
         file_object_text.write('Retention Indices\n')
