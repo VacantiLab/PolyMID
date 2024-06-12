@@ -5,3 +5,6 @@ Allow for deconvolution of peaks by only integrating half of the peak (choose ri
 Look into problems with histidine, arginine, proline, and tryptophan. We also need an asparagine standard.
 
 See what amino acids need to be added to my library.
+
+Repeated Functions:
+quantity_of_atoms -> used by Integrate in supporting functions, but also exists in Analyze Spectra
