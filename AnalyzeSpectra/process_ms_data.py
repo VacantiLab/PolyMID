@@ -59,21 +59,20 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
 
         # Find the indices of peaks
         find_peaks_return = signal.find_peaks(x=y_data_smooth,height=thres_numerator,prominence=500)
+        #     Enforcing a prominence here causes missed peaks
         indexes = find_peaks_return[0]
         peak_properties_dict = find_peaks_return[1]
-        #     Enforcing a prominence here causes missed peaks
 
         # Find the intensities associated with the peaks
-        peak_values = y_data_smooth[indexes]
+        # peak_values = y_data_smooth[indexes]
 
         # Find the peak prominences and relative prominences
-        prominences = signal.peak_prominences(y_data_smooth, indexes, wlen=None)[0]
-        relative_prominence = prominences/peak_values
+        # prominences = signal.peak_prominences(y_data_smooth, indexes, wlen=None)[0]
 
         # enforce a relative peak prominence threshold
+        relative_prominence = peak_properties_dict['prominences']/peak_properties_dict['peak_heights']
         peak_prom_rel_thresh = 0.5
         indices_of_peak_indices_to_keep = relative_prominence >= peak_prom_rel_thresh
-
         indexes = indexes[indices_of_peak_indices_to_keep]
 
         #a peak must be higher than the max radius points before and after it
