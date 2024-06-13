@@ -58,7 +58,9 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
             thres = 1
 
         # Find the indices of peaks
-        indexes = signal.find_peaks(x=y_data_smooth,height=thres_numerator)[0]
+        find_peaks_return = signal.find_peaks(x=y_data_smooth,height=thres_numerator,prominence=500)
+        indexes = find_peaks_return[0]
+        peak_properties_dict = find_peaks_return[1]
         #     Enforcing a prominence here causes missed peaks
 
         # Find the intensities associated with the peaks
@@ -69,7 +71,9 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
         relative_prominence = prominences/peak_values
 
         # enforce a relative peak prominence threshold
-        indices_of_peak_indices_to_keep = relative_prominence = prominences/peak_values >= 0.5
+        peak_prom_rel_thresh = 0.5
+        indices_of_peak_indices_to_keep = relative_prominence >= peak_prom_rel_thresh
+
         indexes = indexes[indices_of_peak_indices_to_keep]
 
         #a peak must be higher than the max radius points before and after it
@@ -84,6 +88,7 @@ def process_ms_data(sat,ic_df,output_plot_directory,n_scns,mz_vals,low_sensitivi
                 if not keep_index:
                     delete_indices = np.append(delete_indices, int(index_counter))
             index_counter = index_counter+1
+        
         indexes = np.delete(indexes,delete_indices)
 
         #find the baseline
