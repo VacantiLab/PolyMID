@@ -180,7 +180,7 @@ def match_fingerprint(ri_array,coelut_dict,coelut_dict_val,metabolite_dict,mz_va
                 next_alkane_i = np.where(next_alkane_mz == co_eluting_mz_array)[0]
                 if co_eluting_mz_val_array[next_alkane_i] > max_value_threshold:
                     metabolite_present = False
-
+        
     return(metabolite_present,metabolite_retention_index)
 
 #Supporting Functions
@@ -316,7 +316,7 @@ def return_ranked_fingerprint(fingerprint,group_tic_dict):
 def check_group(mz,ranked_fingerprint,peak_mz_array,peak_val_array,ri,mz_scan_end,metabolite,sample_name):
     #this function sets the rules to determine if a group led by an mz is present
     import numpy as np
-    import pdb
+    from pdb import set_trace
 
     #Initialize the three specifcations that determine if the group is present
     quantity_requirement = False

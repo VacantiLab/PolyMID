@@ -178,6 +178,15 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
 
             #calculate peak overlap dictionary
             print('    finding coeluting peaks ...')
+            
+            # Find the location of peaks for every mz value
+            #  This is where the spectra are actually analyzed
+            #  All other functions are reorganizations of this returned data
+            #  At this point the retention times have not been mapped to retention indices
+            # Returned:
+            #   peak_overlap_dictionary: dictionary where the keys are mz values
+            #   there is an entry for each retention time (scan) that is a 0 or 1
+            #   1 represents that there is a peak at that mz value at that time, 0 represents there is no peak
             peak_overlap_dictionary = locate_overlap.locate_overlap(ic_smooth_dict,peak_start_i_dict,peak_end_i_dict,mz_vals,peak_max_dict)
 
             #the first sample must always be alkanes - plan to make this optional later
@@ -189,7 +198,7 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
                     #calculate the coelution dictionary with the scan acquisition times as keys
                     #    coelution_dict_sat has keys of sat's and arrays of mz's whoe peaks elute at those sat's
                     #    coelution_dict_val is the same except the arrays are the corresponding intensity values of the eluting peaks at the sat of the key
-                    coelut_dict_sat,coelut_dict_val_sat = calc_coelut.calc_coelut(peak_sat_dict,mz_vals,sat,ic_smooth_dict,peak_overlap_dictionary)
+                    coelut_dict_sat,coelut_dict_val_sat = calc_coelut.calc_coelut(peak_sat_dict,mz_vals,sat,ic_smooth_dict,peak_overlap_dictionary,sample_name=sample_name)
                     ri_sat,ri_rec = find_ri_conversion.find_ri_conversion(ic_smooth_dict,mz_vals,sat,coelut_dict_sat,coelut_dict_val_sat,sample_name)
 
             #convert the retention times of the current sample to retention indices
@@ -219,7 +228,7 @@ def Integrate(corrected=True, use_alkanes=True, low_sensitivity=False, Full_NC=F
             #calculate the coelution dictionary with the retention indices as keys
             #    coelution_dict has keys of ri's and arrays of mz's whoe peaks elute at those ri's
             #    coelution_dict_val is the same except the arrays are the corresponding intensity values of the eluting peaks at the ri of the key
-            coelut_dict,coelut_dict_val = calc_coelut.calc_coelut(peak_ri_dict,mz_vals,ri_array,ic_smooth_dict,peak_overlap_dictionary)
+            coelut_dict,coelut_dict_val = calc_coelut.calc_coelut(peak_ri_dict,mz_vals,ri_array,ic_smooth_dict,peak_overlap_dictionary,sample_name=sample_name)
 
             #integrate fragments in library
             print('    integrating fragment mass isotopomers listed in library...')

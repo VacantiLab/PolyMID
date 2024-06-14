@@ -1,15 +1,19 @@
 def locate_overlap(ic_smooth_dict,peak_start_i_dict,peak_end_i_dict,mz_vals,peak_max_dict):
 
-    #find the index borders designating the fractional-heights of each peak
+    # find the index borders designating the fractional-heights of each peak
     #    if the fractional height is designated as 0.5, the indices found designate the borders marking the half-height width
-    #create a dictionary marking the peak overlap indices
+    # create a dictionary marking the peak overlap indices
     #    the keys of the dictionary are mz values and the value is 0 for no peak at that index and 1 for a peak
+    # Returned:
+    #   peak_range_dict: dictionary where the keys are mz values
+    #                    there is an entry for each retention time (scan) that is a 0 or 1
+    #                    1 representes that there is a peak at that mz value at that time, 0 represents there is no peak
 
     import importlib #allows fresh importing of modules
     import pdb #python debugger
     import numpy as np
     import copy
-    import pdb
+    from pdb import set_trace
     from PolyMID.AnalyzeSpectra import find_closest
 
     peak_height_fraction = 0.5
@@ -60,10 +64,10 @@ def locate_overlap(ic_smooth_dict,peak_start_i_dict,peak_end_i_dict,mz_vals,peak
             peak_start_ic = ion_counts[peak_start_i]
             peak_end_ic = ion_counts[peak_end_i]
 
-            #calculate the height of the peak based on the distance of the max from the higher peak border
+            #calculate the height of the peak based on the distance of the max from the peak border that is higher (the beginning or the end of the peak)
             height_bot_ref = max(peak_start_ic,peak_end_ic)
 
-            #calculate the ion count that marks halfway to the max from the higher peak border
+            #calculate the ion count that marks halfway to the max from the peak border that is higher
             half_height_ic = peak_height_fraction*(peak_max - height_bot_ref) + height_bot_ref
 
             #Initialize the indices which mark the region where the peak above the half_height_ic as defined above
@@ -114,13 +118,15 @@ def locate_overlap(ic_smooth_dict,peak_start_i_dict,peak_end_i_dict,mz_vals,peak
         peak_end_i_overlap_array = peak_end_i_overlap_dict[mz]
         n_peaks = len(peak_start_i_overlap_array)
         peak_iterations = np.arange(0,n_peaks)
-        #iterate through each scan to determine if it occurs during a peak elution
+
+        #iterate through each time (it said scan instead of time before) to determine if it occurs during a peak elution
         for i in all_indices:
             #iterate through each peak and check to see if it is eluting during the current scan
             j = 0
-            for p in peak_iterations:
-                current_start = peak_start_i_overlap_array[p]
-                current_end = peak_end_i_overlap_array[p]
+            for peak_iterator in peak_iterations:
+
+                current_start = peak_start_i_overlap_array[peak_iterator]
+                current_end = peak_end_i_overlap_array[peak_iterator]
 
                 #if the current scan falls before the current peak
                 #    stop searching the peaks because subsequenc peaks have later starts (are in order)
@@ -135,10 +141,13 @@ def locate_overlap(ic_smooth_dict,peak_start_i_dict,peak_end_i_dict,mz_vals,peak
 
                 #if the current scan is past the current peak end
                 #    that peak can be removed from consideration because the indices go in order
-                if i > current_end:
-                    new_peak_iterations_indices = np.arange(j+1,len(peak_iterations))
-                    peak_iterations = peak_iterations[new_peak_iterations_indices]
+                #    Note this causes peaks to be missed in rare instances (I don't yet know why)
+                #       likely a peak index is removed before that peak has been located
+                #       This caused a nightmare when trying to find the lactate_233 peak in a media sample from astrocytes
+                #if i > current_end:
+                #    new_peak_iterations_indices = np.arange(j+1,len(peak_iterations))
+                #    peak_iterations = peak_iterations[new_peak_iterations_indices]
 
-                j = j+1
+                #j = j+1
 
     return(peak_range_dict)

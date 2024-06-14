@@ -1,4 +1,4 @@
-def calc_coelut(peak_ri_dict,mz_vals,ri_array,ic_smooth_dict,peak_overlap_dictionary):
+def calc_coelut(peak_ri_dict,mz_vals,ri_array,ic_smooth_dict,peak_overlap_dictionary,sample_name):
     #calculates the coelution dictionary
     #    coelut_dict has each retention index as a key
     #    the corresponding items are arrays of the masses with peaks that elut at that ri
@@ -41,6 +41,7 @@ def calc_coelut(peak_ri_dict,mz_vals,ri_array,ic_smooth_dict,peak_overlap_dictio
                 coelut_dict[ri] = np.append(coelut_dict[ri],mz)
                 peak_value = ic_smooth_dict[mz][ri_i]
                 coelut_dict_val[ri] = np.append(coelut_dict_val[ri],peak_value)
+        
         ri_i = ri_i + 1
 
     return(coelut_dict,coelut_dict_val)
