@@ -12,7 +12,7 @@
 
 # The call must be made from the directory containing this file
 # The directory containing AnalyzeSpectra must be added to the PYTHONPATH system variable
-#     use: export PYTHONPATH="${PYTHONPATH}:/Users/nate/git_hub_projects" to add it
+#     use: export PYTHONPATH="${PYTHONPATH}:/Users/nv83/github_tools" to add it
 #     Alternatively you can create a .pth file in  ~/anaconda3/envs/YOUR_ENV/lib/pythonX.X/site-packages
 #         The .pth file can have any name and contains one path per line to be added to the python search path
 
